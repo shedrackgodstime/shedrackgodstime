@@ -4,7 +4,7 @@
 I build secure applications and tools with **Rust, Python, and JavaScript/TypeScript**.  
 Passionate about **network security, penetration testing, and secure coding practices**.  
 
----
+--- 
 
 ## 🛠️ Skills
 - **Cybersecurity:** Penetration Testing, Vulnerability Assessment, Network Security  
