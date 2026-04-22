@@ -58,7 +58,7 @@ async function fetchGithubAPI(url: string) {
   };
   
   // If you run into rate limits locally, add a GITHUB_TOKEN to your .env
-  if (process.env.GITHUB_TOKEN) {
+  if (typeof process !== "undefined" && process.env?.GITHUB_TOKEN) {
     headers["Authorization"] = `Bearer ${process.env.GITHUB_TOKEN}`;
   }
 
