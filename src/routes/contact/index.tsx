@@ -40,7 +40,7 @@ export default component$(() => {
         />
 
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-          <div class="lg:col-span-5">
+          <div class="lg:col-span-6">
             {/* Minimal contact cards */}
             <div class="space-y-4 animate-fade-in-up delay-400">
               {contactMethods.map((method, index) => (
@@ -72,29 +72,23 @@ export default component$(() => {
             </div>
           </div>
 
-          <div class="lg:col-span-7">
-            {/* PGP Key Section */}
-            <div class="bg-white p-8 border border-ink/10 animate-fade-in-up delay-500">
-              <div class="mb-6 flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" class="text-precision">
-                  <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
-                </svg>
-                <h3 class="font-mono text-sm tracking-widest uppercase text-ink">Public PGP Key</h3>
-              </div>
-              <div class="bg-canvas-subtle p-5 border border-ink/5 overflow-x-auto">
-                <pre class="font-mono text-[0.65rem] sm:text-xs leading-relaxed text-ink-subtle">
-{`-----BEGIN PGP PUBLIC KEY BLOCK-----
-
-mQINBGP... [Placeholder for actual key] ...
-... If you require E2E encrypted communication,
-... please use this key to encrypt your initial email.
-...
------END PGP PUBLIC KEY BLOCK-----`}
-                </pre>
-              </div>
-              <p class="mt-4 font-mono text-xs text-gray-400">
-                Fingerprint: XXXX XXXX XXXX XXXX
+          <div class="lg:col-span-6">
+            <div class="border border-ink/10 bg-white p-8 animate-fade-in-up delay-500">
+              <p class="mb-3 font-mono text-[0.65rem] tracking-widest text-precision uppercase">
+                Reserved Space
               </p>
+              <h3 class="mb-4 text-2xl font-semibold tracking-tight text-ink">
+                Nothing dramatic lives here.
+              </h3>
+              <p class="max-w-md text-sm leading-relaxed text-ink-subtle">
+                No contact form, no chatbot, no mysterious encrypted ritual.
+                Just email, GitHub, and a reasonable response when the message is clear.
+              </p>
+              <div class="mt-8 border-t border-ink/8 pt-4">
+                <p class="font-mono text-[0.65rem] tracking-widest text-gray-400 uppercase">
+                  Intentionally kept simple.
+                </p>
+              </div>
             </div>
           </div>
         </div>
