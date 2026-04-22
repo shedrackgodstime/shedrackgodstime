@@ -61,11 +61,11 @@ All pages fully implemented in Qwik with real content + individual detail pages.
 - Typography-led: large `clamp()` font sizes for hierarchy
 
 ## Phase 2 Roadmap
-- [ ] GitHub API integration: fetch projects by `portfolio` topic tag
-- [ ] Markdown content: replace `src/lib/data.ts` body strings with `.md` files
-- [ ] Add `[slug]` dynamic OG image generation via Cloudflare Workers
-- [ ] Sitemap + robots.txt for full SEO
-
+- **See [`notes/phase-2-architecture.md`](./phase-2-architecture.md)** for the complete technical specification on how the data layer transitions to a GitHub-backed Headless CMS via AST parsing and Cloudflare SSG.
+- [ ] Implement GitHub API fetcher for `portfolio` topic repositories.
+- [ ] Implement Markdown AST parser for sticky UI layouts.
+- [ ] Add `[slug]` dynamic OG image generation via Cloudflare Workers.
+- [ ] Sitemap + robots.txt for full SEO.
 ## Rules the Next Developer Must Follow
 1. **No percentage skill bars** — see `notes/conclusion.md`
 2. **All content goes through `src/lib/data.ts`** — never inline arrays in pages again

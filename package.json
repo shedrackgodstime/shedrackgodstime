@@ -29,6 +29,7 @@
     "@builder.io/qwik-city": "^1.19.2",
     "@eslint/js": "^9",
     "@tailwindcss/vite": "^4.1.4",
+    "@types/marked": "^6.0.0",
     "@types/node": "20.19.0",
     "eslint": "9.32.0",
     "eslint-plugin-qwik": "^1.19.2",
@@ -43,5 +44,10 @@
     "vite": "7.3.1",
     "vite-tsconfig-paths": "^4.2.1",
     "wrangler": "^3.0.0"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.2",
+    "zod": "^4.3.6"
   }
 }

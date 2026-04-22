@@ -1,10 +1,16 @@
 import { component$, useSignal } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import { PageHeader } from "../../components/page-header";
 import { ProjectCard } from "../../components/project-card";
-import { projects } from "../../lib/data";
+import { fetchAllProjects } from "../../lib/github";
+
+export const useProjects = routeLoader$(async () => {
+  return await fetchAllProjects();
+});
 
 export default component$(() => {
+  const projectsSig = useProjects();
+  const projects = projectsSig.value;
   const filter = useSignal<string>("All");
 
   const categories = ["All", "P2P", "Systems", "Research", "Web"];

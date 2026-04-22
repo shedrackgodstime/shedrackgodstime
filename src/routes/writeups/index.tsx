@@ -1,9 +1,15 @@
 import { component$, useSignal } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import { PageHeader } from "../../components/page-header";
-import { writeups } from "../../lib/data";
+import { fetchAllWriteups } from "../../lib/github";
+
+export const useWriteups = routeLoader$(async () => {
+  return await fetchAllWriteups();
+});
 
 export default component$(() => {
+  const writeupsSig = useWriteups();
+  const writeups = writeupsSig.value;
   const searchTerm = useSignal("");
 
   const filteredWriteups = writeups.filter(

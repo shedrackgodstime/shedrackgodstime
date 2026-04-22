@@ -1,13 +1,18 @@
 import { component$ } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
-import { getWriteupBySlug, writeups } from "../../../lib/data";
+import { fetchAllWriteups } from "../../../lib/github";
 
-export const useWriteupData = routeLoader$(({ params, status }) => {
-  const writeup = getWriteupBySlug(params.slug);
+export const useWriteupData = routeLoader$(async ({ params, status }) => {
+  const writeups = await fetchAllWriteups();
+  const writeup = writeups.find((w) => w.slug === params.slug);
   if (!writeup) {
     status(404);
   }
   return writeup ?? null;
+});
+
+export const useAllWriteups = routeLoader$(async () => {
+  return await fetchAllWriteups();
 });
 
 const categoryColors: Record<string, string> = {
@@ -50,7 +55,9 @@ function renderBody(raw: string) {
 
 export default component$(() => {
   const writeupSig = useWriteupData();
+  const allWriteupsSig = useAllWriteups();
   const writeup = writeupSig.value;
+  const allWriteups = allWriteupsSig.value;
 
   if (!writeup) {
     return (
@@ -117,7 +124,7 @@ export default component$(() => {
         <div class="mt-20 border-t border-ink/8 pt-10">
           <p class="mb-4 font-mono text-xs tracking-widest text-gray-400 uppercase">More Writeups</p>
           <div class="flex flex-wrap gap-4">
-            {writeups
+            {allWriteups
               .filter((w) => w.slug !== writeup.slug)
               .map((w) => (
                 <a

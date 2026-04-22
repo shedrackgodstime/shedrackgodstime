@@ -1,18 +1,25 @@
 import { component$ } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
-import { getProjectBySlug, projects } from "../../../lib/data";
+import { fetchAllProjects } from "../../../lib/github";
 
-export const useProjectData = routeLoader$(({ params, status }) => {
-  const project = getProjectBySlug(params.slug);
+export const useProjectData = routeLoader$(async ({ params, status }) => {
+  const projects = await fetchAllProjects();
+  const project = projects.find((p) => p.slug === params.slug);
   if (!project) {
     status(404);
   }
   return project ?? null;
 });
 
+export const useAllProjects = routeLoader$(async () => {
+  return await fetchAllProjects();
+});
+
 export default component$(() => {
   const projectSig = useProjectData();
+  const allProjectsSig = useAllProjects();
   const project = projectSig.value;
+  const allProjects = allProjectsSig.value;
 
   if (!project) {
     return (
@@ -26,12 +33,7 @@ export default component$(() => {
     );
   }
 
-  const sections = [
-    { label: "The Problem", content: project.sections.problem },
-    { label: "Architecture", content: project.sections.architecture },
-    { label: "Security Model", content: project.sections.security },
-    { label: "What I Would Do Differently", content: project.sections.reflection },
-  ];
+  const sections = project.sections;
 
   return (
     <div class="min-h-screen py-12 sm:py-20 lg:py-24">
@@ -137,7 +139,7 @@ export default component$(() => {
         <div class="mt-20 border-t border-ink/8 pt-10">
           <p class="mb-4 font-mono text-xs tracking-widest text-gray-400 uppercase">More Projects</p>
           <div class="flex flex-wrap gap-4">
-            {projects
+            {allProjects
               .filter((p) => p.slug !== project.slug)
               .slice(0, 3)
               .map((p) => (

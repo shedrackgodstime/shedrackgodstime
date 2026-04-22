@@ -1,9 +1,15 @@
 import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
-import { Link, type DocumentHead } from "@builder.io/qwik-city";
+import { Link, routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import { ProjectCard } from "../components/project-card";
-import { projects as allProjects } from "../lib/data";
+import { fetchAllProjects } from "../lib/github";
+
+export const useFeaturedProjects = routeLoader$(async () => {
+  const allProjects = await fetchAllProjects();
+  return allProjects.slice(0, 3);
+});
 
 export default component$(() => {
+  const featuredProjects = useFeaturedProjects().value;
   const mousePosition = useSignal({ x: 0, y: 0 });
 
   // eslint-disable-next-line qwik/no-use-visible-task
@@ -23,10 +29,6 @@ export default component$(() => {
     "Python",
     "Network Security",
   ];
-
-  // First 3 projects from the shared data file
-  const featuredProjects = allProjects.slice(0, 3);
-
 
   return (
     <div class="min-h-screen overflow-hidden">

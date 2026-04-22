@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
-import type { Project } from "../lib/data";
+import type { Project } from "../lib/github";
 
 interface ProjectCardProps {
   project: Project;
