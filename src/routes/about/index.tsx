@@ -6,22 +6,44 @@ export default component$(() => {
   const expertise = [
     {
       category: "Systems Programming",
-      icon: "⚡",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      ),
       skills: ["Rust", "C / C++", "Linux Internals", "High-Performance Computing"],
     },
     {
       category: "Security Research",
-      icon: "🔒",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      ),
       skills: ["P2P Security", "Binary Analysis", "Vulnerability Assessment", "Threat Modeling"],
     },
     {
       category: "Network & Infrastructure",
-      icon: "🌐",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+          <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+          <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+          <line x1="6" y1="6" x2="6.01" y2="6"></line>
+          <line x1="6" y1="18" x2="6.01" y2="18"></line>
+        </svg>
+      ),
       skills: ["Protocol Design", "Distributed Systems", "QUIC / iroh Transport", "NAT Traversal"],
     },
     {
       category: "Cryptography",
-      icon: "🔐",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+          <circle cx="8" cy="16" r="6"></circle>
+          <line x1="12.24" y1="11.76" x2="19.41" y2="4.59"></line>
+          <polyline points="20.59 5.41 18.59 3.41 15.59 6.41"></polyline>
+        </svg>
+      ),
       skills: ["ECDH Key Exchange", "ChaCha20-Poly1305", "Post-Quantum Primitives", "Protocol Design"],
     },
   ];
@@ -109,8 +131,8 @@ export default component$(() => {
                     class="group bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-precision/10 border-ink/10 border"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <div class="mb-5 flex items-center gap-3">
-                      <span class="text-xl opacity-80 transition-transform group-hover:scale-110">{area.icon}</span>
+                    <div class="mb-5 flex items-center gap-3 text-ink-subtle transition-colors group-hover:text-precision">
+                      <span class="opacity-80 transition-transform group-hover:scale-110">{area.icon}</span>
                       <h3 class="font-mono text-xs font-semibold tracking-widest text-ink transition-colors group-hover:text-precision">
                         {area.category.toUpperCase()}
                       </h3>

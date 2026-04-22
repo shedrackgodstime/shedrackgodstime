@@ -208,9 +208,11 @@ export default component$(() => {
 
         {/* Scroll cue */}
         <div class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:block animate-fade-in-up delay-800">
-          <div class="flex flex-col items-center gap-2">
-            <span class="font-mono text-[0.65rem] tracking-widest text-gray-400">SCROLL</span>
-            <div class="h-10 w-px bg-gradient-to-b from-precision to-transparent" />
+          <div class="flex flex-col items-center gap-3">
+            <span class="font-mono text-[0.65rem] tracking-[0.2em] text-gray-400">SCROLL</span>
+            <div class="relative h-12 w-[1px] bg-gradient-to-b from-precision/20 to-transparent overflow-hidden">
+              <div class="absolute left-0 top-0 h-4 w-full bg-precision animate-[scroll-down_2s_ease-in-out_infinite]" />
+            </div>
           </div>
         </div>
       </section>
