@@ -1,6 +1,7 @@
 import { component$, useSignal } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { PageHeader } from "../../components/page-header";
+import { ProjectCard } from "../../components/project-card";
 import { projects } from "../../lib/data";
 
 export default component$(() => {
@@ -40,61 +41,19 @@ export default component$(() => {
         </div>
 
         {/* Project Grid */}
+        <div class="mb-8 flex items-end justify-between gap-6">
+          <p class="max-w-2xl text-sm leading-relaxed text-ink-subtle">
+            Browse the project archive by category. Each entry is a concise
+            technical summary before the full project writeup.
+          </p>
+          <p class="hidden font-mono text-[0.65rem] tracking-[0.18em] text-gray-400 uppercase sm:block">
+            {filteredProjects.length} entries
+          </p>
+        </div>
+
         <div class="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-2">
-          {filteredProjects.map((project, index) => (
-            <a
-              key={project.title}
-              href={`/projects/${project.slug}`}
-              class="group relative overflow-hidden bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-precision/10 border-ink/10 border block"
-              style={{ animationDelay: `${index * 80}ms` }}
-            >
-              {/* Hover corner accent */}
-              <div class="absolute right-0 top-0 h-24 w-24 bg-gradient-to-br from-precision/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-              <div class="relative z-10">
-                {/* Year + Status row */}
-                <div class="mb-5 flex items-center justify-between">
-                  <span class="font-mono text-xs tracking-widest text-precision">
-                    {project.year}
-                  </span>
-                  <span
-                    class={`px-2.5 py-0.5 font-mono text-[0.65rem] tracking-wider uppercase border ${
-                      project.status === "Active"
-                        ? "bg-precision/10 border-precision/25 text-precision"
-                        : "bg-ink/5 border-ink/10 text-gray-400"
-                    }`}
-                  >
-                    {project.status}
-                  </span>
-                </div>
-
-                <h3
-                  class="mb-3 font-semibold tracking-tight transition-colors group-hover:text-precision"
-                  style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)" }}
-                >
-                  {project.title}
-                </h3>
-
-                <p class="mb-5 leading-relaxed text-ink-subtle text-sm">
-                  {project.description}
-                </p>
-
-                {/* Tags */}
-                <div class="mb-5 flex flex-wrap gap-2">
-                  {project.tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      class="px-2.5 py-1 font-mono text-[0.7rem] tracking-wide bg-canvas-subtle border-ink/8 text-ink-subtle border"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Bottom accent line */}
-                <div class="h-px w-0 bg-precision transition-all duration-500 group-hover:w-full" />
-              </div>
-            </a>
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import { Link, type DocumentHead } from "@builder.io/qwik-city";
+import { ProjectCard } from "../components/project-card";
 import { projects as allProjects } from "../lib/data";
 
 export default component$(() => {
@@ -136,74 +137,82 @@ export default component$(() => {
           </svg>
         </div>
 
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(255,255,255,0.96),rgba(255,255,255,0.68)_32%,transparent_62%)]" />
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/72 to-transparent" />
+
         {/* Hero content */}
         <div class="relative mx-auto w-full max-w-[1600px] px-6 sm:px-8 lg:px-12">
           <div class="max-w-4xl">
 
-            {/* Role badge */}
-            <div
-              class="mb-6 inline-block bg-precision/5 px-4 py-2 backdrop-blur-sm animate-fade-in-up"
-              style={{ border: "1px solid rgba(37, 99, 235, 0.2)" }}
-            >
-              <span class="font-mono text-xs uppercase tracking-widest text-precision">
-                CYBERSECURITY / SYSTEMS_PROGRAMMER
-              </span>
-            </div>
-
-            {/* Name */}
-            <h1
-              class="mb-6 font-bold animate-fade-in-up delay-200"
-              style={{
-                fontSize: "clamp(3rem, 10vw, 8rem)",
-                lineHeight: "1.02",
-                letterSpacing: "-0.03em",
-              }}
-            >
-              Shedrack
-              <br />
-              <span class="bg-gradient-to-r from-precision to-blue-600 bg-clip-text text-transparent">
-                Godstime
-              </span>
-            </h1>
-
-            {/* Tagline */}
-            <p
-              class="mb-10 max-w-2xl leading-relaxed text-ink-subtle animate-fade-in-up delay-400"
-              style={{ fontSize: "clamp(1rem, 2.5vw, 1.35rem)" }}
-            >
-              Building secure distributed systems — P2P networking,
-              applied cryptography, and resilient infrastructure.
-            </p>
-
-            {/* CTAs */}
-            <div class="mb-12 flex flex-col gap-4 sm:flex-row sm:gap-5 animate-fade-in-up delay-600">
-              <Link
-                href="/projects"
-                class="group relative overflow-hidden bg-precision px-8 py-4 text-center font-medium tracking-wide text-white transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-precision/30"
+              {/* Role badge */}
+              <div
+                class="mb-6 inline-flex items-center gap-3 bg-white/75 px-4 py-2 backdrop-blur-sm animate-fade-in-up"
+                style={{ border: "1px solid rgba(37, 99, 235, 0.22)" }}
               >
-                <span class="relative z-10">View Projects</span>
-                <div class="absolute inset-0 -translate-x-full -skew-x-12 transform bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-              </Link>
-              <Link
-                href="/about"
-                class="border border-ink/15 bg-white px-8 py-4 text-center font-medium tracking-wide transition-all hover:border-precision/40 hover:bg-canvas-subtle"
-              >
-                About Me
-              </Link>
-            </div>
-
-            {/* Skill chips */}
-            <div class="flex flex-wrap gap-2.5 animate-fade-in-up delay-800">
-              {skills.map((skill) => (
-                <span
-                  key={skill}
-                  class="bg-white/80 px-3.5 py-1.5 font-mono text-xs text-ink-subtle backdrop-blur-sm border border-ink/10"
-                >
-                  {skill}
+                <span class="h-2 w-2 bg-precision" />
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-precision">
+                  Cybersecurity / Systems
                 </span>
-              ))}
+              </div>
+
+              {/* Name */}
+              <h1
+                class="mb-4 font-bold animate-fade-in-up delay-200"
+                style={{
+                  fontSize: "clamp(3rem, 10vw, 8rem)",
+                  lineHeight: "0.98",
+                  letterSpacing: "-0.04em",
+                }}
+              >
+                Shedrack
+                <br />
+                <span class="bg-gradient-to-r from-precision via-blue-600 to-sky-500 bg-clip-text text-transparent">
+                  Godstime
+                </span>
+              </h1>
+
+              <p class="mb-4 font-mono text-[0.72rem] tracking-[0.18em] text-ink-subtle uppercase animate-fade-in-up delay-300">
+                Distributed systems, applied cryptography, network security
+              </p>
+
+              {/* Tagline */}
+              <p
+                class="mb-10 max-w-2xl leading-relaxed text-ink-subtle animate-fade-in-up delay-400"
+                style={{ fontSize: "clamp(1rem, 2.5vw, 1.35rem)" }}
+              >
+                Building secure distributed systems through peer-to-peer networking,
+                applied cryptography, and resilient infrastructure.
+              </p>
+
+              {/* CTAs */}
+              <div class="mb-10 flex flex-col gap-4 sm:flex-row sm:gap-5 animate-fade-in-up delay-600">
+                <Link
+                  href="/projects"
+                  class="group relative overflow-hidden bg-precision px-8 py-4 text-center font-medium tracking-wide text-white transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-precision/30"
+                >
+                  <span class="relative z-10">View Projects</span>
+                  <div class="absolute inset-0 -translate-x-full -skew-x-12 transform bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                </Link>
+                <Link
+                  href="/about"
+                  class="border border-ink/15 bg-white/88 px-8 py-4 text-center font-medium tracking-wide transition-all hover:border-precision/40 hover:bg-canvas-subtle"
+                >
+                  About Me
+                </Link>
+              </div>
+
+              {/* Skill chips */}
+              <div class="flex flex-wrap gap-2.5 animate-fade-in-up delay-800">
+                {skills.map((skill) => (
+                  <span
+                    key={skill}
+                    class="bg-white/80 px-3.5 py-1.5 font-mono text-xs text-ink-subtle backdrop-blur-sm border border-ink/10"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
         </div>
 
         {/* Scroll cue */}
@@ -221,44 +230,31 @@ export default component$(() => {
       <section class="border-t border-ink/8 bg-canvas-subtle py-20 sm:py-28">
         <div class="mx-auto max-w-[1600px] px-6 sm:px-8 lg:px-12">
 
-          <div class="mb-10 flex items-end justify-between">
-            <div>
-              <p class="mb-2 font-mono text-xs tracking-widest text-precision uppercase">Featured Work</p>
-              <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Recent Projects</h2>
+          <div class="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div class="max-w-3xl">
+              <p class="mb-3 font-mono text-xs tracking-[0.18em] text-precision uppercase">
+                Featured Work
+              </p>
+              <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                Selected projects with systems weight.
+              </h2>
+              <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ink-subtle sm:text-base">
+                A few projects that show how the work is approached: networking,
+                protocol design, cryptography, and the tradeoffs behind each system.
+              </p>
             </div>
+
             <Link
               href="/projects"
-              class="hidden font-mono text-xs tracking-widest text-ink-subtle uppercase transition-colors hover:text-precision sm:block"
+              class="font-mono text-xs tracking-[0.18em] text-ink-subtle uppercase transition-colors hover:text-precision"
             >
               View All →
             </Link>
           </div>
 
           <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project, index) => (
-              <Link
-                key={project.title}
-                href={`/projects/${project.slug}`}
-                class="group block bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-precision/10 border-ink/10 border"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div class="mb-4 flex items-center justify-between">
-                  <span class="font-mono text-xs tracking-widest text-precision">{project.year}</span>
-                  <span class="font-mono text-[0.65rem] tracking-widest text-gray-400 uppercase">→</span>
-                </div>
-                <h3 class="mb-2 font-semibold tracking-tight transition-colors group-hover:text-precision">
-                  {project.title}
-                </h3>
-                <p class="mb-4 text-sm leading-relaxed text-ink-subtle">{project.description}</p>
-                <div class="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} class="font-mono text-[0.65rem] tracking-wide text-gray-400 bg-canvas-subtle border-ink/8 border px-2 py-0.5">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div class="mt-5 h-px w-0 bg-precision transition-all duration-500 group-hover:w-full" />
-              </Link>
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
 
