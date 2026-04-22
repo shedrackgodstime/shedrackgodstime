@@ -19,9 +19,9 @@ export default component$(() => {
   );
 
   const categoryColors: Record<string, string> = {
-    "Incident Analysis": "bg-red-50 border-red-200 text-red-600",
-    "Architecture": "bg-precision/10 border-precision/25 text-precision",
-    "Research": "bg-emerald-50 border-emerald-200 text-emerald-700",
+    "Incident Analysis": "bg-red-500/5 border-red-500/20 text-red-600",
+    "Architecture": "bg-precision/5 border-precision/20 text-precision",
+    "Research": "bg-emerald-500/5 border-emerald-500/20 text-emerald-600",
   };
 
   return (
@@ -30,58 +30,70 @@ export default component$(() => {
         <PageHeader
           tag="RESEARCH"
           title="Technical Writeups"
-          description="Incident analyses, architecture deep-dives, and security research."
+          description="In-depth post-mortems, system design documents, and security research findings."
         />
 
         {/* Search */}
-        <div class="mb-10 max-w-md animate-fade-in-up delay-400">
-          <input
-            type="text"
-            placeholder="Search writeups..."
-            bind:value={searchTerm}
-            class="w-full bg-white px-5 py-3.5 font-mono text-sm transition-all focus:ring-2 focus:ring-precision focus:outline-none border-ink/10 border placeholder:text-gray-400"
-          />
+        <div class="mb-16 max-w-lg animate-fade-in-up delay-400">
+          <div class="group relative">
+            <input
+              type="text"
+              placeholder="Search by keyword or category..."
+              bind:value={searchTerm}
+              class="w-full bg-white px-6 py-4 font-mono text-xs tracking-wider transition-all focus:ring-1 focus:ring-precision focus:outline-none border-ink/8 border-l-4 border-l-precision/20 focus:border-l-precision placeholder:text-gray-300"
+            />
+          </div>
         </div>
 
         {/* List */}
-        <div class="space-y-4">
+        <div class="grid grid-cols-1 gap-4">
           {filteredWriteups.map((writeup, index) => (
             <a
               key={writeup.slug}
               href={`/writeups/${writeup.slug}`}
-              class="group relative overflow-hidden bg-white transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-precision/8 border-ink/10 border block cursor-pointer"
-              style={{ animationDelay: `${index * 60}ms` }}
+              class={`group relative overflow-hidden bg-white border border-ink/8 px-8 py-8 transition-all duration-500 hover:-translate-x-1 hover:border-precision/30 hover:shadow-[32px_0_64px_-16px_rgba(37,99,235,0.08)] animate-fade-in-up delay-${((index % 6) + 1) * 100}`}
             >
-              {/* Left border accent */}
-              <div class="absolute left-0 top-0 h-0 w-[3px] bg-precision transition-all duration-300 group-hover:h-full" />
+              {/* Vertical Accent */}
+              <div class="absolute right-0 top-0 h-full w-[2px] bg-precision/5 transition-all duration-500 group-hover:bg-precision group-hover:w-1" />
 
-              <div class="relative px-7 py-6 transition-all duration-300 group-hover:pl-10">
-                {/* Meta row */}
-                <div class="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-                  <span
-                    class={`inline-block w-fit px-2.5 py-0.5 font-mono text-[0.65rem] tracking-wider uppercase border ${categoryColors[writeup.category] ?? "bg-gray-50 border-gray-200 text-gray-500"}`}
-                  >
-                    {writeup.category}
-                  </span>
-                  <span class="font-mono text-xs text-gray-400">{writeup.readTime}</span>
+              <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div class="flex-1">
+                  {/* Meta */}
+                  <div class="mb-4 flex items-center gap-4">
+                    <span
+                      class={`px-3 py-1 font-mono text-[0.6rem] font-bold tracking-widest uppercase border ${categoryColors[writeup.category] ?? "bg-gray-50 border-gray-200 text-gray-500"}`}
+                    >
+                      {writeup.category}
+                    </span>
+                    <span class="font-mono text-[0.6rem] tracking-[0.2em] text-ink/30 uppercase italic">
+                      {writeup.readTime}
+                    </span>
+                  </div>
+
+                  <h3 class="text-2xl font-bold tracking-tight text-ink transition-colors duration-300 group-hover:text-precision">
+                    {writeup.title}
+                  </h3>
+                  
+                  <p class="mt-2 max-w-3xl text-sm leading-relaxed text-ink-subtle">
+                    {writeup.excerpt}
+                  </p>
                 </div>
 
-                <h3
-                  class="mb-2 font-semibold tracking-tight transition-colors group-hover:text-precision"
-                  style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)" }}
-                >
-                  {writeup.title}
-                </h3>
-
-                <p class="mb-4 text-sm leading-relaxed text-ink-subtle">
-                  {writeup.excerpt}
-                </p>
-
-                <div class="flex items-center justify-between">
-                  <span class="font-mono text-xs text-gray-400">{writeup.date}</span>
-                  <span class="translate-x-0 text-sm text-precision opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100">
-                    Read →
-                  </span>
+                <div class="flex items-center justify-between border-t border-ink/5 pt-6 lg:border-none lg:pt-0">
+                  <div class="flex flex-col lg:items-end">
+                    <span class="font-mono text-[0.65rem] font-bold tracking-widest text-ink/80 uppercase">
+                      {writeup.date.split("-")[1]}
+                    </span>
+                    <span class="font-mono text-[0.65rem] tracking-widest text-ink/30 uppercase">
+                      {writeup.date.split("-")[0]}
+                    </span>
+                  </div>
+                  
+                  <div class="flex h-10 w-10 items-center justify-center rounded-full border border-ink/10 transition-all duration-500 group-hover:border-precision group-hover:bg-precision group-hover:text-white lg:ml-12">
+                    <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5">
+                      →
+                    </span>
+                  </div>
                 </div>
               </div>
             </a>

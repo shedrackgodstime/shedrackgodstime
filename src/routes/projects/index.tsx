@@ -58,8 +58,8 @@ export default component$(() => {
         </div>
 
         <div class="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-2">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={index} />
           ))}
         </div>
       </div>

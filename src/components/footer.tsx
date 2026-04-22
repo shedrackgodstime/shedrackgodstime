@@ -1,14 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 
 export const Footer = component$(() => {
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/projects", label: "Projects" },
-    { href: "/writeups", label: "Writeups" },
-    { href: "/contact", label: "Contact" },
-  ];
-
   const socialLinks = [
     { href: "https://github.com/shedrackgodstime", label: "GitHub" },
     { href: "https://x.com/krixtency", label: "Twitter" },
@@ -16,51 +8,43 @@ export const Footer = component$(() => {
   ];
 
   return (
-    <footer class="border-t border-ink/8 bg-canvas-subtle">
-      <div class="mx-auto max-w-[1600px] px-6 py-10 sm:px-8 lg:px-12">
-        <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <footer class="border-t border-ink/5 bg-white">
+      <div class="mx-auto max-w-[1600px] px-6 py-12 sm:px-8 lg:px-12">
+        <div class="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
           {/* Left: Monogram + tagline */}
           <div>
-            <p class="font-mono text-sm font-bold tracking-tight text-ink">SHEDRACK</p>
-            <p class="mt-0.5 font-mono text-xs text-gray-400">
-              Building a safer digital world.
+            <div class="flex items-center gap-3">
+              <div class="h-6 w-6 rounded-full bg-precision" />
+              <p class="font-mono text-sm font-bold tracking-[0.2em] text-ink uppercase">
+                Shedrack Godstime
+              </p>
+            </div>
+            <p class="mt-4 max-w-xs font-mono text-[0.65rem] leading-relaxed tracking-wider text-ink/30 uppercase">
+              Systems thinker building at the edge of networks, security, and decentralized software.
             </p>
           </div>
 
-          {/* Center: Nav links */}
-          <nav class="flex flex-wrap gap-x-6 gap-y-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                class="font-mono text-xs tracking-widest text-ink-subtle uppercase transition-colors hover:text-precision"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Right: Social */}
-          <div class="flex gap-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                class="font-mono text-xs text-gray-400 transition-colors hover:text-precision"
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Right: Social & Info */}
+          <div class="flex flex-col gap-8 sm:items-end">
+            <div class="flex gap-8">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  class="group flex flex-col font-mono text-[0.65rem] tracking-[0.2em] text-ink/40 uppercase transition-colors hover:text-precision"
+                >
+                  <span class="text-[0.6rem] text-ink/20 transition-colors group-hover:text-precision/40">Connect</span>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+            
+            <p class="font-mono text-[0.6rem] tracking-[0.1em] text-ink/20 uppercase">
+              © {new Date().getFullYear()} — Nigeria / Global
+            </p>
           </div>
-        </div>
-
-        {/* Bottom line */}
-        <div class="mt-8 border-t border-ink/5 pt-5">
-          <p class="font-mono text-[0.65rem] text-gray-300">
-            © {new Date().getFullYear()} Shedrack Godstime. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
