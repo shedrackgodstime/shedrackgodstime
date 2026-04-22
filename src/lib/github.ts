@@ -233,8 +233,13 @@ export async function fetchAllWriteups(token?: string | null): Promise<Writeup[]
       }
     }
 
+    // Deduplicate by slug (prefer local version if there's a collision)
+    const uniqueWriteups = Array.from(
+      new Map(writeups.map((w) => [w.slug, w])).values()
+    );
+
     // Sort by date descending
-    writeupsCache = writeups.sort((a, b) => b.date.localeCompare(a.date));
+    writeupsCache = uniqueWriteups.sort((a, b) => b.date.localeCompare(a.date));
     return writeupsCache;
   } catch (error) {
     console.error("Failed to fetch writeups:", error);
