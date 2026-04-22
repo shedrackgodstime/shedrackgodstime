@@ -2,8 +2,8 @@ import { component$ } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead, type StaticGenerateHandler } from "@builder.io/qwik-city";
 import { fetchAllWriteups } from "../../../lib/github";
 
-export const useWriteupData = routeLoader$(async ({ params, status }) => {
-  const writeups = await fetchAllWriteups();
+export const useWriteupData = routeLoader$(async ({ params, status, env }) => {
+  const writeups = await fetchAllWriteups(env.get("GITHUB_TOKEN"));
   const writeup = writeups.find((w) => w.slug === params.slug);
   if (!writeup) {
     status(404);
@@ -11,12 +11,12 @@ export const useWriteupData = routeLoader$(async ({ params, status }) => {
   return writeup ?? null;
 });
 
-export const useAllWriteups = routeLoader$(async () => {
-  return await fetchAllWriteups();
+export const useAllWriteups = routeLoader$(async ({ env }) => {
+  return await fetchAllWriteups(env.get("GITHUB_TOKEN"));
 });
 
-export const onStaticGenerate: StaticGenerateHandler = async () => {
-  const writeups = await fetchAllWriteups();
+export const onStaticGenerate: StaticGenerateHandler = async ({ env }) => {
+  const writeups = await fetchAllWriteups(env.get("GITHUB_TOKEN"));
   return {
     params: writeups.map((w) => {
       return { slug: w.slug };

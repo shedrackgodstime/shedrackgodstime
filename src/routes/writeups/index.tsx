@@ -3,8 +3,8 @@ import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import { PageHeader } from "../../components/page-header";
 import { fetchAllWriteups } from "../../lib/github";
 
-export const useWriteups = routeLoader$(async () => {
-  return await fetchAllWriteups();
+export const useWriteups = routeLoader$(async ({ env }) => {
+  return await fetchAllWriteups(env.get("GITHUB_TOKEN"));
 });
 
 export default component$(() => {

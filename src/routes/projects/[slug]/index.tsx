@@ -2,8 +2,8 @@ import { component$ } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead, type StaticGenerateHandler } from "@builder.io/qwik-city";
 import { fetchAllProjects } from "../../../lib/github";
 
-export const useProjectData = routeLoader$(async ({ params, status }) => {
-  const projects = await fetchAllProjects();
+export const useProjectData = routeLoader$(async ({ params, status, env }) => {
+  const projects = await fetchAllProjects(env.get("GITHUB_TOKEN"));
   const project = projects.find((p) => p.slug === params.slug);
   if (!project) {
     status(404);
@@ -11,12 +11,12 @@ export const useProjectData = routeLoader$(async ({ params, status }) => {
   return project ?? null;
 });
 
-export const useAllProjects = routeLoader$(async () => {
-  return await fetchAllProjects();
+export const useAllProjects = routeLoader$(async ({ env }) => {
+  return await fetchAllProjects(env.get("GITHUB_TOKEN"));
 });
 
-export const onStaticGenerate: StaticGenerateHandler = async () => {
-  const projects = await fetchAllProjects();
+export const onStaticGenerate: StaticGenerateHandler = async ({ env }) => {
+  const projects = await fetchAllProjects(env.get("GITHUB_TOKEN"));
   return {
     params: projects.map((p) => {
       return { slug: p.slug };

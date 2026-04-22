@@ -51,19 +51,25 @@ let projectsCache: Project[] | null = null;
 let writeupsCache: Writeup[] | null = null;
 
 // Fetch helper with standard headers
-async function fetchGithubAPI(url: string) {
+async function fetchGithubAPI(url: string, token?: string | null) {
   const headers: Record<string, string> = {
     "User-Agent": "Qwik-Portfolio-Builder",
     "Accept": "application/vnd.github.v3+json",
   };
   
-  // If you run into rate limits locally, add a GITHUB_TOKEN to your .env
-  if (typeof process !== "undefined" && process.env?.GITHUB_TOKEN) {
-    headers["Authorization"] = `Bearer ${process.env.GITHUB_TOKEN}`;
+  // Use passed token or fallback to process.env (for local dev)
+  const actualToken = token || (typeof process !== "undefined" ? process.env?.GITHUB_TOKEN : undefined);
+  
+  if (actualToken) {
+    headers["Authorization"] = `Bearer ${actualToken}`;
   }
 
   const res = await fetch(url, { headers });
   if (!res.ok) {
+    console.error(`[GitHub API] ERROR: ${res.status} ${res.statusText} on ${url}`);
+    if (res.status === 403) {
+      console.error("[GitHub API] Rate limit hit! You MUST use a GITHUB_TOKEN.");
+    }
     throw new Error(`GitHub API error: ${res.status} ${res.statusText} on ${url}`);
   }
   return res.json();
@@ -72,13 +78,13 @@ async function fetchGithubAPI(url: string) {
 /**
  * Fetches all repos tagged with "portfolio", then grabs their portfolio.md
  */
-export async function fetchAllProjects(): Promise<Project[]> {
+export async function fetchAllProjects(token?: string | null): Promise<Project[]> {
   if (projectsCache) return projectsCache;
 
   try {
     // 1. Find tagged repos
     const searchUrl = `https://api.github.com/search/repositories?q=user:${GITHUB_USER}+topic:portfolio`;
-    const searchData = await fetchGithubAPI(searchUrl);
+    const searchData = await fetchGithubAPI(searchUrl, token);
     
     const projects: Project[] = [];
 
@@ -155,7 +161,7 @@ export async function fetchAllProjects(): Promise<Project[]> {
  * 1. Local `src/content/writeups/` folder (for general writeups)
  * 2. Remote `writeups/` folder inside any GitHub repo tagged with "portfolio"
  */
-export async function fetchAllWriteups(): Promise<Writeup[]> {
+export async function fetchAllWriteups(token?: string | null): Promise<Writeup[]> {
   if (writeupsCache) return writeupsCache;
 
   const writeups: Writeup[] = [];
@@ -189,13 +195,13 @@ export async function fetchAllWriteups(): Promise<Writeup[]> {
 
     // --- SOURCE B: Remote Writeups (from project repos) ---
     const searchUrl = `https://api.github.com/search/repositories?q=user:${GITHUB_USER}+topic:portfolio`;
-    const searchData = await fetchGithubAPI(searchUrl).catch(() => ({ items: [] }));
+    const searchData = await fetchGithubAPI(searchUrl, token).catch(() => ({ items: [] }));
     
     if (searchData.items && Array.isArray(searchData.items)) {
       for (const repo of searchData.items) {
         try {
           const contentsUrl = `https://api.github.com/repos/${GITHUB_USER}/${repo.name}/contents/writeups`;
-          const contentsData = await fetchGithubAPI(contentsUrl).catch(() => null);
+          const contentsData = await fetchGithubAPI(contentsUrl, token).catch(() => null);
           
           if (!contentsData || !Array.isArray(contentsData)) {
             continue; // No writeups directory in this repo

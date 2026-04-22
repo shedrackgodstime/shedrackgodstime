@@ -4,8 +4,8 @@ import { PageHeader } from "../../components/page-header";
 import { ProjectCard } from "../../components/project-card";
 import { fetchAllProjects } from "../../lib/github";
 
-export const useProjects = routeLoader$(async () => {
-  return await fetchAllProjects();
+export const useProjects = routeLoader$(async ({ env }) => {
+  return await fetchAllProjects(env.get("GITHUB_TOKEN"));
 });
 
 export default component$(() => {

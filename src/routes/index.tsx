@@ -3,8 +3,8 @@ import { Link, routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import { ProjectCard } from "../components/project-card";
 import { fetchAllProjects } from "../lib/github";
 
-export const useFeaturedProjects = routeLoader$(async () => {
-  const allProjects = await fetchAllProjects();
+export const useFeaturedProjects = routeLoader$(async ({ env }) => {
+  const allProjects = await fetchAllProjects(env.get("GITHUB_TOKEN"));
   return allProjects.slice(0, 3);
 });
 
