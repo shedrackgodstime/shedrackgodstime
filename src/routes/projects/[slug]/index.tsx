@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead, type StaticGenerateHandler } from "@builder.io/qwik-city";
 import { fetchAllProjects } from "../../../lib/github";
 
 export const useProjectData = routeLoader$(async ({ params, status }) => {
@@ -14,6 +14,15 @@ export const useProjectData = routeLoader$(async ({ params, status }) => {
 export const useAllProjects = routeLoader$(async () => {
   return await fetchAllProjects();
 });
+
+export const onStaticGenerate: StaticGenerateHandler = async () => {
+  const projects = await fetchAllProjects();
+  return {
+    params: projects.map((p) => {
+      return { slug: p.slug };
+    }),
+  };
+};
 
 export default component$(() => {
   const projectSig = useProjectData();

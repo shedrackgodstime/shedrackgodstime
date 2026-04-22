@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead, type StaticGenerateHandler } from "@builder.io/qwik-city";
 import { fetchAllWriteups } from "../../../lib/github";
 
 export const useWriteupData = routeLoader$(async ({ params, status }) => {
@@ -14,6 +14,15 @@ export const useWriteupData = routeLoader$(async ({ params, status }) => {
 export const useAllWriteups = routeLoader$(async () => {
   return await fetchAllWriteups();
 });
+
+export const onStaticGenerate: StaticGenerateHandler = async () => {
+  const writeups = await fetchAllWriteups();
+  return {
+    params: writeups.map((w) => {
+      return { slug: w.slug };
+    }),
+  };
+};
 
 const categoryColors: Record<string, string> = {
   "Incident Analysis": "bg-red-50 border-red-200 text-red-600",
