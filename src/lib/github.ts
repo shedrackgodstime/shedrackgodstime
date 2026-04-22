@@ -1,8 +1,6 @@
 import { z } from "zod";
 import matter from "gray-matter";
 import { marked } from "marked";
-import fs from "fs/promises";
-import path from "path";
 
 const GITHUB_USER = "shedrackgodstime";
 const CONTENT_REPO = "portfolio-content";
@@ -164,33 +162,29 @@ export async function fetchAllWriteups(): Promise<Writeup[]> {
 
   try {
     // --- SOURCE A: Local Writeups ---
-    const localDir = path.join(process.cwd(), "writeups");
     try {
-      const files = await fs.readdir(localDir);
-      for (const file of files) {
-        if (!file.endsWith(".md")) continue;
+      // Use Vite's glob import to bundle files at build time. 
+      // This fixes the Cloudflare Worker error because Cloudflare cannot use Node 'fs' at runtime.
+      const markdownFiles = import.meta.glob("../../writeups/*.md", { query: "?raw", import: "default", eager: true });
+      
+      for (const [filePath, rawMarkdown] of Object.entries(markdownFiles)) {
+        const fileName = filePath.split("/").pop() || "";
         
-        const filePath = path.join(localDir, file);
-        const rawMarkdown = await fs.readFile(filePath, "utf-8");
-        
-        const { data: frontmatter, content: body } = matter(rawMarkdown);
+        const { data: frontmatter, content: body } = matter(rawMarkdown as string);
         const parsed = WriteupSchema.safeParse(frontmatter);
         
         if (parsed.success) {
           writeups.push({
-            slug: file.replace(".md", ""),
+            slug: fileName.replace(".md", ""),
             ...parsed.data,
             body,
           });
         } else {
-          console.warn(`[Local] Invalid frontmatter in ${file}. Skipping.`);
+          console.warn(`[Local] Invalid frontmatter in ${fileName}. Skipping.`);
         }
       }
     } catch (err: any) {
-      // Ignore if directory doesn't exist yet
-      if (err.code !== "ENOENT") {
-        console.error("Error reading local writeups:", err);
-      }
+      console.error("Error reading local writeups:", err);
     }
 
     // --- SOURCE B: Remote Writeups (from project repos) ---
