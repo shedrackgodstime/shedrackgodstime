@@ -1,23 +1,180 @@
 ---
-title: "Testing the Markdown Pipeline"
+title: "Testing the Full Markdown Pipeline"
 date: "2026-04"
 category: "Architecture"
-readTime: "3 min read"
-excerpt: "This is a local writeup created to test the Qwik City MD AST parser and custom Tailwind renderer."
+readTime: "5 min read"
+excerpt: "A comprehensive test of the markdown rendering pipeline including code blocks, tables, blockquotes, lists, and images."
 ---
 
-This is a test paragraph to verify that local markdown files are successfully parsed by the `fs` module and injected into the UI during the Qwik SSG build.
+Welcome to the test writeup! This file demonstrates all the markdown features now supported in the portfolio.
 
-## Rendering Code Blocks
+## Introduction
 
-We also need to make sure that inline code blocks like `const test = true;` are wrapped in the custom Tailwind span defined in the `renderBody()` function inside the writeup route.
+The previous implementation used a **minimal custom parser** that only handled:
 
-If you can read this, the local `src/content/writeups/` fetching logic is working perfectly.
+- `##` headings
+- `inline code`
 
-## Checking Custom Classes
+Now we have full GitHub-style rendering powered by `marked` + `highlight.js` + `@tailwindcss/typography`.
 
-Notice how the `##` headings should not just render as generic `<h2>` tags. They should be intercepted by our custom renderer and styled with:
+## Code Blocks
 
-`class="mt-10 mb-4 font-mono text-xs tracking-widest text-precision uppercase"`
+### JavaScript
 
-If everything is blue and sharp, we have succeeded.
+```javascript
+function greet(name) {
+  const message = `Hello, ${name}!`;
+  console.log(message);
+  return message;
+}
+
+greet("Shedrack");
+```
+
+### TypeScript
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
+}
+
+function createUser(name: string, email: string): User {
+  return {
+    id: Math.random(),
+    name,
+    email,
+    isActive: true,
+  };
+}
+```
+
+### Python
+
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+for i in range(10):
+    print(fibonacci(i))
+```
+
+### Bash/Shell
+
+```bash
+#!/bin/bash
+echo "Building the project..."
+npm run build
+echo "Deploying to Cloudflare Pages..."
+wrangler pages deploy ./dist
+```
+
+### JSON Configuration
+
+```json
+{
+  "name": "shedrackgodstime",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite --mode ssr",
+    "build": "qwik build"
+  },
+  "dependencies": {
+    "@builder.io/qwik": "^1.19.2"
+  }
+}
+```
+
+### SQL
+
+```sql
+SELECT
+    users.name,
+    COUNT(orders.id) as order_count
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id
+WHERE users.is_active = true
+GROUP BY users.id
+ORDER BY order_count DESC
+LIMIT 10;
+```
+
+## Blockquotes
+
+> This is a blockquote. It's useful for highlighting important information or quotes from external sources.
+>
+> It can span multiple lines and maintains proper styling.
+
+> **Pro tip:** Use blockquotes to emphasize key takeaways or callouts.
+
+## Tables
+
+### User Statistics
+
+| Name     | Role          | Status   | Projects |
+| -------- | ------------- | -------- | -------- |
+| Shedrack | Lead Engineer | Active   | 12       |
+| John     | Backend Dev   | Active   | 8        |
+| Sarah    | Designer      | Inactive | 5        |
+
+### Feature Comparison
+
+| Feature           | Previous | Current                |
+| ----------------- | -------- | ---------------------- |
+| Code highlighting | ❌       | ✅ 10+ languages       |
+| Tables            | ❌       | ✅ Styled              |
+| Blockquotes       | ❌       | ✅ With accent border  |
+| Images            | ❌       | ✅ With shadow         |
+| Lists             | ❌       | ✅ Ordered & unordered |
+
+## Lists
+
+### Unordered Lists
+
+- First item with some longer text to see how it wraps
+- Second item
+  - Nested item A
+  - Nested item B
+- Third item
+
+### Ordered Lists
+
+1. Initialize the project
+2. Configure the markdown parser
+3. Add syntax highlighting
+4. Style with Tailwind
+5. Deploy to production
+
+## Inline Code
+
+You can use inline code like `const x = 42` or `npm install` within sentences.
+
+## Links
+
+- [GitHub](https://github.com)
+- [Qwik Documentation](https://qwik.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+
+## Horizontal Rules
+
+Use horizontal rules to separate sections:
+
+---
+
+## Conclusion
+
+If everything renders correctly, you should see:
+
+- ✅ Syntax highlighted code blocks in multiple languages
+- ✅ Beautiful blockquotes with blue accent border
+- ✅ Clean tables with alternating rows
+- ✅ Properly styled lists (both ordered and unordered)
+- ✅ Inline code within paragraphs
+- ✅ Links that match the theme
+- ✅ Smooth typography throughout
+
+The markdown pipeline is now fully operational!

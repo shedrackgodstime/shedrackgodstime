@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "highlight.js/styles/github-dark.css";
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   /* Colors */
@@ -29,13 +31,21 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
 
-  code, pre, kbd, samp {
+  code,
+  pre,
+  kbd,
+  samp {
     font-family: var(--font-mono);
     font-size: 0.9em;
   }
@@ -51,7 +61,7 @@
   .border-precision {
     border: 1px solid var(--color-border);
   }
-  
+
   .section-padding {
     padding-block: clamp(2rem, 8vw, 6rem);
   }
@@ -77,17 +87,37 @@
     opacity: 0;
   }
 
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
-  .delay-600 { animation-delay: 600ms; }
-  .delay-700 { animation-delay: 700ms; }
-  .delay-800 { animation-delay: 800ms; }
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+  .delay-600 {
+    animation-delay: 600ms;
+  }
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+  .delay-800 {
+    animation-delay: 800ms;
+  }
 
   @keyframes scroll-down {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(300%); }
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(300%);
+    }
   }
 }
