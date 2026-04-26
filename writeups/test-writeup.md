@@ -103,6 +103,48 @@ ORDER BY order_count DESC
 LIMIT 10;
 ```
 
+### Rust
+
+```rust
+use std::collections::HashMap;
+
+struct User {
+    id: u32,
+    name: String,
+    email: String,
+    is_active: bool,
+}
+
+impl User {
+    fn new(id: u32, name: String, email: String) -> Self {
+        Self {
+            id,
+            name,
+            email,
+            is_active: true,
+        }
+    }
+
+    fn deactivate(&mut self) {
+        self.is_active = false;
+    }
+}
+
+fn main() {
+    let mut users = HashMap::new();
+
+    let user = User::new(
+        1,
+        String::from("Shedrack"),
+        String::from("shedrack@example.com"),
+    );
+
+    users.insert(user.id, user);
+
+    println!("Total users: {}", users.len());
+}
+```
+
 ## Blockquotes
 
 > This is a blockquote. It's useful for highlighting important information or quotes from external sources.
