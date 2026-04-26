@@ -34,6 +34,17 @@ hljs.registerLanguage("rust", rust);
 
 marked.use({
   renderer: {
+    image({
+      href,
+      title,
+      text,
+    }: {
+      href: string;
+      title?: string | null;
+      text: string;
+    }) {
+      return `<img src="${href}" alt="${text}" title="${title || ""}" loading="lazy" />`;
+    },
     code({ text, lang }: { text: string; lang?: string }) {
       const language = lang || "";
       let highlighted = text;

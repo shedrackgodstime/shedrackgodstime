@@ -17,6 +17,12 @@ The previous implementation used a **minimal custom parser** that only handled:
 
 Now we have full GitHub-style rendering powered by `marked` + `highlight.js` + `@tailwindcss/typography`.
 
+## Images
+
+Here is a test image:
+
+![Test Image](https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop)
+
 ## Code Blocks
 
 ### JavaScript
