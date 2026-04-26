@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
 @theme {
   /* Colors */
@@ -49,10 +48,14 @@
     font-size: 0.9em;
   }
 
-  /* Custom Selection */
   ::selection {
     background-color: var(--color-precision-muted);
     color: var(--color-precision);
+  }
+
+  .markdown-content pre code::selection,
+  .markdown-content pre code *::selection {
+    background-color: #c8e1ff !important;
   }
 }
 
@@ -122,6 +125,11 @@
 }
 
 /* Markdown Content Styles */
+.markdown-content {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 .markdown-content h1 {
   font-size: 1.875rem;
   font-weight: 600;
@@ -190,6 +198,7 @@
 .markdown-content pre code {
   display: block;
   padding: 1rem 1.25rem;
+  padding-right: 3rem;
   font-family: var(--font-mono);
   font-size: 0.875rem;
   line-height: 1.7;
@@ -197,53 +206,12 @@
   background: transparent !important;
   border: none;
   overflow-x: auto;
+  white-space: pre;
 }
 
 .markdown-content pre code::selection,
 .markdown-content pre code *::selection {
   background-color: #c8e1ff;
-}
-
-/* Copy Button */
-.markdown-content .copy-button {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  padding: 0.375rem;
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  color: #6b7280;
-  opacity: 0;
-  transition:
-    opacity 0.2s,
-    color 0.2s,
-    background-color 0.2s;
-}
-
-.markdown-content .copy-button:hover {
-  color: #374151;
-  background-color: #f3f4f6;
-}
-
-.markdown-content pre:hover .copy-button {
-  opacity: 1;
-}
-
-.markdown-content .copy-button.copied {
-  color: #059669;
-}
-
-.markdown-content pre code {
-  display: block;
-  padding: 1rem 1.25rem;
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  line-height: 1.7;
-  color: #d4d4d4;
-  background: transparent !important;
-  border: none;
 }
 
 .markdown-content blockquote {
@@ -328,7 +296,7 @@
   margin: 1.5rem 0;
 }
 
-/* highlight.js Light theme */
+/* Syntax Highlighting - Light Theme */
 .hljs {
   color: #24292e;
   background: transparent;
@@ -400,7 +368,33 @@
   color: #005cc5;
 }
 
-/* Set code text color */
-.markdown-content pre code.hljs {
-  color: #24292e;
+/* Copy Button */
+.markdown-content .copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.375rem;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  color: #6b7280;
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    color 0.2s,
+    background-color 0.2s;
+}
+
+.markdown-content .copy-button:hover {
+  color: #374151;
+  background-color: #f3f4f6;
+}
+
+.markdown-content pre:hover .copy-button {
+  opacity: 1;
+}
+
+.markdown-content .copy-button.copied {
+  color: #059669;
 }
