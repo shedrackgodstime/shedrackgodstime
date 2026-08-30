@@ -1,0 +1,37 @@
+---
+/**
+ * Container — page-width wrapper.
+ *
+ * Single source of truth for horizontal width and centering.
+ * Replaces every `max-w-[1320px] min-w-0 mx-auto` / `max-w-[1300px] mx-auto` div.
+ *
+ * Width variants:
+ *   default     → --max-width-container (1320px) — standard page chrome
+ *   content     → --max-width-content (992px)    — markdown body column
+ *   prose       → --max-width-prose (760px)      — long-form markdown body
+ *   prose-wide  → --max-width-prose-wide (840px) — wider text/grid utility
+ *
+ * Per design-rules.md §1.6 — max-width is defined exactly once, here.
+ */
+interface Props {
+  /** Container width variant */
+  width?: "default" | "content" | "prose" | "prose-wide";
+  /** Additional Tailwind classes for the consumer's specific needs */
+  class?: string;
+}
+
+const { width = "default", class: className = "" } = Astro.props;
+
+const widthClass =
+  width === "content"
+    ? "max-w-content"
+    : width === "prose"
+      ? "max-w-prose"
+      : width === "prose-wide"
+        ? "max-w-prose-wide"
+        : "max-w-container";
+---
+
+<div class:list={["mx-auto w-full min-w-0", widthClass, className]}>
+  <slot />
+</div>

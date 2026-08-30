@@ -1,0 +1,41 @@
+---
+/**
+ * SocialLinks — list of social/external links.
+ *
+ * Replaces the inline SOCIALS.map() in the footer. The parent passes the
+ * data (typed structurally compatible with data/config's SocialLink); this
+ * primitive owns the rendering and the auto-external behavior
+ * (target="_blank" rel="noopener noreferrer" for any href starting with
+ * "http").
+ */
+interface SocialLink {
+  label: string;
+  href: string;
+  username?: string;
+}
+
+interface Props {
+  links: SocialLink[];
+  class?: string;
+}
+
+const { links, class: className = "" } = Astro.props;
+---
+<nav
+  class:list={["flex flex-wrap items-center gap-1.5", className]}
+  aria-label="Social links"
+>
+  {
+    links.map((link) => (
+      <a
+        href={link.href}
+        {...(link.href.startsWith("http")
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+        class="px-2.5 py-1.5 border border-transparent text-text-faint hover:border-accent-soft hover:text-accent-fill-hover transition-colors"
+      >
+        {link.label}
+      </a>
+    ))
+  }
+</nav>

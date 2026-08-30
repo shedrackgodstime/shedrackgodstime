@@ -1,0 +1,57 @@
+---
+/**
+ * Section — page section shell with horizontal gutter and vertical padding.
+ *
+ * Replaces every `px-[var(--space-gutter)] py-[var(--space-section)] border-b border-line`
+ * inline <section>. The optional border gives a consistent hairline divider
+ * between sections; pass `divider={false}` to skip.
+ *
+ * Variants:
+ *   default  — surface (page) background
+ *   raised   — surface-raised (card) background
+ *   soft     — surface-soft (subtle band) background
+ *   wash     — scrim-50 (translucent band) background
+ *
+ * Per design-rules.md §1.6.
+ */
+interface Props {
+  /** Visual surface treatment */
+  variant?: "default" | "raised" | "soft" | "wash";
+  /** Add hairline divider below the section */
+  divider?: boolean;
+  /** Section landmark id (sets the id attribute for in-page links) */
+  id?: string;
+  /** Section heading used for screen readers when no visible h2 is present */
+  ariaLabel?: string;
+  /** Additional Tailwind classes */
+  class?: string;
+}
+
+const {
+  variant = "default",
+  divider = true,
+  id,
+  ariaLabel,
+  class: className = "",
+} = Astro.props;
+
+const variantClass = {
+  default: "bg-surface",
+  raised: "bg-surface-raised",
+  soft: "bg-surface-soft",
+  wash: "bg-scrim-50",
+}[variant];
+---
+
+<section
+  id={id}
+  aria-label={ariaLabel}
+  class:list={[
+    "section-body",
+    variantClass,
+    divider ? "border-b border-line" : "",
+    className,
+  ]}
+>
+  <slot />
+</section>

@@ -1,0 +1,48 @@
+---
+/**
+ * Footer — site footer.
+ *
+ * Two-column on desktop (name + tagline | social links), stacked on
+ * mobile. Renders a compact icon + label pill nav for the three core
+ * socials (GitHub, X, LinkedIn). Contact page has the full channel
+ * directory; the footer is a tighter, top-level nav.
+ */
+import SocialIcon from "../ui/SocialIcon.astro";
+import { SITE, SOCIALS } from "../../data/config";
+
+const FOOTER_SOCIAL_LABELS = ["GitHub", "X", "LinkedIn"];
+
+const footerSocials = SOCIALS.filter((s) =>
+  FOOTER_SOCIAL_LABELS.includes(s.label),
+);
+---
+
+<footer
+  class="flex flex-col gap-4.5 px-gutter py-7 font-mono text-text-faint text-kicker sm:flex-row sm:items-center sm:justify-between"
+>
+  <div class="grid gap-1">
+    <p class="m-0 text-text-muted">{SITE.name}</p>
+    <p class="m-0">{SITE.footerTagline}</p>
+  </div>
+
+  <nav
+    class="flex flex-wrap items-center gap-1.5"
+    aria-label="Social links"
+  >
+    {
+      footerSocials.map((s) => (
+        <a
+          href={s.href}
+          {...(s.href.startsWith("http")
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
+          aria-label={s.label}
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-transparent text-text-faint hover:border-accent-soft hover:text-accent-fill-hover transition-colors"
+        >
+          <SocialIcon name={s.label.toLowerCase()} />
+          <span>{s.label}</span>
+        </a>
+      ))
+    }
+  </nav>
+</footer>

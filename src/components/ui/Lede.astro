@@ -1,0 +1,56 @@
+---
+/**
+ * Lede — opening paragraph of a page or section.
+ *
+ * Replaces the duplicated `max-w-[780px] m-0 ... text-body text-[clamp(...)]
+ * leading-[1.6]` pattern used at the top of pages.
+ *
+ * Width variants map to the design's content-column tokens.
+ * Render as <p> by default; switch to <div> for compound lede blocks.
+ */
+interface Props {
+  /** Lede width preset */
+  width?: "lede" | "tight" | "narrow" | "prose" | "shorter";
+  /** Visual emphasis level */
+  tone?: "default" | "muted" | "faint";
+  /** Bottom margin preset */
+  mb?: "none" | "sm" | "md" | "lg" | "xl";
+  /** Render as <p> or <div> */
+  as?: "p" | "div";
+  class?: string;
+}
+
+const {
+  width = "lede",
+  tone = "default",
+  mb = "md",
+  as: Tag = "p",
+  class: className = "",
+} = Astro.props;
+
+const widthClass = {
+  lede: "max-w-lede",
+  tight: "max-w-tight",
+  narrow: "max-w-narrow",
+  prose: "max-w-prose",
+  shorter: "max-w-shorter",
+}[width];
+
+const toneClass = {
+  default: "text-text-muted",
+  muted: "text-text-faint",
+  faint: "text-text-faint",
+}[tone];const sizeClass = "text-body-responsive leading-body";
+
+const mbClass = {
+  none: "m-0",
+  sm: "m-0 mb-3",
+  md: "m-0 mb-6",
+  lg: "m-0 mb-8",
+  xl: "m-0 mb-10",
+}[mb];
+---
+
+<Tag class:list={["m-0", widthClass, toneClass, sizeClass, mbClass, className]}>
+  <slot />
+</Tag>

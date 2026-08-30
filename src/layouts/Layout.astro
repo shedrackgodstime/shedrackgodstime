@@ -1,0 +1,182 @@
+---
+/**
+ * Layout — site shell.
+ *
+ * Single place that imports the stylesheet cascade (tokens → base →
+ * components → prose → code), wires the no-flash theme bootstrap (dark
+ * default), emits the `--d-*` diagram variables consumed by the baked
+ * Mermaid SVGs, frames every page with the Header (navigation) and
+ * Footer, and wires site-wide runtime behavior (diagram zoom/expand,
+ * delegated code-block copy).
+ *
+ * The <head> is the single source of truth for all document-level meta:
+ * canonical, Open Graph, Twitter Card, JSON-LD, search verification, and
+ * favicons. Pages pass `title` / `description` / `robots` / `ogImage`.
+ *
+ * Per design-rules.md: pages compose UI primitives and never import
+ * styles themselves — the cascade lives here.
+ */
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/components.css";
+import "../styles/prose.css";
+import "../styles/code.css";
+
+import Header from "../components/navigation/Header.astro";
+import Footer from "../components/navigation/Footer.astro";
+import { SITE, SEO, SOCIALS } from "../data/config";
+import { paletteLight, paletteDark } from "../data/diagram-palette";
+import { cssVarsBlock } from "../utils/diagram-theme";
+
+interface Props {
+  /** Page title; prefixed with the site name when set. */
+  title?: string;
+  /** Meta description; falls back to the site description. */
+  description?: string;
+  /** Robots directive; omitted when not provided. */
+  robots?: string;
+  /** Social preview image; falls back to SITE.ogImage. */
+  ogImage?: string;
+}
+
+const { title, description = SITE.description, robots, ogImage = SITE.ogImage } =
+  Astro.props;
+
+const pageTitle = title ? `${title} — ${SITE.name}` : `${SITE.name} | ${SITE.tagline}`;
+const canonicalURL = new URL(Astro.url.pathname, SITE.url);
+const ogImageURL = new URL(ogImage, SITE.url);
+
+const jsonLdPerson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.name,
+  url: SITE.url,
+  email: SITE.email,
+  jobTitle: "Security Researcher / Systems Programmer",
+  sameAs: SOCIALS.filter((s) => s.href.startsWith("http")).map((s) => s.href),
+});
+
+const jsonLdWebsite = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.name,
+  url: SITE.url,
+  description: SITE.description,
+  author: { "@type": "Person", name: SITE.name },
+});
+
+// Diagram custom properties (`--d-*`) for the baked Mermaid SVGs and the
+// diagram CSS in code.css. The SVGs reference var(--d-*) after the
+// build-time recolor pass; without these declarations every diagram color
+// resolves invalid → fills go black. Emitted inline (is:inline) exactly
+// like the reference. See data/diagram-palette.ts + utils/diagram-theme.ts.
+const diagramVarsCss = `
+:root {
+${cssVarsBlock(paletteLight)}
+  --d-shadow-rgb: 0 0 0;
+}
+html.dark {
+${cssVarsBlock(paletteDark)}
+  --d-shadow-rgb: 0 0 0;
+}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
+    <meta name="theme-color" content={SITE.themeColor} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content={SITE.name} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Search engine verification -->
+    <meta name="google-site-verification" content={SEO.googleSiteVerificationId} />
+    <meta name="msvalidate.01" content={SEO.bingSiteVerificationId} />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" set:html={jsonLdPerson} />
+    <script type="application/ld+json" set:html={jsonLdWebsite} />
+
+    <!--
+      No-flash theme bootstrap. Runs inline before paint and before any
+      module import so the correct theme is applied without a flash.
+      Must stay in the <head>; see utils/theme.ts for the toggle handler.
+      Default follows the OS (prefers-color-scheme); an explicit stored
+      choice wins and, while unset, OS changes re-theme live.
+    -->
+    <script is:inline>
+      (function () {
+        try {
+          var query = window.matchMedia("(prefers-color-scheme: dark)");
+          var stored = localStorage.getItem("theme");
+          var dark = stored !== null ? stored === "dark" : query.matches;
+          document.documentElement.classList.toggle("dark", dark);
+          if (stored === null) {
+            query.addEventListener("change", function () {
+              if (localStorage.getItem("theme") === null) {
+                document.documentElement.classList.toggle("dark", query.matches);
+              }
+            });
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Diagram custom properties (`--d-*`): without these the baked
+         Mermaid SVGs paint black/blank. See diagramVarsCss above. -->
+    <style is:inline set:html={diagramVarsCss} />
+  </head>
+  <body class="bg-surface text-text min-h-screen flex flex-col antialiased">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import { initDiagrams } from "../utils/diagrams";
+      import { copyText } from "../utils/clipboard";
+
+      initDiagrams();
+
+      // Delegated copy-button handler (reference Layout parity). Works
+      // wherever a codeblock chrome figure is rendered; no-op otherwise.
+      document.addEventListener("click", async (event) => {
+        const target = event.target instanceof Element ? event.target : null;
+        if (!target) return;
+        const btn = target.closest<HTMLElement>(".copy-btn");
+        if (!btn) return;
+        const pre = btn.closest("figure")?.querySelector("pre");
+        if (!pre) return;
+        const ok = await copyText(pre.innerText.replace(/\n$/, ""));
+        if (!ok) return;
+        btn.dataset.copied = "";
+        btn.textContent = "copied \u2713";
+        setTimeout(() => {
+          delete btn.dataset.copied;
+          btn.textContent = "copy";
+        }, 1600);
+      });
+    </script>
+  </body>
+</html>

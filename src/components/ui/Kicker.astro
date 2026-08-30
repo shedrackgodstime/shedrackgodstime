@@ -1,0 +1,32 @@
+---
+/**
+ * Kicker — small uppercase accent label, used above page/section titles.
+ *
+ * Wraps the existing `.kicker` utility from tokens.css for use as a
+ * component (with consistent bottom margin).
+ *
+ * Replaces the 6 `kicker mb-3` paragraphs in about.astro and the
+ * `p class="m-0 kicker mb-3"` patterns in contact.astro and workbench pages.
+ */
+interface Props {
+  /** Bottom margin preset */
+  mb?: "none" | "xs" | "sm" | "md" | "lg";
+  /** Render as a specific element (default: <p>) */
+  as?: "p" | "span" | "div";
+  class?: string;
+}
+
+const { mb = "sm", as: Tag = "p", class: className = "" } = Astro.props;
+
+const mbClass = {
+  none: "m-0",
+  xs: "m-0 mb-2.5",
+  sm: "m-0 mb-3",
+  md: "m-0 mb-4.5",
+  lg: "m-0 mb-6",
+}[mb];
+---
+
+<Tag class:list={["kicker", mbClass, className]}>
+  <slot />
+</Tag>

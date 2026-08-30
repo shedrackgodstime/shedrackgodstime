@@ -1,0 +1,105 @@
+/*
+ * prose — ALL Markdown content styles, scoped under .prose.
+ * Cascade order: tokens → base → components → prose → code.
+ *
+ * Single source of truth for: typography, element styling, responsive
+ * overrides. The .prose wrapper on slug pages keeps Tailwind UI free
+ * of cascade surprises.
+ */
+
+/* ── Typography ──────────────────────────────────────────────────────── */
+
+.prose {
+  line-height: var(--leading-prose);
+}
+
+.prose h1 {
+  line-height: 1.25;
+  font-size: var(--text-prose-h1);
+}
+
+.prose h2 {
+  line-height: 1.25;
+  font-size: var(--text-prose-h2);
+}
+
+.prose h3 {
+  line-height: 1.25;
+  font-size: var(--text-prose-h3);
+}
+
+.prose a {
+  color: var(--color-accent);
+}
+
+/* ── Inline elements ─────────────────────────────────────────────────── */
+
+.prose p code,
+.prose li code {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  padding: 0.1rem 0.35rem;
+  font-size: 0.85em;
+}
+
+.prose blockquote {
+  margin: 1.25rem 0;
+  padding: 0.25rem 1rem;
+  border-left: 3px solid var(--color-line);
+  color: var(--color-text-muted);
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  margin: 2rem 0;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────── */
+
+.prose table {
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9em;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--color-line);
+  padding: 0.4rem 0.7rem;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--color-surface-raised);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+
+/* --breakpoint-prose: 640px (defined in tokens.css) */
+@media (max-width: 640px) {
+  /* Tighter heading sizes on phones. The fluid clamps above already
+     scale down at small viewports, but we tighten the lower bound so
+     they never feel oversized on a 360px screen. */
+  .prose h1 {
+    font-size: var(--text-prose-h1-sm);
+  }
+  .prose h2 {
+    font-size: var(--text-prose-h2-sm);
+  }
+  .prose h3 {
+    font-size: 1rem;
+  }
+
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

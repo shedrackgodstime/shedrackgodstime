@@ -1,0 +1,60 @@
+---
+/**
+ * Breadcrumb — navigation trail showing the page's location in the site.
+ *
+ * Accessible: <nav aria-label="Breadcrumb"> with <ol>, the last item
+ * marked aria-current="page", separator spans aria-hidden. Used by
+ * slug pages and section indices.
+ */
+import type { HTMLAttributes } from "astro/types";
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props extends Omit<HTMLAttributes<"nav">, "class" | "aria-label"> {
+  items: BreadcrumbItem[];
+  class?: string;
+  "aria-label"?: string;
+}
+
+const {
+  items,
+  class: className = "",
+  "aria-label": ariaLabel = "Breadcrumb",
+  ...rest
+} = Astro.props;
+---
+<nav aria-label={ariaLabel} class:list={[className]} {...rest}>
+  <ol class="flex flex-wrap items-center gap-2 text-small">
+    {
+      items.map((item, i) => {
+        const isLast = i === items.length - 1;
+        return (
+          <li class="flex items-center gap-2">
+            {isLast ? (
+              <span class="text-text" aria-current="page">
+                {item.label}
+              </span>
+            ) : item.href ? (
+              <a
+                href={item.href}
+                class="text-text-muted hover:text-text transition-colors"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <span class="text-text-muted">{item.label}</span>
+            )}
+            {!isLast && (
+              <span class="text-text-faint" aria-hidden="true">
+                ›
+              </span>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

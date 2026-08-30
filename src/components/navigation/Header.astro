@@ -1,0 +1,67 @@
+---
+/**
+ * Header — sticky site header.
+ *
+ * Sticky, translucent surface (theme-adaptive scrim + backdrop blur),
+ * wordmark cluster on the left, nav + theme toggle on the right.
+ * On mobile the two clusters stack and the theme toggle moves into
+ * the logo row.
+ *
+ * Uses the NavLink primitive for each NAV_ITEMS entry (the active
+ * state is computed here from currentPath) and ThemeToggle for the
+ * dark/light switch.
+ */
+import ThemeToggle from "../ui/ThemeToggle.astro";
+import NavLink from "../ui/NavLink.astro";
+import { SITE, NAV_ITEMS } from "../../data/config";
+
+const currentPath = Astro.url.pathname;
+---
+<header
+  class="sticky top-0 z-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 min-h-header px-gutter py-4 bg-scrim-86 backdrop-blur-header"
+  aria-label="Site header"
+>
+  <div class="flex items-center gap-4 w-full sm:w-auto min-w-0 sm:min-w-max">
+    <a
+      class="flex items-center gap-2.5 min-w-0 group"
+      href="/"
+      aria-label={`${SITE.name} home`}
+    >
+      <span class="grid gap-0.5 min-w-0">
+        <span
+          class="text-regular [font-weight:720] tracking-normal text-text group-hover:text-accent transition-colors"
+        >
+          {SITE.name}
+        </span>
+        <small class="font-mono text-text-faint text-micro">
+          {SITE.headerTagline}
+        </small>
+      </span>
+    </a>
+
+    <ThemeToggle class="inline-flex sm:hidden ml-auto" />
+  </div>
+
+  <div class="flex items-center justify-start sm:justify-end gap-4 w-full sm:w-auto">
+    <nav
+      class="flex items-center justify-start sm:justify-end gap-1.5 flex-wrap flex-1 sm:flex-initial"
+      aria-label="Primary navigation"
+    >
+      {
+        NAV_ITEMS.map((item) => {
+          const isActive =
+            item.path === "/"
+              ? currentPath === "/"
+              : currentPath.startsWith(item.path);
+          return (
+            <NavLink href={item.path} active={isActive}>
+              {item.label}
+            </NavLink>
+          );
+        })
+      }
+    </nav>
+
+    <ThemeToggle class="hidden sm:inline-flex" />
+  </div>
+</header>

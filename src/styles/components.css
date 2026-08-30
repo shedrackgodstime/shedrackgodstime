@@ -1,0 +1,241 @@
+/*
+ * components — reusable UI component classes.
+ * Cascade order: tokens → base → components → prose → code.
+ *
+ * These are shared across pages (buttons, cards, layout shells).
+ * Scoped under @layer utilities so Tailwind's utility layer wins
+ * when there's a conflict.
+ *
+ * Color references use the 9-role token system from tokens.css.
+ */
+@layer utilities {
+  /* ── Layout shells ────────────────────────────────────────────────── */
+
+  .hairline-grid {
+    display: grid;
+    gap: 1px;
+    background-color: var(--color-line);
+    border: 1px solid var(--color-line);
+  }
+
+  .container {
+    max-width: var(--max-width-container);
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  /* Page header section (workbench, about, contact, slug pages) */
+  .page-header {
+    padding-left: var(--space-gutter);
+    padding-right: var(--space-gutter);
+    padding-top: var(--space-page-header-pt);
+    padding-bottom: var(--space-page-header-pb);
+    border-bottom: 1px solid var(--color-line);
+    background-color: var(--color-scrim-50);
+  }
+
+  .page-header--slug {
+    padding-top: var(--space-page-header-pt-slug);
+    padding-bottom: var(--space-page-header-pb-slug);
+  }
+
+  /* Section body (main content sections) */
+  .section-body {
+    padding-left: var(--space-gutter);
+    padding-right: var(--space-gutter);
+    padding-top: var(--space-section);
+    padding-bottom: var(--space-section);
+  }
+
+  /* Markdown content panel (workbench slug) — GitHub file-view box:
+     bordered, muted raised surface close to the page, constrained to the
+     standard container. */
+  .content-panel {
+    padding: var(--space-gutter);
+    background-color: var(--color-surface-muted);
+    border: 1px solid var(--color-line);
+  }
+
+  /* Wrapper-section flush on mobile: the outer section below --breakpoint-sm
+     (721px) collapses to zero effect so the content panel sits flush to the
+     page edges — GitHub mobile file view. Desktop keeps section-body rhythm. */
+  @media (max-width: 720px) {
+    .section-body--flush {
+      padding: 0;
+    }
+  }
+
+  /* ── Workbench entry card ─────────────────────────────────────────── */
+
+  .entry-card {
+    display: grid;
+    gap: 0.875rem;
+    padding: 1.5rem;
+    background-color: var(--color-surface-raised);
+    min-width: 0;
+    border: 1px solid var(--color-line);
+    transition: background-color var(--duration-base) var(--ease-out),
+                border-color var(--duration-base) var(--ease-out);
+  }
+  .entry-card:hover {
+    background-color: var(--color-surface-hover);
+    border-color: var(--color-accent-soft);
+  }
+
+  /* Dark-mode card lift: with surface-raised dark sitting very close to
+     surface-soft, cards lose their edge. A subtle shadow (the
+     --shadow-card token, defined in tokens.css) carries the "lift" the
+     surface color would, keeping cards defined. */
+  html.dark .entry-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  /* TechnicalAreas grid cards: same dark-mode lift treatment. The
+     hairline-grid provides the cell separation; the shadow gives each
+     card definition against the section. */
+  html.dark .hairline-grid > article {
+    box-shadow: var(--shadow-card);
+  }
+
+  .entry-context {
+    margin: 0;
+    color: var(--color-text-faint);
+    font-size: var(--text-small);
+    line-height: 1.6;
+    border-left: 2px solid var(--color-accent-soft);
+    padding-left: 0.75rem;
+  }
+
+  /* ── Theme toggle (CSS-driven icon swap, zero-JS flash-free) ──────── */
+
+  .theme-toggle .theme-icon-light {
+    display: none;
+  }
+  html.dark .theme-toggle .theme-icon-dark {
+    display: none;
+  }
+  html.dark .theme-toggle .theme-icon-light {
+    display: block;
+  }
+
+  /* Small-caps label/eyebrow. Defined as a normal class (not @utility)
+     because lightningcss strips the leading dot from @utility rules
+     during minification, breaking the selector. */
+  .kicker {
+    color: var(--color-accent);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* ── About portrait (click-to-enlarge) ───────────────────────────────
+   * One-off: aspect-ratio + object-fit for the About page portrait card.
+   * Kept here because arbitrary values (4/5 ratio, 58%/22% position) are
+   * not allowed in component class lists (§1.2.2).
+   *
+   * The small card renders the portrait in grayscale; hovering (or the
+   * modal lightbox, which uses portrait-lightbox-img) shows full color. */
+  .portrait-frame {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 58% 22%;
+    filter: grayscale(1);
+    transition: filter var(--duration-base) var(--ease-out);
+  }
+  .group:hover .portrait-frame {
+    filter: grayscale(0);
+  }
+
+  /* Portrait lightbox image sizing — 90vw/85vh is viewport-relative and
+   * intentional (see design-rules §4.2 note; arbitrary values are not
+   * allowed in class lists, so the sizing lives here). */
+  .portrait-lightbox-img {
+    max-width: 90vw;
+    max-height: 85vh;
+  }
+
+  /* ── Hero (homepage) ─────────────────────────────────────────────────
+     Complex one-off visual (backdrop image + gradient overlay + absolute
+     status card) — component class per design-rules §1.8. Padding/min-height
+     come from the hero spacing tokens; the gradient references --hero-overlay
+     tokens so it is not an inline color-mix. */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--space-hero-gap);
+    min-height: auto;
+    padding-left: var(--space-gutter);
+    padding-right: var(--space-gutter);
+    padding-top: var(--space-hero-pt);
+    padding-bottom: var(--space-hero-pb);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  @media (min-width: 981px) {
+    .hero {
+      min-height: var(--height-hero-min);
+    }
+  }
+
+  .hero-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+  }
+  .hero-backdrop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 66% 18%;
+    opacity: 0.42;
+    filter: saturate(0.72) contrast(1.08);
+  }
+  /* Dark sits a hair above the reference's image (0.4/0.48) so the
+     portrait reads slightly in dark; light pushes it higher (overlay + img)
+     so it is faintly but clearly present. Tall portrait + cover crops the
+     face toward the upper-right, which the overlays expose. */
+  html.dark .hero-backdrop img {
+    opacity: 0.4;
+  }
+  @media (min-width: 721px) {
+    .hero-backdrop img {
+      object-position: 74% 24%;
+      opacity: 0.5;
+    }
+    html.dark .hero-backdrop img {
+      opacity: 0.48;
+    }
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--hero-overlay);
+  }
+  @media (min-width: 721px) {
+    .hero-overlay {
+      background: var(--hero-overlay-sm);
+    }
+  }
+
+  .hero-status {
+    width: auto;
+    max-width: 100%;
+  }
+  @media (min-width: 981px) {
+    .hero-status {
+      position: absolute;
+      right: var(--space-gutter);
+      bottom: var(--space-hero-pb-sm);
+      width: min(320px, calc(100% - 36px));
+    }
+  }
+}

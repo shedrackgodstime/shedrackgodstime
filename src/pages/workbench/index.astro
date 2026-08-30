@@ -1,0 +1,84 @@
+---
+/**
+ * Workbench index — catalog of workbench entries.
+ *
+ * Ported from the reference workbench index, rebuilt for the 9-role token
+ * system. Uses the PageHeader/Container/Kicker/Heading/Lede/EntryCard
+ * primitives; the filter bar is a static counts display (matching the
+ * reference). Entry links use the entry id (the [slug] route's param).
+ */
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/ui/Container.astro";
+import PageHeader from "../../components/ui/PageHeader.astro";
+import Section from "../../components/ui/Section.astro";
+import Kicker from "../../components/ui/Kicker.astro";
+import Heading from "../../components/ui/Heading.astro";
+import Lede from "../../components/ui/Lede.astro";
+import EntryCard from "../../components/ui/EntryCard.astro";
+import Tag from "../../components/ui/Tag.astro";
+import { getCollection } from "astro:content";
+import { SITE } from "../../data/config";
+
+const entries = await getCollection("workbench");
+
+const sorted = entries
+  .filter((e) => e.id !== "test")
+  .sort((a, b) =>
+    (a.data.started ?? "0000-00").localeCompare(b.data.started ?? "0000-00"),
+  );
+
+const totalCount = sorted.length;
+const projectCount = sorted.filter((e) => e.data.type === "project").length;
+const explorationCount = sorted.filter(
+  (e) => e.data.type === "exploration",
+).length;
+---
+
+<Layout
+  title="Workbench"
+  description={`Technical record behind ${SITE.name}'s portfolio: project narratives, research notes, and protocol investigations.`}
+>
+  <PageHeader>
+    <Container>
+      <Kicker>Technical Workbench</Kicker>
+      <Heading level={1} mb="md">Projects &amp; Explorations</Heading>
+      <Lede>
+        The technical record behind the portfolio: project narratives,
+        investigations, protocol research, and case-study material.
+      </Lede>
+    </Container>
+  </PageHeader>
+
+  <Section>
+    <Container>
+      <div
+        class="flex items-center justify-between gap-4 flex-wrap mb-8 pb-4 border-b border-line"
+      >
+        <div class="flex items-center gap-2 flex-wrap font-mono text-small">
+          <Tag variant="filter-active">All ({totalCount})</Tag>
+          <Tag variant="filter">Projects ({projectCount})</Tag>
+          <Tag variant="filter">Explorations ({explorationCount})</Tag>
+        </div>
+        <span class="text-text-faint text-kicker font-mono">
+          Source: workbench repository
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {
+          sorted.map((entry) => (
+            <EntryCard
+              href={`/workbench/${entry.id}/`}
+              type={entry.data.type}
+              status={entry.data.status}
+              title={entry.data.title}
+              summary={entry.data.summary}
+              context={entry.data.context}
+              tags={entry.data.tags}
+            />
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+</Layout>

@@ -1,0 +1,110 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/ui/Container.astro";
+import Section from "../components/ui/Section.astro";
+import Button from "../components/ui/Button.astro";
+import Heading from "../components/ui/Heading.astro";
+import Lede from "../components/ui/Lede.astro";
+import Tag from "../components/ui/Tag.astro";
+import StatusDot from "../components/ui/StatusDot.astro";
+import Kicker from "../components/ui/Kicker.astro";
+import Hero from "../components/sections/Hero.astro";
+---
+
+<Layout title="UI primitives showcase (reference)">
+  <Hero />
+
+    <Section variant="default">
+      <Container>
+        <Kicker>Tags</Kicker>
+        <Heading level={2} mb="md">Tag variants</Heading>
+        <Lede width="lede" mb="md">Five tag variants replace the inline label chips scattered across pages.</Lede>
+        <div class="flex flex-wrap gap-2.5">
+          <Tag>Rust (muted)</Tag>
+          <Tag variant="accent">Active (accent)</Tag>
+          <Tag variant="filter">Filter</Tag>
+          <Tag variant="filter-active">Filter active</Tag>
+          <Tag variant="link" href="#">Source ↗ (link)</Tag>
+        </div>
+      </Container>
+    </Section>
+
+    <Section variant="soft" divider={true}>
+      <Container>
+        <Kicker>Status dots</Kicker>
+        <Heading level={2} mb="md">Status indicators</Heading>
+        <Lede width="lede" mb="md">Replaces inline `w-1.5 h-1.5 rounded-full bg-accent` markers.</Lede>
+        <div class="flex flex-wrap items-center gap-4">
+          <div class="flex items-center gap-2 text-small font-mono text-text-muted">
+            <StatusDot pulse /> Current mode
+          </div>
+          <div class="flex items-center gap-2 text-small font-mono text-text-muted">
+            <StatusDot /> Static
+          </div>
+          <div class="flex items-center gap-2 text-small font-mono text-text-muted">
+            <StatusDot size="sm" /> Skill bullet
+          </div>
+        </div>
+      </Container>
+    </Section>
+
+<Section variant="raised" divider={true}>
+      <Container width="prose">
+        <article class="grid gap-2.5 p-5 bg-surface-raised border border-line min-w-0">
+          <span class="text-accent text-kicker font-mono">01</span>
+          <Heading level={3} mb="xs">Entry card pattern</Heading>
+            <p class="m-0 text-text-muted text-small leading-body">
+              Container variants: <code class="font-mono text-small px-1 py-0.5 bg-surface border border-line rounded-pill">width="default"</code> (1320px chrome),
+              <code class="font-mono text-small px-1 py-0.5 bg-surface border border-line rounded-pill">width="content"</code> (992px markdown column),
+              <code class="font-mono text-small px-1 py-0.5 bg-surface border border-line rounded-pill">width="prose"</code> (760px long-form), and
+              <code class="font-mono text-small px-1 py-0.5 bg-surface border border-line rounded-pill">width="prose-wide"</code> (840px utility).
+            </p>
+          <div class="flex flex-wrap gap-2 self-end">
+            <Tag>rust</Tag>
+            <Tag>networking</Tag>
+            <Tag>p2p</Tag>
+          </div>
+        </article>
+      </Container>
+    </Section>
+
+    <Section variant="wash" divider={false}>
+      <Container>
+        <Kicker>Surface variants</Kicker>
+        <Heading level={2} mb="md">Section surface treatments</Heading>
+        <Lede width="lede">
+          The four <code>variant</code> options on <code class="font-mono">Section</code> cover every background treatment in the live site: default page, raised card band, soft band, wash band.
+        </Lede>
+      </Container>
+    </Section>
+
+    <Section variant="default" divider={false}>
+      <Container>
+        <Kicker>Spacing scale</Kicker>
+        <Heading level={2} mb="md">Tailwind v4 utility resolution</Heading>
+        <Lede width="lede" mb="md">
+          The integer spacing scale is now in <code class="font-mono">@theme</code> as <code>--spacing-N</code>, so <code>mt-2</code> / <code>p-4</code> / <code>gap-6</code> / <code>mt-8</code> all resolve to the rem-multiplied values below.
+        </Lede>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 border border-line bg-surface-raised">
+            <p class="m-0 text-text-faint text-micro font-mono">mt-2 → 0.5rem</p>
+            <p class="mt-2 m-0 text-text text-small">0.5rem (8px) top margin</p>
+          </div>
+          <div class="p-4 border border-line bg-surface-raised">
+            <p class="m-0 text-text-faint text-micro font-mono">p-6 → 1.5rem</p>
+            <p class="m-0 text-text text-small">1.5rem (24px) padding</p>
+          </div>
+          <div class="p-4 border border-line bg-surface-raised">
+            <p class="m-0 text-text-faint text-micro font-mono">gap-8 → 2rem</p>
+            <p class="m-0 text-text text-small">2rem (32px) gap</p>
+          </div>
+          <div class="p-4 border border-line bg-surface-raised">
+            <p class="m-0 text-text-faint text-micro font-mono">mt-12 → 3rem</p>
+            <p class="m-0 text-text text-small">3rem (48px) top margin</p>
+          </div>
+        </div>
+      </Container>
+    </Section>
+
+  </Layout>
+

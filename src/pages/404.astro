@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/ui/Section.astro";
+import Kicker from "../components/ui/Kicker.astro";
+import Button from "../components/ui/Button.astro";
+import { SITE } from "../data/config";
+---
+
+<Layout
+  title={`404 — Page not found | ${SITE.name}`}
+  description={`The page you requested does not exist. Go back to ${SITE.name}'s portfolio.`}
+>
+  <Section
+    variant="soft"
+    divider={false}
+    class="flex items-center justify-center"
+  >
+    <div class="max-w-shorter w-full text-center grid gap-6 justify-items-center">
+      <Kicker>404 / Not Found</Kicker>
+      <p
+        class="m-0 font-mono text-accent text-display leading-none font-bold select-none"
+        aria-hidden="true"
+      >
+        404
+      </p>
+      <h1 class="m-0 text-h2 leading-h2 font-bold text-text">
+        That page doesn't exist.
+      </h1>
+      <p class="max-w-shorter m-0 text-text-muted text-regular leading-body">
+        The link may be broken, the page may have moved, or the address may be
+        wrong. Either way, it's not here.
+      </p>
+      <div class="flex items-center justify-center gap-3 flex-wrap">
+        <Button href="/">Back to home</Button>
+        <Button href="/workbench" variant="ghost" mono>Explore workbench →</Button>
+      </div>
+    </div>
+  </Section>
+</Layout>

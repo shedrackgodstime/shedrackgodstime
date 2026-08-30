@@ -1,0 +1,62 @@
+---
+/**
+ * EntryCard — workbench entry tile (project or exploration).
+ *
+ * Replaces the inline entry markup in the workbench list/slug sections.
+ * The `entry-card` class (in components.css) owns the card layout, hover
+ * surface, and border treatment; this primitive owns the content
+ * structure and 9-role token usage.
+ */
+import Tag from "./Tag.astro";
+
+interface Props {
+  href: string;
+  type: string;
+  status: string;
+  title: string;
+  summary: string;
+  context?: string;
+  tags: string[];
+  class?: string;
+}
+
+const { href, type, status, title, summary, context, tags, class: className = "" } =
+  Astro.props;
+
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+---
+<a href={href} class:list={["entry-card group", className]}>
+  <div
+    class="flex items-center justify-between gap-3 text-accent text-kicker font-mono uppercase"
+  >
+    <span>{cap(type)}</span>
+    <span class="flex items-center gap-1">
+      <span>{cap(status)}</span>
+      <span
+        class="group-hover:translate-x-1 transition-transform"
+        aria-hidden="true"
+      >→</span>
+    </span>
+  </div>
+  <h3
+    class="m-0 text-text group-hover:text-accent text-h3 font-bold leading-normal transition-colors"
+  >
+    {title}
+  </h3>
+  <p class="m-0 text-text-muted text-prose leading-prose">
+    {summary}
+  </p>
+  {context && <p class="entry-context">{context}</p>}
+  <ul
+    class="flex flex-wrap gap-2 self-end p-0 m-0 list-none"
+    aria-label={`${title} tags`}
+  >
+    {
+      tags.map((tag) => (
+        <li>
+          <Tag variant="muted">{tag}</Tag>
+        </li>
+      ))
+    }
+  </ul>
+</a>

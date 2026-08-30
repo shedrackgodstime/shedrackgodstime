@@ -1,0 +1,65 @@
+---
+/**
+ * Hero — homepage opening section.
+ *
+ * Ported from the reference Hero.astro, rebuilt for the 9-role token
+ * system and the ui/ primitives (Button, StatusDot). The backdrop image
+ * and gradient overlay are complex one-off visuals, so their styling
+ * lives in component classes (.hero / .hero-backdrop / .hero-overlay /
+ * .hero-status) in components.css — no inline arbitrary values, no inline
+ * color-mix, no legacy token names.
+ *
+ * Per design-rules.md §1.3 this belongs in components/sections/.
+ */
+import Container from "../ui/Container.astro";
+import Button from "../ui/Button.astro";
+import StatusDot from "../ui/StatusDot.astro";
+import { SITE } from "../../data/config";
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-backdrop" aria-hidden="true">
+    <img src="/profile-picture.webp" alt="" />
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <Container>
+    <p class="m-0 text-accent text-regular font-bold uppercase">{SITE.name}</p>
+    <h1
+      id="hero-title"
+      class="m-0 mb-6 text-h1-hero sm:text-h1-hero-sm leading-tight sm:leading-tight-sm tracking-none text-text font-bold"
+    >
+      Cybersecurity, systems, and networked software.
+    </h1>
+    <p
+      class="max-w-lede-hero m-0 mb-7.5 text-text-muted text-body-hero leading-relaxed"
+    >
+      I build tools, investigate how systems behave, and document the
+      technical work behind them.
+    </p>
+
+    <div
+      class="flex flex-col xs:flex-row flex-wrap gap-3"
+      aria-label="Primary actions"
+    >
+      <Button href="/workbench" class="w-full xs:w-auto">Explore workbench</Button>
+      <Button href="/about" variant="ghost" class="w-full xs:w-auto">
+        View background
+      </Button>
+    </div>
+  </Container>
+
+  <aside
+    class="hero-status grid gap-2.5 p-4.5 border border-line-strong bg-scrim-58 text-text-faint text-kicker font-mono"
+    aria-label="Current status"
+  >
+    <div class="flex items-center gap-2">
+      <StatusDot pulse />
+      <span>Current mode</span>
+    </div>
+    <strong class="text-text font-sans text-regular leading-normal">
+      Building a unified technical portfolio
+    </strong>
+    <small class="text-micro text-text-faint">Nigeria / WAT</small>
+  </aside>
+</section>

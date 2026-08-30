@@ -1,0 +1,42 @@
+---
+/**
+ * StatusDot — small accent-colored dot, optionally pulsing.
+ *
+ * Replaces the 3 inline `w-1.5 h-1.5 rounded-full bg-accent [animate-pulse]`
+ * indicators in Hero, about.astro, workbench/[slug].astro.
+ *
+ * Sizes:
+ *   sm  — 6px (skill bullet, workbench entry status)
+ *   md  — 8px (default, hero "current mode" indicator)
+ *
+ * Pulse:
+ *   true  — animate-pulse (active state)
+ *   false — static (passive indicator)
+ */
+interface Props {
+  size?: "sm" | "md";
+  pulse?: boolean;
+  /** Color variant — accent (default) or a text color */
+  tone?: "accent" | "text-muted";
+  class?: string;
+}
+
+const { size = "md", pulse = false, tone = "accent", class: className = "" } = Astro.props;
+
+const sizeClass = {
+  sm: "w-1.5 h-1.5",
+  md: "w-2 h-2",
+}[size];
+
+const toneClass = {
+  "accent": "bg-accent",
+  "text-muted": "bg-text-muted",
+}[tone];
+
+const pulseClass = pulse ? "animate-pulse" : "";
+---
+
+<span
+  class:list={["inline-block rounded-full shrink-0", sizeClass, toneClass, pulseClass, className]}
+  aria-hidden="true"
+></span>

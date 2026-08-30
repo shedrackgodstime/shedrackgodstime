@@ -1,0 +1,36 @@
+---
+/**
+ * NavLink — site navigation link with active/inactive states.
+ *
+ * Replaces the inline nav markup in the header. The active state is
+ * decided by the parent (typically by comparing currentPath to item.path);
+ * this primitive only owns the visual treatment.
+ *
+ * Renders <a> always. Pass aria-current="page" via the `active` prop.
+ */
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"a">, "class"> {
+  href: string;
+  active?: boolean;
+  class?: string;
+}
+
+const { href, active = false, class: className = "", ...rest } = Astro.props;
+
+const stateClass = active
+  ? "border-transparent text-accent-fill-hover font-bold"
+  : "border-transparent text-text-faint hover:border-accent-soft hover:text-accent-fill-hover";
+---
+<a
+  href={href}
+  class:list={[
+    "min-h-nav-link py-2.5 px-2.5 sm:px-3 text-small border transition-colors",
+    stateClass,
+    className,
+  ]}
+  aria-current={active ? "page" : undefined}
+  {...rest}
+>
+  <slot />
+</a>

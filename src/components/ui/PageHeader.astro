@@ -1,0 +1,53 @@
+---
+/**
+ * PageHeader — first <section> of a page: title + lede + optional meta.
+ *
+ * Replaces the duplicated page-header markup in
+ * about.astro / contact.astro / workbench-index.astro / workbench-slug.astro.
+ *
+ * Layout:
+ *   [kicker]
+ *   [h1] (responsive clamp)
+ *   [lede paragraph]
+ *   [<slot name="meta" />]   optional meta strip (tags, badges, breadcrumb)
+ *   [<slot />]               optional body (e.g. photo gallery in about)
+ *
+ * The two header variants (regular vs slug) use different vertical
+ * padding per --space-page-header-* tokens.
+ */
+interface Props {
+  /** Header size variant. Slug is tighter (used on article pages). */
+  variant?: "default" | "slug";
+  /** Visual surface treatment (default: wash band) */
+  variant_?: "default" | "wash" | "raised";
+  /** Optional id for the wrapping section */
+  id?: string;
+  /** Optional aria-label for the section landmark */
+  ariaLabel?: string;
+  /** Additional classes on the section */
+  class?: string;
+}
+
+const {
+  variant = "default",
+  variant_: surface = "wash",
+  id,
+  ariaLabel,
+  class: className = "",
+} = Astro.props;
+
+const padClass = variant === "slug" ? "page-header page-header--slug" : "page-header";
+const surfaceClass = {
+  default: "bg-surface",
+  wash: "bg-scrim-50",
+  raised: "bg-surface-raised",
+}[surface];
+---
+
+<section
+  id={id}
+  aria-label={ariaLabel}
+  class:list={[padClass, surfaceClass, "border-b border-line", className]}
+>
+  <slot />
+</section>

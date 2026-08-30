@@ -1,0 +1,341 @@
+---
+/**
+ * About — background, experience, education, credentials.
+ *
+ * Built clean and minimal like contact.astro. Composes PageHeader +
+ * Section primitives with the 9-role token system. The portrait is a
+ * click-to-enlarge modal (portrait-frame / portrait-lightbox classes in
+ * components.css handle the one-off aspect-ratio and viewport sizing).
+ */
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/ui/Container.astro";
+import PageHeader from "../components/ui/PageHeader.astro";
+import Section from "../components/ui/Section.astro";
+import Kicker from "../components/ui/Kicker.astro";
+import Heading from "../components/ui/Heading.astro";
+import Lede from "../components/ui/Lede.astro";
+import StatusDot from "../components/ui/StatusDot.astro";
+import Tag from "../components/ui/Tag.astro";
+import { SITE, GALLERY } from "../data/config";
+import {
+  credentials,
+  experienceTimeline,
+  educationTimeline,
+  skillCategories,
+} from "../data/portfolio";
+
+const toolingSkills = skillCategories.flatMap((cat) => cat.skills);
+
+const gallery = GALLERY.map((img) => ({
+  src: img.src,
+  alt: img.alt,
+  caption: img.caption ?? "",
+}));
+---
+
+<Layout
+  title="About"
+  description="Background, experience, education, credentials, and the technical practice behind the work."
+>
+  <PageHeader>
+    <Container>
+      <Kicker>About / Background</Kicker>
+      <Heading level={1} mb="md">
+        Profile &amp; Background
+      </Heading>
+      <Lede>
+        Background, experience, education, and the technical practice behind
+        the work.
+      </Lede>
+    </Container>
+  </PageHeader>
+
+  <!-- Profile -->
+  <Section>
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 lg:gap-x-12 items-start">
+        <!-- Portrait → click opens modal -->
+        <button
+          type="button"
+          data-photo-open="0"
+          class="group w-full max-w-sm lg:max-w-none text-left p-0 cursor-pointer rounded-card overflow-hidden border border-line bg-surface-raised hover:border-accent-soft transition-colors"
+          aria-label={`View portrait of ${SITE.name} in a larger view`}
+        >
+          <img
+            src="/profile-picture.webp"
+            alt={`Portrait of ${SITE.name}`}
+            class="portrait-frame w-full"
+          />
+          <span class="flex items-center justify-between gap-3 px-3 py-2.5 border-t border-line font-mono text-micro text-text-faint">
+            <span>Portrait</span>
+            <span class="group-hover:text-accent transition-colors">Enlarge →</span>
+          </span>
+        </button>
+
+        <!-- Identity -->
+        <div class="grid gap-4 min-w-0 lg:col-span-3">
+          <div class="flex items-center gap-2.5">
+            <StatusDot pulse size="sm" />
+            <span class="text-accent text-small font-bold font-mono">
+              Active Technical Practice
+            </span>
+          </div>
+          <div class="grid gap-1">
+            <Heading level={2} mb="none">
+              {SITE.name}
+            </Heading>
+            <p class="m-0 text-accent text-button font-mono">
+              Security Researcher &amp; Systems Programmer
+            </p>
+          </div>
+          <p class="m-0 text-text-faint text-small font-mono">
+            Nigeria (WAT) • HND Cybersecurity, Federal Polytechnic Auchi
+          </p>
+          <div class="grid gap-3 max-w-prose text-text-muted text-subtitle-responsive leading-prose">
+            <p class="m-0">
+              Brief professional introduction — replace with your own
+              background summary.
+            </p>
+            <p class="m-0">
+              Second paragraph on direction, interests, and how the work
+              connects. Replace with your own text.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Experience -->
+  <Section variant="soft">
+    <Container>
+      <div class="max-w-prose mb-6">
+        <Kicker mb="xs">Professional History</Kicker>
+        <Heading level={2} mb="none">
+          Experience
+        </Heading>
+      </div>
+
+      <div class="hairline-grid">
+        {experienceTimeline.map((item) => (
+          <article class="p-6 bg-surface-raised grid gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <Heading level={3} as={4} mb="none">
+                  {item.role}
+                </Heading>
+                <p class="m-0 mt-1 text-accent text-small font-mono">
+                  {item.organization} — {item.location}
+                </p>
+              </div>
+              <Tag class="self-start sm:self-auto">{item.period}</Tag>
+            </div>
+            <p class="m-0 text-text-muted text-regular leading-prose">
+              {item.description}
+            </p>
+            <ul class="m-0 p-0 pl-4 text-text-muted text-button leading-prose grid gap-1">
+              {item.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Education -->
+  <Section>
+    <Container>
+      <div class="max-w-prose mb-6">
+        <Kicker mb="xs">Academic Background</Kicker>
+        <Heading level={2} mb="none">
+          Education
+        </Heading>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 hairline-grid">
+        {educationTimeline.map((edu) => (
+          <article class="p-6 bg-surface-raised grid gap-3">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-accent text-micro font-mono uppercase">
+                {edu.period}
+              </span>
+              <span class="text-text-faint text-micro font-mono">
+                {edu.location}
+              </span>
+            </div>
+            <Heading level={3} as={4} mb="none">
+              {edu.degree}
+            </Heading>
+            <p class="m-0 text-accent text-button font-mono">
+              {edu.field} • {edu.institution}
+            </p>
+            {edu.details && (
+              <p class="m-0 text-text-muted text-button leading-prose">
+                {edu.details}
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Credentials & Tooling -->
+  <Section variant="soft">
+    <Container>
+      <div class="max-w-prose mb-6">
+        <Kicker mb="xs">Credentials</Kicker>
+        <Heading level={2} mb="none">
+          At a Glance
+        </Heading>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 hairline-grid">
+        {credentials.map((cred) => (
+          <article class="p-6 bg-surface-raised grid gap-2 content-start min-w-0">
+            <span class="text-accent text-micro font-mono uppercase">
+              {cred.label}
+            </span>
+            <p class="m-0 text-text-muted text-button leading-prose">
+              {cred.detail}
+            </p>
+          </article>
+        ))}
+      </div>
+
+      <!-- Tooling Range -->
+      <div class="mt-8 grid gap-3">
+        <Heading level={3} as={4} mb="none" class="font-mono">
+          Tooling Range
+        </Heading>
+        <ul class="flex flex-wrap gap-2 p-0 m-0 list-none">
+          {toolingSkills.map((skill) => (
+            <li>
+              <Tag>{skill}</Tag>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Container>
+  </Section>
+</Layout>
+
+<!-- Portrait lightbox (gallery, driven by GALLERY) -->
+<div
+  id="portrait-lightbox"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-scrim-95 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Portrait viewer"
+>
+  <button
+    id="portrait-close"
+    class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center border border-line bg-surface-raised text-text hover:text-accent hover:border-accent transition-colors cursor-pointer"
+    aria-label="Close portrait viewer"
+  >
+    ✕
+  </button>
+  <button
+    id="portrait-prev"
+    class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center border border-line bg-surface-raised text-text hover:text-accent hover:border-accent transition-colors cursor-pointer"
+    aria-label="Previous photo"
+  >
+    ‹
+  </button>
+  <button
+    id="portrait-next"
+    class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center border border-line bg-surface-raised text-text hover:text-accent hover:border-accent transition-colors cursor-pointer"
+    aria-label="Next photo"
+  >
+    ›
+  </button>
+  <div class="select-none px-12 sm:px-16">
+    <img id="portrait-image" src="" alt="" class="portrait-lightbox-img object-contain" />
+    <p id="portrait-caption" class="m-0 mt-3 text-center text-small font-mono text-text-faint"></p>
+    <p id="portrait-counter" class="m-0 mt-2 text-center text-micro font-mono text-text-faint"></p>
+  </div>
+</div>
+
+<script define:vars={{ gallery }}>
+  const lightbox = document.getElementById("portrait-lightbox");
+  const closeBtn = document.getElementById("portrait-close");
+  const prevBtn = document.getElementById("portrait-prev");
+  const nextBtn = document.getElementById("portrait-next");
+  const img = document.getElementById("portrait-image");
+  const caption = document.getElementById("portrait-caption");
+  const counter = document.getElementById("portrait-counter");
+  const triggers = document.querySelectorAll("[data-photo-open]");
+
+  let index = 0;
+
+  function show(i) {
+    index = ((i % gallery.length) + gallery.length) % gallery.length;
+    if (gallery.length === 0) return;
+    const item = gallery[index];
+    if (img) {
+      img.src = item.src;
+      img.alt = item.alt;
+    }
+    if (caption) caption.textContent = item.caption;
+    if (counter) counter.textContent = `${index + 1} / ${gallery.length}`;
+  }
+
+  function openLightbox(i = 0) {
+    lightbox?.classList.remove("hidden");
+    lightbox?.classList.add("flex");
+    document.body.style.overflow = "hidden";
+    show(i);
+  }
+
+  function closeLightbox() {
+    lightbox?.classList.add("hidden");
+    lightbox?.classList.remove("flex");
+    document.body.style.overflow = "";
+  }
+
+  function next() {
+    show(index + 1);
+  }
+
+  function prev() {
+    show(index - 1);
+  }
+
+  if (gallery.length < 2) {
+    prevBtn?.classList.add("hidden");
+    nextBtn?.classList.add("hidden");
+  }
+
+  triggers.forEach((btn) =>
+    btn.addEventListener("click", () =>
+      openLightbox(Number(btn.dataset.photoOpen ?? "0"))
+    )
+  );
+
+  prevBtn?.addEventListener("click", prev);
+  nextBtn?.addEventListener("click", next);
+  closeBtn?.addEventListener("click", closeLightbox);
+
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (lightbox?.classList.contains("hidden")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") next();
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") prev();
+  });
+
+  let touchX = 0;
+  lightbox?.addEventListener("touchstart", (e) => {
+    touchX = e.touches[0].clientX;
+  });
+  lightbox?.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (dx < -50) next();
+    if (dx > 50) prev();
+  });
+</script>

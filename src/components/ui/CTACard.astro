@@ -1,0 +1,56 @@
+---
+/**
+ * CTACard — call-to-action section.
+ *
+ * Replaces the inline CallToAction component. Composes Kicker, Heading,
+ * Lede, and a default slot for the action buttons. The parent decides
+ * the actions; this primitive owns the section shell, the surface
+ * treatment, and the title/lede sizing.
+ */
+import Section from "./Section.astro";
+import Kicker from "./Kicker.astro";
+import Heading from "./Heading.astro";
+import Lede from "./Lede.astro";
+
+interface Props {
+  /** Section landmark id (for in-page links) */
+  id?: string;
+  /** Accessible label when no visible heading is present */
+  ariaLabel?: string;
+  /** Heading text */
+  title: string;
+  /** Optional kicker above the title */
+  kicker?: string;
+  /** Optional lede paragraph */
+  lede?: string;
+  /** Width preset for the lede */
+  ledeWidth?: "lede" | "tight" | "narrow" | "prose" | "shorter";
+  /** Heading level (default 2) */
+  level?: 1 | 2 | 3;
+  /** Bottom margin on the lede */
+  ledeMb?: "sm" | "md" | "lg";
+  class?: string;
+}
+
+const {
+  id,
+  ariaLabel,
+  title,
+  kicker,
+  lede,
+  ledeWidth = "tight",
+  level = 2,
+  ledeMb = "lg",
+  class: className = "",
+} = Astro.props;
+---
+<Section id={id} ariaLabel={ariaLabel} variant="raised" class={className}>
+  <div class="max-w-card-cta">
+    {kicker && <Kicker>{kicker}</Kicker>}
+    <Heading level={level} mb="sm">{title}</Heading>
+    {lede && <Lede width={ledeWidth} mb={ledeMb}>{lede}</Lede>}
+    <div class="flex flex-wrap items-center gap-3">
+      <slot />
+    </div>
+  </div>
+</Section>

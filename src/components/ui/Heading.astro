@@ -1,0 +1,69 @@
+---
+/**
+ * Heading — semantic heading (h1–h6) with the site's responsive type scale.
+ *
+ * Replaces every `m-0 mb-X text-[clamp(...)] leading-X font-bold text-primary`
+ * h1/h2/h3 in pages. The level prop drives both the tag and the size.
+ *
+ * Levels map to existing tokens (tokens.css --text-h1, --text-h2, etc.):
+ *   1  → --text-h1       (page titles, hero)
+ *   2  → --text-h2       (section titles)
+ *   3  → --text-h3       (card titles, entry titles)
+ *   4  → --text-subtitle (minor headings)
+ *
+ * Per design-rules.md §1.7 — no duplicated h1/h2 markup across pages.
+ */
+interface Props {
+  /** Semantic heading level (1–6) */
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  /** Visual size override (independent of level, e.g. visually-1 with semantic-2) */
+  as?: 1 | 2 | 3 | 4;
+  /** Heading id (for in-page anchors) */
+  id?: string;
+  /** Bottom margin preset */
+  mb?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
+  /** Color variant */
+  tone?: "default" | "muted" | "faint";
+  class?: string;
+}
+
+const {
+  level = 2,
+  as,
+  id,
+  mb = "md",
+  tone = "default",
+  class: className = "",
+} = Astro.props as Props;
+
+const Tags = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
+const Tag = Tags[level - 1];
+const sizeMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 4, 6: 4 } as const;
+const size = as ?? sizeMap[level];
+
+const sizeClass = {
+  1: "text-h1 leading-page-h1",
+  2: "text-h2 leading-h2",
+  3: "text-h3 leading-normal",
+  4: "text-subtitle leading-normal",
+}[size];
+
+const mbClass = {
+  none: "m-0",
+  xs: "m-0 mb-2.5",
+  sm: "m-0 mb-3",
+  md: "m-0 mb-4.5",
+  lg: "m-0 mb-6",
+  xl: "m-0 mb-8",
+}[mb];
+
+const toneClass = {
+  default: "text-text",
+  muted: "text-text-muted",
+  faint: "text-text-faint",
+}[tone];
+---
+
+<Tag id={id} class:list={["font-bold", sizeClass, mbClass, toneClass, className]}>
+  <slot />
+</Tag>

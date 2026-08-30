@@ -1,0 +1,58 @@
+---
+/**
+ * Tag — inline label chip.
+ *
+ * Replaces the legacy .tag-chip class (now deleted from components.css)
+ * and the inline `px-2.5 py-1 border ...` tag markup (4+ uses) across pages.
+ *
+ * Variants:
+ *   muted      — neutral tag, default
+ *   accent     — accent border + bg + text (status pill, "active" tag)
+ *   filter     — outline only, used in workbench filter bar
+ *   filter-active — accent-tinted, used for the selected filter
+ *   link       — accent text, hover reveals border (used for "Source ↗")
+ */
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "muted" | "accent" | "filter" | "filter-active" | "link";
+
+interface BaseProps {
+  variant?: Variant;
+  /** Render as <a> for links, <span> for static labels */
+  href?: string;
+  /** Uppercase + tracking (used in workbench top-line meta) */
+  uppercase?: boolean;
+  class?: string;
+}
+
+type Props = BaseProps & Omit<HTMLAttributes<"a">, "class"> & Omit<HTMLAttributes<"span">, "class">;
+
+const {
+  variant = "muted",
+  href,
+  uppercase = false,
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const Tag = href ? "a" : "span";
+
+const variantClass = {
+  muted:
+    "px-2.5 py-1 border border-line text-text-faint font-mono text-micro",
+  accent:
+    "px-2.5 py-1 border border-accent-pill-border bg-accent-pill-bg text-accent font-mono text-micro",
+  filter:
+    "px-3 py-1.5 border border-line text-text-faint text-small",
+  "filter-active":
+    "px-3 py-1.5 border border-accent bg-accent-pill-bg text-accent font-bold text-small",
+  link:
+    "px-2.5 py-1 border border-line text-accent text-micro hover:border-accent-soft",
+}[variant];
+
+const textClass = uppercase ? "uppercase" : "";
+---
+
+<Tag href={href} class:list={["inline-flex items-center", variantClass, textClass, className]} {...rest}>
+  <slot />
+</Tag>

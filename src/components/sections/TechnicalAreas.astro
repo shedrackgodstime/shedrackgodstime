@@ -1,0 +1,36 @@
+---
+/**
+ * TechnicalAreas — homepage section: a 4-up grid of focus areas.
+ *
+ * Ported from the reference TechnicalAreas.astro, rebuilt for the 9-role
+ * token system. Uses the Section/Container/Kicker primitives and the
+ * `hairline-grid` component class; cards use surface-raised tokens.
+ *
+ * Per design-rules.md §1.3 this lives in components/sections/.
+ */
+import Section from "../ui/Section.astro";
+import Container from "../ui/Container.astro";
+import Kicker from "../ui/Kicker.astro";
+import { technicalAreas } from "../../data/portfolio";
+---
+
+<Section variant="soft">
+  <Container>
+    <Kicker mb="md">Technical Areas</Kicker>
+    <div class="hairline-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      {technicalAreas.map((area, index) => (
+        <article class="grid gap-2.5 content-start p-5 bg-surface-raised min-w-0">
+          <span class="text-accent text-kicker font-mono">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 class="m-0 text-text text-emphasis leading-normal font-bold">
+            {area.name}
+          </h3>
+          <p class="m-0 text-text-muted text-small leading-body break-words">
+            {area.description}
+          </p>
+        </article>
+      ))}
+    </div>
+  </Container>
+</Section>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --stroke: #cbd5e1;
+      --icon: #0f172a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --stroke: #1e293b;
+        --icon: #38bdf8;
+      }
+    }
+  </style>
+  <rect x="1" y="1" width="22" height="22" rx="3" fill="var(--bg)" stroke="var(--stroke)" stroke-width="1.5"/>
+  <path stroke="var(--icon)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 18l4-12m2 3l3 3-3 3M8 15l-3-3 3-3" />
+</svg>

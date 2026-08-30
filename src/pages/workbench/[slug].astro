@@ -1,0 +1,174 @@
+---
+/**
+ * Workbench entry — detailed view of a single project or exploration.
+ *
+ * Renders the entry's markdown body (entry.rendered.html, prepared by the
+ * GitHub loader in src/content.config.ts → src/utils/github.ts) inside the
+ * .prose scope. The header carries the reference-style top-line meta
+ * (type / status / date pills) built from the Tag + StatusDot primitives.
+ *
+ * Route uses entry.id as the slug (matching workbench/index.astro links).
+ * Layout follows GitHub's rendered-markdown file view: page chrome on the
+ * standard container (1320px) on the page background, then a raised,
+ * bordered content panel constrained to the same 1320 container (matching
+ * every other page's content width) holding the markdown body in a
+ * centered 992px column — wide enough for code and diagrams on desktop.
+ * On mobile (<721px) the wrapper section is flush (`.section-body--flush`,
+ * zero padding), so the panel spans edge-to-edge like GitHub's mobile view.
+ * The "test" pipeline fixture is still generated (matching the reference)
+ * so it renders in a browser, but is noindexed, robots-disallowed, and
+ * excluded from index, sitemap, rss, and prev/next navigation.
+ */
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/ui/Container.astro";
+import PageHeader from "../../components/ui/PageHeader.astro";
+import Section from "../../components/ui/Section.astro";
+import Heading from "../../components/ui/Heading.astro";
+import Lede from "../../components/ui/Lede.astro";
+import Tag from "../../components/ui/Tag.astro";
+import StatusDot from "../../components/ui/StatusDot.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("workbench");
+  const visible = entries
+    .filter((e) => e.id !== "test")
+    .sort((a, b) =>
+      (a.data.started ?? "0000-00").localeCompare(b.data.started ?? "0000-00"),
+    );
+  return entries.map((entry) => {
+    const idx = visible.findIndex((e) => e.id === entry.id);
+    return {
+      params: { slug: entry.id },
+      props: {
+        entry,
+        prev: idx > 0 ? visible[idx - 1] : null,
+        next: idx < visible.length - 1 ? visible[idx + 1] : null,
+      },
+    };
+  });
+}
+
+const { entry, prev, next } = Astro.props;
+
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const meta = entry.data.updated
+  ? `Updated: ${entry.data.updated}`
+  : entry.data.started
+    ? `Started: ${entry.data.started}`
+    : "";
+const robots = entry.id === "test" ? "noindex, nofollow" : undefined;
+---
+
+<Layout
+  title={entry.data.title}
+  description={entry.data.summary || undefined}
+  robots={robots}
+>
+  <PageHeader variant="slug">
+    <Container>
+      <a
+        href="/workbench/"
+        class="inline-flex items-center gap-1.5 text-accent text-small font-mono mb-6 hover:underline"
+      >
+        <span aria-hidden="true">←</span>
+        Back to Workbench Catalog
+      </a>
+
+      <div class="flex items-center flex-wrap gap-2 mb-4">
+        <Tag variant="accent" uppercase>{cap(entry.data.type)}</Tag>
+        <Tag variant="muted" uppercase class="gap-2">
+          <StatusDot size="sm" />
+          Status: {cap(entry.data.status)}
+        </Tag>
+        {meta && <Tag variant="muted" uppercase>{meta}</Tag>}
+      </div>
+
+      <Heading level={1} mb="md">{entry.data.title}</Heading>
+
+      {entry.data.summary && <Lede>{entry.data.summary}</Lede>}
+
+      {(entry.data.tags.length > 0 || entry.data.source) && (
+        <div class="flex flex-wrap gap-2">
+          {
+            entry.data.tags.map((tag: string) => (
+              <Tag>{tag}</Tag>
+            ))
+          }
+          {entry.data.source && (
+            <Tag
+              variant="link"
+              href={entry.data.source}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Source ↗
+            </Tag>
+          )}
+        </div>
+      )}
+    </Container>
+  </PageHeader>
+
+  <Section divider={false} class="section-body--flush">
+    <Container>
+      <div class="content-panel">
+        <Container width="content">
+          <div class="prose">
+        {
+          entry.rendered?.html ? (
+            <Fragment set:html={entry.rendered.html} />
+          ) : (
+            <p class="m-0 text-text-muted text-regular">
+              No notes recorded for this entry yet.
+            </p>
+          )
+        }
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-line">
+        <nav
+          class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-start"
+          aria-label="Workbench entry navigation"
+        >
+          {
+            prev ? (
+              <a
+                href={`/workbench/${prev.id}/`}
+                class="group flex flex-col gap-1 text-left"
+              >
+                <span class="text-text-faint font-mono text-micro uppercase">
+                  ← Previous
+                </span>
+                <span class="text-accent font-semibold group-hover:underline">
+                  {prev.data.title}
+                </span>
+              </a>
+            ) : (
+              <span />
+            )
+          }
+          {
+            next ? (
+              <a
+                href={`/workbench/${next.id}/`}
+                class="group flex flex-col gap-1 text-right"
+              >
+                <span class="text-text-faint font-mono text-micro uppercase">
+                  Next →
+                </span>
+                <span class="text-accent font-semibold group-hover:underline">
+                  {next.data.title}
+                </span>
+              </a>
+            ) : (
+              <span />
+            )
+          }
+        </nav>
+          </div>
+        </Container>
+      </div>
+    </Container>
+  </Section>
+</Layout>

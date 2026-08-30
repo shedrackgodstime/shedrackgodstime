@@ -1,0 +1,70 @@
+/*
+ * base — Box model reset, html/body defaults, focus ring, reduced-motion.
+ * Cascade order: tokens → base → components → prose → code.
+ */
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    margin: 0;
+    background:
+      linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px),
+      linear-gradient(180deg, var(--color-grid-line) 1px, transparent 1px),
+      var(--color-surface);
+    background-size: 72px 72px;
+    color: var(--color-text);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+  }
+
+  /* Default focus ring for keyboard navigation. Per design-rules.md
+     §1.5: :focus-visible is a global default that lives in @layer base.
+     Components may opt out and supply their own ring, but the default
+     is always present. */
+  :focus-visible {
+    outline: var(--focus-ring-width) var(--focus-ring-style) var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  /* Respect reduced-motion preference at the global level — per
+     design-rules.md §1.5. Disables all transitions/animations by
+     default for users who opt out. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

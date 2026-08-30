@@ -1,0 +1,137 @@
+---
+/**
+ * Contact — get in touch.
+ *
+ * Built clean and minimal, no reference. Composes PageHeader + Section
+ * primitives. Channels are a proper contact directory: each row is a
+ * full-row interactive surface (hairline + hover) with the username
+ * stacked under the label. The email row has a copy affordance (uses the
+ * existing clipboard util) — email is otherwise treated like the rest.
+ */
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/ui/Container.astro";
+import PageHeader from "../components/ui/PageHeader.astro";
+import Section from "../components/ui/Section.astro";
+import Kicker from "../components/ui/Kicker.astro";
+import Heading from "../components/ui/Heading.astro";
+import Lede from "../components/ui/Lede.astro";
+import StatusDot from "../components/ui/StatusDot.astro";
+import SocialIcon from "../components/ui/SocialIcon.astro";
+import { SOCIALS } from "../data/config";
+---
+
+<Layout
+  title="Contact"
+  description="Direct channels for research collaboration, security disclosures, and technical questions. No contact form, no newsletter, no tracking."
+>
+  <PageHeader>
+    <Container>
+      <Kicker>Contact</Kicker>
+      <Heading level={1} mb="md">Get in touch</Heading>
+      <Lede>
+        Research collaboration, security disclosures, and technical questions.
+        No contact form — pick whichever channel below is easiest.
+      </Lede>
+    </Container>
+  </PageHeader>
+
+  <Section>
+    <Container>
+      <div class="grid gap-10 max-w-prose-wide lg:max-w-container lg:grid-cols-3 lg:gap-x-12">
+
+        <!-- Channels: contact directory (2-col on sm+, full-row interactive).
+             Spans 2 of 3 columns on lg+ so the directory and Best for sit
+             side-by-side with a natural 2:1 ratio. -->
+        <div class="lg:col-span-2">
+          <Kicker mb="xs">Channels</Kicker>
+          <ul class="grid sm:grid-cols-2 gap-x-8 m-0 p-0 list-none max-w-prose-wide">
+            {
+              SOCIALS.map((s) => {
+                const isEmail = s.href.startsWith("mailto:");
+                return (
+                  <li class="flex items-center border-b border-line">
+                    <a
+                      href={s.href}
+                      {...(s.href.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      aria-label={`${s.label}, ${s.username ?? s.href}`}
+                      class="group flex-1 min-w-0 flex items-center gap-3 py-3 px-2 -mx-2 rounded text-text hover:bg-surface-soft hover:text-accent transition-colors"
+                    >
+                      <SocialIcon name={s.label.toLowerCase()} />
+                      <span class="grid gap-0.5 min-w-0 flex-1">
+                        <span>{s.label}</span>
+                        <span class="text-text-faint text-small font-mono break-all">
+                          {s.username}
+                        </span>
+                      </span>
+                      {!isEmail && (
+                        <span
+                          aria-hidden="true"
+                          class="ml-auto text-text-faint group-hover:text-accent transition-colors"
+                        >
+                          →
+                        </span>
+                      )}
+                    </a>
+                    {isEmail && (
+                      <button
+                        type="button"
+                        class="copy-email-btn text-text-faint text-small font-mono hover:text-accent transition-colors px-2 py-1"
+                        data-copy={s.username}
+                        aria-label={`Copy email address ${s.username}`}
+                      >
+                        Copy
+                      </button>
+                    )}
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+
+        <!-- Best for -->
+        <div>
+          <Kicker mb="xs">Best for</Kicker>
+          <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 m-0 p-0 list-none text-text-muted text-regular max-w-prose-wide">
+            <li>Research collaboration</li>
+            <li>Security disclosures (coordinated)</li>
+            <li>Technical questions on the workbench</li>
+            <li>Professional inquiries</li>
+          </ul>
+        </div>
+
+        <!-- Status card (echoes the hero's status treatment, quieter). Spans
+             all columns on lg+ so it sits as a full-width footer note. -->
+        <div class="lg:col-span-3 flex items-center gap-2 border border-line bg-scrim-50 text-text-faint text-small font-mono p-4">
+          <StatusDot />
+          <span>Nigeria / WAT · usually responsive on weekdays</span>
+        </div>
+
+      </div>
+    </Container>
+  </Section>
+</Layout>
+
+<script>
+  import { copyText } from "../utils/clipboard";
+
+  let resetTimer: ReturnType<typeof setTimeout> | undefined;
+
+  document
+    .querySelectorAll<HTMLButtonElement>(".copy-email-btn")
+    .forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const text = btn.dataset.copy ?? "";
+        if (!text) return;
+        const ok = await copyText(text);
+        if (!ok) return;
+        btn.textContent = "Copied";
+        if (resetTimer) clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => {
+          btn.textContent = "Copy";
+        }, 1500);
+      });
+    });
+</script>

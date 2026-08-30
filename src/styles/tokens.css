@@ -1,0 +1,319 @@
+/*
+ * tokens — Tailwind entry, design tokens, dark palette.
+ * Cascade order: tokens → base → components → prose → code.
+ *
+ * Tailwind v4 uses @theme for token definitions (they become utility
+ * classes automatically) and @layer for cascade ordering.
+ *
+ * Color system: 9-role spec per design-rules.md PART 2.
+ * Spacing/width/height/leading/radius/alpha tokens: Phase 1 promotion.
+ */
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+/*
+ * Design tokens. Light palette lives in @theme (:root default);
+ * the dark palette overrides under html.dark.
+ */
+@theme {
+  /* ── Color: surfaces (5 tokens) ──────────────────────────────────── */
+  --color-surface: #f6f8f7;
+  --color-surface-raised: #ffffff;
+  --color-surface-hover: #f0f5f2;
+  --color-surface-soft: #eef2f0;
+  /* Muted panel tier — midpoint of raised↔surface: a step off the page
+     that stays close to it (GitHub file-view panel background). */
+  --color-surface-muted: color-mix(in srgb, var(--color-surface-raised) 50%, var(--color-surface));
+
+  /* ── Color: text (3-tier ladder) ─────────────────────────────────── */
+  --color-text: #131c18;
+  --color-text-muted: #55625d;
+  --color-text-faint: #64716c;
+
+  /* ── Color: line / border (1 token) ──────────────────────────────── */
+  --color-line: color-mix(in oklch, var(--color-text) 12%, transparent);
+  --color-line-strong: color-mix(in oklch, var(--color-text) 18%, transparent);
+
+  /* ── Color: accent (4 tokens: accent, fill, fill-hover, on-fill) ─ */
+  --color-accent: #0b6d50;
+  --color-accent-fill: #0b6d50;
+  --color-accent-fill-hover: #083f30;  /* hover bg of filled buttons (light) */
+  --color-on-accent: #ffffff;
+
+  /* ── Color: derived alpha states (replace magic /N modifiers) ────── */
+  --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 70%);
+  --color-accent-pill-bg: color-mix(in oklch, var(--color-accent), transparent 92%);
+  --color-accent-pill-border: color-mix(in oklch, var(--color-accent), transparent 70%);
+  --color-accent-active: color-mix(in oklch, var(--color-accent), transparent 66%);
+  --color-accent-fill-hover-soft: color-mix(in oklch, var(--color-accent-fill-hover), transparent 80%);
+  --color-accent-highlight: color-mix(in srgb, var(--color-accent) 12%, transparent);
+
+  /* ── Color: scrim (overlay/screen tints) ─────────────────────────── */
+  /* Literal sRGB rgba (ref parity): mixing the surface toward transparent
+     in OKLCH resolves to a different composite than the reference's rgba()
+     overlays, which shows as a neutral/warm cast in dark mode. */
+  --color-scrim-95: rgba(246, 248, 247, 0.95);
+  --color-scrim-86: rgba(246, 248, 247, 0.86);
+  --color-scrim-80: rgba(246, 248, 247, 0.8);
+  --color-scrim-58: rgba(246, 248, 247, 0.58);
+  --color-scrim-50: rgba(238, 242, 240, 0.5);
+
+  /* ── Hero gradient overlay (references --color-surface so it adapts
+       to dark mode automatically). Consumed by .hero-overlay in
+       components.css — kept here (not inlined) so the audit's
+       inline-color-mix rule does not flag it. in srgb mirrors the
+       reference's in_srgb so translucent stops composite the same.
+       LIGHT: opened up on the portrait side (up-right) so the backdrop
+       image is faintly but visibly present; the text side (left) and the
+       bottom fade keep near-solid surface for contrast. Dark keeps the
+       reference's exact stops in the html.dark block below. */
+  --hero-overlay: linear-gradient(90deg,
+      color-mix(in srgb, var(--color-surface) 96%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface) 56%, transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--color-surface) 12%, transparent) 0%,
+      var(--color-surface) 100%);
+  --hero-overlay-sm: linear-gradient(90deg,
+      color-mix(in srgb, var(--color-surface) 98%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface) 75%, transparent) 42%,
+      color-mix(in srgb, var(--color-surface) 24%, transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--color-surface) 14%, transparent) 0%,
+      var(--color-surface) 100%);
+
+  /* ── Decorative body grid pattern (hairline). in srgb so the tint stops
+       render as straight sRGB alpha like the reference's rgba() grid lines.
+       Light matches the reference's stronger light hairlines (0.05/0.042);
+       dark is overridden lower (0.028/0.024) below. */
+  --color-grid-line: color-mix(in srgb, var(--color-text) 4.6%, transparent);
+
+  /* ── Spacing scale (promotes §4.2 arbitrary values to tokens) ────── */
+  --space-gutter: clamp(18px, 4vw, 56px);
+  /* Spacing utility — generates px-gutter / py-gutter / p-gutter / gap-gutter / w-gutter / h-gutter / m-gutter */
+  --spacing-gutter: var(--space-gutter);
+  --space-section: clamp(48px, 6vw, 72px);
+  --space-page-header-pt: clamp(48px, 6vw, 80px);
+  --space-page-header-pb: clamp(36px, 5vw, 60px);
+  --space-page-header-pt-slug: clamp(40px, 5vw, 68px);
+  --space-page-header-pb-slug: clamp(32px, 4vw, 52px);
+  --space-hero-pt: 58px;
+  --space-hero-pt-sm: clamp(52px, 7vw, 92px);
+  --space-hero-pb: 42px;
+  --space-hero-pb-sm: clamp(36px, 6vw, 68px);
+  --space-hero-gap: clamp(28px, 6vw, 80px);
+  --space-nav-px: 9px;
+  --space-nav-px-sm: 12px;
+
+  /* Tailwind v4 resolves half-step spacing decimals natively
+     (e.g. `gap-4.5` = calc(var(--spacing) * 4.5)), so components use
+     the decimal form directly — no extra named tokens required. */
+
+  /* Full spacing scale. Tailwind v4's default scale is overridden by
+     any value declared in @theme. We define the integers the design
+     actually uses so utility classes like `mt-2`, `p-6`, `gap-8` all
+     resolve. Names follow the rem multiplier convention. */
+  --spacing: 0.25rem;  /* base unit (4px). Tailwind multiplies this. */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+
+  /* ── Max-width utilities (single source of truth) ───────────────────── */
+  /* Tailwind v4 derives max-w-* from --max-width-* (NOT --width-*), so the
+     named container/lede widths live here to expose max-w-container,
+     max-w-lede, max-w-prose, etc. as real semantic utilities. */
+  --max-width-container: 1320px;
+  --max-width-container-narrow: 1300px;
+  --max-width-content: 992px;
+  --max-width-prose: 760px;
+  --max-width-prose-wide: 840px;
+  --max-width-card-cta: 820px;
+  --max-width-lede: 780px;
+  --max-width-lede-hero: 650px;
+  --max-width-narrow: 720px;
+  --max-width-tight: 640px;
+  --max-width-shorter: 520px;
+
+  /* ── Vertical rhythm heights ─────────────────────────────────────── */
+  --height-header: 76px;
+  --height-button: 44px;
+  --height-nav-link: 36px;
+  --height-icon-button: 34px;
+
+  /* Square icon button (theme toggle, etc.) — size-* sets width + height */
+  --size-icon-button: 34px;
+  --height-thumb: 96px;
+
+  /* Hero minimum height */
+  --height-hero-min: min(600px, calc(100vh - var(--height-header)));
+
+  /* ── Type scale (text size) ──────────────────────────────────────── */
+  --text-micro: 0.72rem;
+  --text-kicker: 0.76rem;
+  --text-small: 0.88rem;
+  --text-prose: 0.95rem;
+  --text-button: 0.93rem;
+  --text-regular: 1rem;
+  --text-emphasis: 1.05rem;
+  --text-subtitle: 1.2rem;
+  --text-title: 1.4rem;
+
+  /* Responsive heading sizes */
+  --text-h1: clamp(2.4rem, 6vw, 4.5rem);
+  --text-h1-slug: clamp(2.2rem, 5.5vw, 4rem);
+  --text-h1-hero: clamp(2rem, 7.5vw, 3.2rem);
+  --text-h1-hero-sm: clamp(3.4rem, 6.8vw, 6.4rem);
+  --text-h2: clamp(1.8rem, 4vw, 2.8rem);
+  --text-h2-featured: clamp(1.55rem, 6.2vw, 2.15rem);
+  --text-h2-featured-sm: clamp(1.9rem, 3.8vw, 3.35rem);
+  --text-h2-cta: clamp(1.6rem, 3.6vw, 2.5rem);
+  --text-h3: clamp(1.3rem, 2.2vw, 1.75rem);
+  --text-display: clamp(4rem, 14vw, 8rem);
+
+  /* Prose heading sizes (smaller than page-level for inline markdown) */
+  --text-prose-h1: clamp(1.55rem, 1.25rem + 1.5vw, 2rem);
+  --text-prose-h2: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-prose-h3: clamp(1.05rem, 0.98rem + 0.35vw, 1.17rem);
+  --text-prose-h1-sm: clamp(1.35rem, 1.1rem + 1.2vw, 1.75rem);
+  --text-prose-h2-sm: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
+
+  /* Responsive body sizes */
+  --text-body-responsive: clamp(1.08rem, 2.2vw, 1.35rem);
+  --text-body-hero: clamp(1.08rem, 2.2vw, 1.45rem);
+  --text-body-slug: clamp(1.08rem, 2vw, 1.3rem);
+  --text-subtitle-responsive: clamp(1rem, 2vw, 1.2rem);
+
+  /* ── Line heights (promotes leading-[0.98] / [1.1] / [1.6] etc.) ─ */
+  --leading-page-h1: 0.98;
+  --leading-h2: 1.1;
+  --leading-h2-featured: 1.04;
+  --leading-body: 1.6;
+  --leading-prose: 1.65;
+  --leading-list: 1.7;
+  --leading-tight: 0.96;
+  --leading-tight-sm: 0.94;
+  --leading-snug: 1.05;
+  --leading-normal: 1.3;
+  --leading-relaxed: 1.58;
+  --leading-loose: 1.7;
+
+  /* ── Letter spacing ──────────────────────────────────────────────── */
+  --tracking-none: 0;
+
+  /* ── Font stacks ─────────────────────────────────────────────────── */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", ui-monospace, monospace;
+
+  /* ── Radii (promotes 8px / 6px / 4px literals) ─────────────────── */
+  --radius-card: 8px;
+  --radius-button: 6px;
+  --radius-pill: 4px;
+
+  /* ── Focus ring (accessibility — keyboard navigation) ─────────────── */
+  --focus-ring-color: var(--color-accent);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-style: solid;
+
+  /* ── Motion (transitions and animations) ─────────────────────────── */
+  --duration-instant: 0ms;
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 260ms;
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Shadows (none in the live site; tokens for future use) ─────── */
+  --shadow-card: 0 1px 2px color-mix(in oklch, var(--color-text), transparent 92%),
+                 0 2px 8px color-mix(in oklch, var(--color-text), transparent 94%);
+  --shadow-elevated: 0 4px 12px color-mix(in oklch, var(--color-text), transparent 90%),
+                     0 12px 32px color-mix(in oklch, var(--color-text), transparent 92%);
+
+  /* ── Blur ────────────────────────────────────────────────────────── */
+  --backdrop-blur-header: 18px;
+
+  /* ── Breakpoints (unchanged) ─────────────────────────────────────── */
+  --breakpoint-xs: 421px;
+  --breakpoint-sm: 721px;
+  --breakpoint-lg: 981px;
+  --breakpoint-prose: 640px;  /* prose/code phone-specific adjustments */
+}
+
+/* ── Dark theme ──────────────────────────────────────────────────────── */
+
+html.dark {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --color-surface: #080a0d;
+  --color-surface-raised: #0b0f12;
+  --color-surface-hover: #0e1418;
+  --color-surface-soft: #090d10;
+  /* Muted panel tier (re-resolved against dark surfaces) */
+  --color-surface-muted: color-mix(in srgb, var(--color-surface-raised) 50%, var(--color-surface));
+
+  /* Text */
+  --color-text: #f3f6f4;
+  --color-text-muted: #9da8a5;
+  --color-text-faint: #8d9a97;
+
+  /* Line */
+  /* --color-line / --color-line-strong auto-derive from --color-text
+     (light tint in dark mode, dark tint in light mode). */
+
+  /* Accent (dark mode splits accent-fill from accent) */
+  --color-accent: #7dd3b9;
+  --color-accent-fill: #d8f7ed;
+  --color-accent-fill-hover: #ecfdf5;  /* hover bg of filled buttons (dark) */
+  --color-on-accent: #07100d;
+
+  /* Derived alpha (re-resolved against dark accent) */
+  --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 70%);
+  --color-accent-pill-bg: color-mix(in oklch, var(--color-accent), transparent 92%);
+  --color-accent-pill-border: color-mix(in oklch, var(--color-accent), transparent 70%);
+  --color-accent-active: color-mix(in oklch, var(--color-accent), transparent 66%);
+  --color-accent-fill-hover-soft: color-mix(in oklch, var(--color-accent-fill-hover), transparent 80%);
+  --color-accent-highlight: color-mix(in srgb, var(--color-accent) 12%, transparent);
+
+  /* Scrim (re-resolved against dark surface; literal sRGB rgba mirroring
+     the ref's rgba(8,10,13,…) / wash-soft rgba(11,15,18,.5)) */
+  --color-scrim-95: rgba(8, 10, 13, 0.95);
+  --color-scrim-86: rgba(8, 10, 13, 0.86);
+  --color-scrim-80: rgba(8, 10, 13, 0.8);
+  --color-scrim-58: rgba(8, 10, 13, 0.58);
+  --color-scrim-50: rgba(11, 15, 18, 0.5);
+
+  /* Hero overlay + grid re-resolve in srgb (ref: in_srgb / rgba);
+     dark opened a hair over the reference so the portrait reads a
+     little more in dark mode too. */
+  --hero-overlay: linear-gradient(90deg,
+      color-mix(in srgb, var(--color-surface) 96%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface) 70%, transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--color-surface) 20%, transparent) 0%,
+      var(--color-surface) 100%);
+  --hero-overlay-sm: linear-gradient(90deg,
+      color-mix(in srgb, var(--color-surface) 98%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface) 82%, transparent) 42%,
+      color-mix(in srgb, var(--color-surface) 30%, transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--color-surface) 24%, transparent) 0%,
+      var(--color-surface) 100%);
+  /* Grid: dark keeps the reference's fainter hairlines (0.028/0.024) */
+  --color-grid-line: color-mix(in srgb, var(--color-text) 2.5%, transparent);
+}
+
+:root {
+  color-scheme: light;
+}

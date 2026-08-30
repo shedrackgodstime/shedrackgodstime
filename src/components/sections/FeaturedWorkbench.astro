@@ -1,0 +1,65 @@
+---
+/**
+ * FeaturedWorkbench — homepage section: latest workbench entries.
+ *
+ * Ported from the reference FeaturedWorkbench.astro, rebuilt for the
+ * 9-role token system. Reuses the EntryCard primitive (which owns the
+ * card markup + tag rendering) and the Button primitive for "All entries".
+ * Links use the entry id (the [slug] route's param), not a slugified title.
+ *
+ * Per design-rules.md §1.3 this lives in components/sections/.
+ */
+import Section from "../ui/Section.astro";
+import Container from "../ui/Container.astro";
+import Kicker from "../ui/Kicker.astro";
+import Button from "../ui/Button.astro";
+import EntryCard from "../ui/EntryCard.astro";
+import { getCollection } from "astro:content";
+
+const allEntries = await getCollection("workbench");
+
+const featured = allEntries
+  .filter((e) => e.id !== "test")
+  .sort((a, b) =>
+    (a.data.started ?? "0000-00").localeCompare(b.data.started ?? "0000-00"),
+  )
+  .slice(0, 4);
+---
+
+<Section variant="soft" id="workbench">
+  <Container>
+    <div class="max-w-card-cta mb-6 min-w-0">
+      <Kicker mb="sm">Featured Workbench</Kicker>
+      <h2
+        class="m-0 text-h2-featured sm:text-h2-featured-sm leading-snug font-bold text-text"
+      >
+        Selected records from the bench.
+      </h2>
+      <p
+        class="max-w-narrow m-0 mt-3.5 text-text-muted text-subtitle-responsive leading-prose"
+      >
+        The technical record behind the portfolio: project narratives,
+        explorations, and research notes from ongoing work.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {
+        featured.map((entry) => (
+          <EntryCard
+            href={`/workbench/${entry.id}/`}
+            type={entry.data.type}
+            status={entry.data.status}
+            title={entry.data.title}
+            summary={entry.data.summary}
+            tags={entry.data.tags}
+          />
+        ))
+      }
+    </div>
+
+    <div class="mt-6">
+      <Button href="/workbench" variant="ghost" mono>All entries →</Button>
+    </div>
+  </Container>
+</Section>
