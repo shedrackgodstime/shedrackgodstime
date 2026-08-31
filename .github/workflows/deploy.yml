@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -28,13 +29,12 @@ jobs:
         run: bunx playwright install --with-deps
 
       - name: Build project
-        # IMPORTANT: never set OFFLINE=1 here. Online mode is the production
-        # guard — contents/test.md (the pipeline fixture) only loads when
-        # OFFLINE=1, so it can never reach the deployed site.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bun run build
 
       - name: Deploy to Cloudflare Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
