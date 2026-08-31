@@ -88,11 +88,11 @@ const gallery = GALLERY.map((img) => ({
             </p>
           </div>
           <p class="m-0 text-text-faint text-small font-mono">
-            Nigeria (WAT) • Abuja • Global
+            Nigeria (WAT) · Abuja · Global
           </p>
           <div class="grid gap-3.5 max-w-prose text-text-muted text-subtitle-responsive leading-prose">
             <p class="m-0">
-              I'm Shedrack Godstime, based in Abuja, Nigeria. Most of my work sits at the intersection of security research and low-level systems—understanding how software, networks, and operating systems operate under the hood, and finding where they fail.
+              I'm Shedrack Godstime, based in Abuja, Nigeria. Most of my work sits at the intersection of security research and low-level systems. I focus on understanding how software, networks, and operating systems operate under the hood, and finding where they fail.
             </p>
             <p class="m-0">
               While cybersecurity is my core focus, I spend a lot of time digging into the layers beneath it: Linux internals, networking protocols, systems programming in Rust, and embedded hardware.
@@ -125,7 +125,7 @@ const gallery = GALLERY.map((img) => ({
                   {item.role}
                 </Heading>
                 <p class="m-0 mt-1 text-accent text-small font-mono">
-                  {item.organization} — {item.location}
+                  {item.organization} · {item.location}
                 </p>
               </div>
               <Tag class="self-start sm:self-auto">{item.period}</Tag>
@@ -169,7 +169,7 @@ const gallery = GALLERY.map((img) => ({
               {edu.degree}
             </Heading>
             <p class="m-0 text-accent text-button font-mono">
-              {edu.field} • {edu.institution}
+              {edu.field} · {edu.institution}
             </p>
             {edu.details && (
               <p class="m-0 text-text-muted text-button leading-prose">

@@ -8,7 +8,7 @@ export async function GET(context: APIContext) {
   const visible = entries.filter((e) => e.id !== "test");
 
   return rss({
-    title: `${SITE.name} — Workbench`,
+    title: `${SITE.name} | Workbench`,
     description: SITE.description,
     site: context.site!,
     items: visible.map((entry) => ({

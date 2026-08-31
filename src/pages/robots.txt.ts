@@ -5,6 +5,7 @@ export const GET: APIRoute = async () => {
   const content = `User-agent: *
 Allow: /
 Disallow: /workbench/test
+Disallow: /primitives-showcase
 
 Sitemap: ${SITE.url}/sitemap.xml
 `;

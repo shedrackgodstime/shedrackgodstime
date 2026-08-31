@@ -7,7 +7,7 @@ export const SITE = {
   name: "Shedrack Godstime",
   handle: "kristency",
   url: "https://shedrackgodstime.pages.dev",
-  title: "Shedrack Godstime — Cybersecurity, Systems & Networked Software",
+  title: "Shedrack Godstime | Cybersecurity, Systems & Networked Software",
   tagline: "Cybersecurity, systems, and networked software.",
   headerTagline: "Cybersecurity / Systems / Networks",
   footerTagline: "Cybersecurity, systems, and networked software.",
@@ -23,7 +23,6 @@ export const SITE = {
   email: "shedrackgodstime@outlook.com",
   ogImage: "/og-image.png",
   profileImage: "/profile-picture.webp",
-  themeColor: "#2563eb",
   keywords:
     "Shedrack Godstime, kristency, cybersecurity, security research, systems programming, Rust, networking, Linux, network security, software security",
 };
@@ -57,13 +56,13 @@ export const SOCIALS: SocialLink[] = [
   },
   {
     label: "Bluesky",
-    href: "https://bsky.app/profile/placeholder",
-    username: "@placeholder",
+    href: "https://bsky.app/profile/kristency.bsky.social",
+    username: "@kristency.bsky.social",
   },
   {
     label: "Mastodon",
-    href: "https://mastodon.social/@placeholder",
-    username: "@placeholder",
+    href: "https://mastodon.social/@shedrackgodstime",
+    username: "@shedrackgodstime",
   },
   {
     label: "Email",

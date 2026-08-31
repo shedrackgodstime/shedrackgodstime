@@ -323,7 +323,7 @@ Embedded systems, electronics, radio communication, and the security problems th
 
 Projects, tools, and security research.
 
-Projects, experiments, and investigations documenting what I'm building and trying to understand.
+Experiments, tools, and investigations documenting what I'm building and trying to understand.
 
 [View Workbench →]
 
@@ -345,7 +345,7 @@ Technical Workbench
 
 **Projects, tools, and security research.**
 
-Projects, experiments, and investigations documenting what I'm building and trying to understand.
+Experiments, tools, and investigations documenting what I'm building and trying to understand.
 
 ---
 
@@ -353,7 +353,7 @@ Projects, experiments, and investigations documenting what I'm building and tryi
 
 ### Profile & Background
 
-I'm Shedrack Godstime, based in Abuja, Nigeria. Most of my work sits at the intersection of security research and low-level systems—understanding how software, networks, and operating systems operate under the hood, and finding where they fail.
+I'm Shedrack Godstime, based in Abuja, Nigeria. Most of my work sits at the intersection of security research and low-level systems. I focus on understanding how software, networks, and operating systems operate under the hood, and finding where they fail.
 
 While cybersecurity is my core focus, I spend a lot of time digging into the layers beneath it: Linux internals, networking protocols, systems programming in Rust, and embedded hardware.
 
@@ -367,8 +367,8 @@ The Workbench is where I keep that record.
 
 ### Experience
 
-**IT Trainee — Networking & Systems**
-Setraco Nigeria Limited — Professional Training
+**IT Trainee: Networking & Systems**
+Setraco Nigeria Limited · Professional Training
 
 Hands-on enterprise networking and infrastructure support at Setraco, maintaining day-to-day corporate network operations and hardware reliability.
 
@@ -389,13 +389,13 @@ Self-directed security research, systems programming, and lab environments explo
 
 ### Education
 
-**Higher National Diploma (HND) — Cybersecurity**
-Federal Polytechnic Auchi — Higher Education
+**Higher National Diploma (HND) · Cybersecurity**
+Federal Polytechnic Auchi · Higher Education
 
 Advanced coursework focused on applied cryptography, network defense, digital forensics, threat analysis, and secure systems architecture.
 
-**National Diploma (ND) — Computer Science**
-Federal Polytechnic Auchi — Foundational Education
+**National Diploma (ND) · Computer Science**
+Federal Polytechnic Auchi · Foundational Education
 
 Core computer science curriculum: data structures, algorithms, operating system fundamentals, database design, and software development.
 
@@ -403,13 +403,13 @@ Core computer science curriculum: data structures, algorithms, operating system 
 
 ### Technical Interests
 
-**01 — Cybersecurity** — Security research, offensive security, vulnerability analysis, digital forensics, and network security.
+**01 / Cybersecurity** · Security research, offensive security, vulnerability analysis, digital forensics, and network security.
 
-**02 — Systems** — Rust, Linux, operating systems, systems programming, and low-level software.
+**02 / Systems** · Rust, Linux, operating systems, systems programming, and low-level software.
 
-**03 — Networks** — TCP/IP, protocols, network analysis, routing, DNS, and network infrastructure.
+**03 / Networks** · TCP/IP, protocols, network analysis, routing, DNS, and network infrastructure.
 
-**04 — Hardware** — Embedded systems, microcontrollers, radio communication, electronics, and hardware security.
+**04 / Hardware** · Embedded systems, microcontrollers, radio communication, electronics, and hardware security.
 
 My technical focus shifts as I take on new problems. To see the specific tools, crates, and protocols used across individual projects, explore the Workbench.
 
@@ -422,12 +422,12 @@ My technical focus shifts as I take on new problems. To see the specific tools, 
 Direct channels for technical questions, research collaboration, security disclosures, and professional enquiries. Pick whichever channel you prefer.
 
 **Channels**
-GitHub — @shedrackgodstime →
-X — @kristency_ →
-LinkedIn — in/shedrackgodstime →
-Bluesky — @placeholder →
-Mastodon — @placeholder →
-Email — shedrackgodstime@outlook.com
+GitHub · @shedrackgodstime →
+X · @kristency_ →
+LinkedIn · in/shedrackgodstime →
+Bluesky · @placeholder →
+Mastodon · @placeholder →
+Email · shedrackgodstime@outlook.com
 
 **Best For**
 Research collaboration
@@ -442,7 +442,7 @@ ABUJA, NIGERIA · GLOBAL
 ## Metadata / SEO
 
 **Title**
-Shedrack Godstime — Cybersecurity, Systems & Networked Software
+Shedrack Godstime | Cybersecurity, Systems & Networked Software
 
 **Description**
 Shedrack Godstime is a cybersecurity practitioner and systems builder focused on understanding how systems work, how they fail, and how to secure them. Work spans security research, systems programming in Rust, Linux, and networking.

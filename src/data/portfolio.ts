@@ -142,7 +142,7 @@ export const technicalInterests: TechnicalInterest[] = [
 
 export const experienceTimeline: ExperienceItem[] = [
   {
-    role: "IT Trainee — Networking & Systems",
+    role: "IT Trainee: Networking & Systems",
     organization: "Setraco Nigeria Limited",
     location: "Nigeria",
     period: "Professional Training",
