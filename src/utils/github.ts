@@ -175,12 +175,14 @@ export async function loadWorkbench(
     ...explorationDirs.map((dir) => fetchEntry("exploration", dir, sha, token)),
   ]);
 
-  // Separate entries from violations
+  // Separate entries from violations, skipping drafts
   const entries: WorkbenchEntry[] = [];
   for (const result of results) {
     if ("reason" in result) {
       violations.push(result);
       console.warn(`[workbench] SKIP: ${result.reason}`);
+    } else if (result.data.status === "draft") {
+      console.info(`[workbench] SKIP draft: ${result.id}`);
     } else {
       entries.push(result);
       sources.push(result.source);

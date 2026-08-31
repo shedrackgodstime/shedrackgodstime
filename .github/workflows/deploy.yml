@@ -8,6 +8,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - workbench_updated
 
 jobs:
   build-and-deploy:
@@ -34,7 +37,7 @@ jobs:
         run: bun run build
 
       - name: Deploy to Cloudflare Pages
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch') && github.ref == 'refs/heads/main'
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
