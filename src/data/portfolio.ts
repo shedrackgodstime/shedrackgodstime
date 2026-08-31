@@ -162,7 +162,7 @@ export const experienceTimeline: ExperienceItem[] = [
     description:
       "Self-directed security research, systems programming, and lab environments exploring how protocols, operating systems, and edge devices behave.",
     highlights: [
-      "Developing irosh, a peer-to-peer encrypted remote access tool written in Rust.",
+      "Building CLI utilities, systems tooling, and network applications primarily in Rust and Python.",
       "Running offensive security labs, vulnerability assessments, and web application audits.",
       "Investigating edge communication protocols including LoRa, ESP32 microcontrollers, and RF links.",
     ],

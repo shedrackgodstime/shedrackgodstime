@@ -19,6 +19,7 @@ ${SITE.description}
 ## Pages
 
 ${nav}
+- [Workbench Contract](${SITE.url}/workbench/contract)
 
 ## Contact
 

@@ -271,7 +271,7 @@ const gallery = GALLERY.map((img) => ({
   </div>
 </div>
 
-<script define:vars={{ gallery }}>
+<script is:inline define:vars={{ gallery }}>
   const lightbox = document.getElementById("portrait-lightbox");
   const closeBtn = document.getElementById("portrait-close");
   const prevBtn = document.getElementById("portrait-prev");

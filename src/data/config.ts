@@ -23,6 +23,7 @@ export const SITE = {
   email: "shedrackgodstime@outlook.com",
   ogImage: "/og-image.png",
   profileImage: "/profile-picture.webp",
+  themeColor: "#2563eb",
   keywords:
     "Shedrack Godstime, kristency, cybersecurity, security research, systems programming, Rust, networking, Linux, network security, software security",
 };

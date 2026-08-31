@@ -25,7 +25,7 @@ function createGitHubLoader(): Loader {
 
       // Local fixtures are dev/offline-only and must never reach a production
       // build (CI runs a plain online build). In dev we load BOTH fixtures and
-      // the GitHub feed so e.g. test + irosh coexist locally; offline builds
+      // the GitHub feed so e.g. test + remote entries coexist locally; offline builds
       // stay fixture-only and online builds stay GitHub-only.
       if (offline) {
         context.logger.info("OFFLINE mode — using local fixtures");
