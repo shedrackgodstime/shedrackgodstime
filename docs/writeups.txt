@@ -178,13 +178,7 @@ selection of projects, tools, and security research.
 
 Projects, experiments, and investigations documenting what I'm building and trying to understand.
 
-irosh
-
-Active
-
-A Rust-based exploration of secure peer-to-peer remote access and data transfer.
-
-"Rust" "P2P" "SSH" "Networking"
+......
 
 View Workbench →
 
@@ -301,11 +295,11 @@ Shedrack Godstime
 
 Cybersecurity, systems, and networked software.
 
-I build things, investigate how they work, and document what I learn.
+A security practitioner and systems builder exploring low-level software, networks, and infrastructure through labs, research, and hands-on tooling.
 
 [Explore Workbench] [About Me]
 
-Nigeria · WAT
+Current mode: Active technical practice · ABUJA, NIGERIA · GLOBAL
 
 ---
 
@@ -327,23 +321,19 @@ Embedded systems, electronics, radio communication, and the security problems th
 
 ### Featured Workbench
 
-Selected work from the bench.
+Projects, tools, and security research.
 
 Projects, experiments, and investigations documenting what I'm building and trying to understand.
-
-**irosh** — Active
-
-A Rust-based exploration of secure peer-to-peer remote access and data transfer.
-
-`Rust` `P2P` `SSH` `Networking`
 
 [View Workbench →]
 
 ---
 
-### Behind the Work
+### Next Steps
 
-Explore the background behind the work, or get in touch to start a conversation.
+**Background, experience, and direct contact.**
+
+Read about my background and education on the About page, or reach out directly for research collaboration and technical discussion.
 
 [About Me] [Get In Touch →]
 
@@ -353,9 +343,9 @@ Explore the background behind the work, or get in touch to start a conversation.
 
 Technical Workbench
 
-**Projects & Explorations**
+**Projects, tools, and security research.**
 
-A collection of projects, experiments, and investigations documenting the things I build, explore, and work to understand.
+Projects, experiments, and investigations documenting what I'm building and trying to understand.
 
 ---
 
@@ -371,7 +361,7 @@ Cybersecurity is my primary field, but my interests extend into the systems bene
 
 ### Technical Practice
 
-I learn primarily through building and investigation. Some work becomes a project; other work becomes an experiment, research, or a technical note.
+I learn primarily through building and investigation. Not everything I work on becomes a full project — some efforts stay as quick experiments, deep-dives into specific problems, or short technical notes.
 
 The Workbench is where I document that process — the things I've built, the systems I've explored, and the technical questions I'm working through.
 
@@ -380,46 +370,42 @@ The Workbench is where I document that process — the things I've built, the sy
 ### Experience
 
 **IT Trainee — Networking & Systems**
-Setraco Nigeria Limited
+Setraco Nigeria Limited — Professional Training
 
-Worked on enterprise networking and IT infrastructure: network diagnostics, IP address management, router and switch configuration, and Windows/Linux troubleshooting. Observed network operations and documented technical issues.
+Worked on enterprise networking and IT infrastructure: network diagnostics, IP address management, router and switch configuration, and Windows/Linux system troubleshooting. Observed network operations and documented technical issues.
 
 **Independent Technical Practice**
-Security · Systems · Networking · Open Source
+Security · Systems · Networking · Open Source — Ongoing
 
-I independently build software and conduct security and systems experiments outside formal employment. My work includes Rust-based systems tooling, network and protocol exploration, security labs, and hardware-related research. Selected work and technical findings are documented in the Workbench.
+Independently building software and conducting security and systems investigations outside formal employment. Work includes Rust systems tooling, network and protocol exploration, security labs, and hardware research. Selected work and technical findings are documented in the Workbench.
 
 ---
 
 ### Education
 
-**Higher National Diploma — Cybersecurity**
-Federal Polytechnic Auchi
+**Higher National Diploma (HND) — Cybersecurity**
+Federal Polytechnic Auchi — Higher Education
 
-Focused on cybersecurity, networking, ethical hacking, digital forensics, cyber resilience, cryptography, and security of information systems.
+Specialized study in network security, cryptography, defensive posture, digital forensics, ethical hacking, and cyber resilience.
 
-**National Diploma — Computer Science**
-Federal Polytechnic Auchi
+**National Diploma (ND) — Computer Science**
+Federal Polytechnic Auchi — Foundational Education
 
-Studied foundational computer science including programming, algorithms, data structures, operating systems, databases, and networking.
+Foundational computer science curriculum: programming, algorithms, data structures, operating systems, databases, and networking fundamentals.
 
 ---
 
 ### Technical Interests
 
-**Cybersecurity** — Security research, offensive security, vulnerability analysis, digital forensics, and network security.
+**01 — Cybersecurity** — Security research, offensive security, vulnerability analysis, digital forensics, and network security.
 
-**Systems** — Rust, Linux, operating systems, systems programming, and low-level software.
+**02 — Systems** — Rust, Linux, operating systems, systems programming, and low-level software.
 
-**Networks** — TCP/IP, protocols, network analysis, routing, DNS, and network infrastructure.
+**03 — Networks** — TCP/IP, protocols, network analysis, routing, DNS, and network infrastructure.
 
-**Hardware** — Embedded systems, microcontrollers, radio communication, electronics, and hardware security.
+**04 — Hardware** — Embedded systems, microcontrollers, radio communication, electronics, and hardware security.
 
-These interests change as I encounter new problems worth understanding.
-
-*(The old "Credentials & Practice" section is removed — it just restated Experience and Education you'd already read two scrolls up. For tools/tech behind individual projects, that line now belongs at the bottom of the Education block:)*
-
-For the tools and technologies behind individual projects, see the relevant Workbench entries.
+These interests evolve as I encounter new problems worth understanding. For the specific tools, libraries, and technologies behind individual projects, see the relevant Workbench entries.
 
 ---
 
@@ -427,7 +413,7 @@ For the tools and technologies behind individual projects, see the relevant Work
 
 ### Get in Touch
 
-For technical questions, research, collaboration, security disclosures, or professional enquiries.
+Direct channels for technical questions, research collaboration, security disclosures, and professional enquiries. Pick whichever channel you prefer.
 
 **Channels**
 GitHub — @shedrackgodstime →
@@ -439,11 +425,11 @@ Email — shedrackgodstime@outlook.com
 
 **Best For**
 Research collaboration
-Security disclosures
+Coordinated security disclosures
 Technical questions about the Workbench
 Professional enquiries
 
-Nigeria · WAT
+ABUJA, NIGERIA · GLOBAL
 
 ---
 
@@ -453,15 +439,15 @@ Nigeria · WAT
 Shedrack Godstime — Cybersecurity, Systems & Networked Software
 
 **Description**
-Shedrack Godstime is a cybersecurity practitioner and systems/software developer focused on understanding how systems work, how they fail, and how they can be secured. His work spans cybersecurity, systems programming, networking, Linux, software, and technical research.
+Shedrack Godstime is a cybersecurity practitioner and systems builder focused on understanding how systems work, how they fail, and how to secure them. Work spans security research, systems programming in Rust, Linux, and networking.
 
 **Short Description**
-Shedrack Godstime is a cybersecurity practitioner and systems/software developer exploring security, systems, networking, and the technology beneath them.
+Shedrack Godstime is a cybersecurity practitioner and systems builder exploring security, systems, networking, and the technology beneath them.
 
 **Tagline**
 Cybersecurity, systems, and networked software.
 
 **Keywords**
-Shedrack Godstime, Kristency, cybersecurity, security research, systems programming, Rust, networking, Linux, network security, software security
+Shedrack Godstime, kristency, cybersecurity, security research, systems programming, Rust, networking, Linux, network security, software security
 
 

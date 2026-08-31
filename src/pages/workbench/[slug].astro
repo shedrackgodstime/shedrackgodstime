@@ -28,6 +28,7 @@ import Lede from "../../components/ui/Lede.astro";
 import Tag from "../../components/ui/Tag.astro";
 import StatusDot from "../../components/ui/StatusDot.astro";
 import { getCollection } from "astro:content";
+import { SITE } from "../../data/config";
 
 export async function getStaticPaths() {
   const entries = await getCollection("workbench");
@@ -58,11 +59,22 @@ const meta = entry.data.updated
     ? `Started: ${entry.data.started}`
     : "";
 const robots = entry.id === "test" ? "noindex, nofollow" : undefined;
+const entryKeywords = [
+  entry.data.title,
+  ...entry.data.tags,
+  entry.data.type,
+  "workbench",
+  SITE.name,
+  SITE.handle,
+  "cybersecurity",
+  "systems programming",
+].join(", ");
 ---
 
 <Layout
   title={entry.data.title}
   description={entry.data.summary || undefined}
+  keywords={entryKeywords}
   robots={robots}
 >
   <PageHeader variant="slug">
@@ -72,7 +84,7 @@ const robots = entry.id === "test" ? "noindex, nofollow" : undefined;
         class="inline-flex items-center gap-1.5 text-accent text-small font-mono mb-6 hover:underline"
       >
         <span aria-hidden="true">←</span>
-        Back to Workbench Catalog
+        Back to Workbench
       </a>
 
       <div class="flex items-center flex-wrap gap-2 mb-4">

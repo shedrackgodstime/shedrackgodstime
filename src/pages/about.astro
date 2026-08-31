@@ -16,15 +16,13 @@ import Heading from "../components/ui/Heading.astro";
 import Lede from "../components/ui/Lede.astro";
 import StatusDot from "../components/ui/StatusDot.astro";
 import Tag from "../components/ui/Tag.astro";
+import Button from "../components/ui/Button.astro";
 import { SITE, GALLERY } from "../data/config";
 import {
-  credentials,
   experienceTimeline,
   educationTimeline,
-  skillCategories,
+  technicalInterests,
 } from "../data/portfolio";
-
-const toolingSkills = skillCategories.flatMap((cat) => cat.skills);
 
 const gallery = GALLERY.map((img) => ({
   src: img.src,
@@ -35,7 +33,8 @@ const gallery = GALLERY.map((img) => ({
 
 <Layout
   title="About"
-  description="Background, experience, education, credentials, and the technical practice behind the work."
+  description="Background, experience, education, and the technical practice behind the work."
+  keywords="Shedrack Godstime, kristency, cybersecurity, systems developer, background, experience, education, Setraco Nigeria, Federal Polytechnic Auchi, security research, Linux, Rust, hardware edge"
 >
   <PageHeader>
     <Container>
@@ -85,20 +84,21 @@ const gallery = GALLERY.map((img) => ({
               {SITE.name}
             </Heading>
             <p class="m-0 text-accent text-button font-mono">
-              Security Researcher &amp; Systems Programmer
+              {SITE.tagline}
             </p>
           </div>
           <p class="m-0 text-text-faint text-small font-mono">
-            Nigeria (WAT) • HND Cybersecurity, Federal Polytechnic Auchi
+            Nigeria (WAT) • Abuja • Global
           </p>
-          <div class="grid gap-3 max-w-prose text-text-muted text-subtitle-responsive leading-prose">
+          <div class="grid gap-3.5 max-w-prose text-text-muted text-subtitle-responsive leading-prose">
             <p class="m-0">
-              Brief professional introduction — replace with your own
-              background summary.
+              I'm Shedrack Godstime, a cybersecurity practitioner and systems/software developer from Nigeria. My work is centered on understanding how systems work and where they break. I build software, explore networks and protocols, investigate security problems, and document what I find along the way.
             </p>
             <p class="m-0">
-              Second paragraph on direction, interests, and how the work
-              connects. Replace with your own text.
+              Cybersecurity is my primary field, but my interests extend into the systems beneath it — Linux, systems programming, networking, infrastructure, electronics, and hardware.
+            </p>
+            <p class="m-0">
+              I learn primarily through building and investigation. Not everything I work on becomes a full project — some efforts stay as quick experiments, deep-dives into specific problems, or short technical notes. The <a href="/workbench" class="text-accent hover:underline">Workbench</a> is where I document that process — the things I've built, the systems I've explored, and the technical questions I'm working through.
             </p>
           </div>
         </div>
@@ -182,41 +182,54 @@ const gallery = GALLERY.map((img) => ({
     </Container>
   </Section>
 
-  <!-- Credentials & Tooling -->
+  <!-- Technical Interests -->
   <Section variant="soft">
     <Container>
       <div class="max-w-prose mb-6">
-        <Kicker mb="xs">Credentials</Kicker>
+        <Kicker mb="xs">Focus Domains</Kicker>
         <Heading level={2} mb="none">
-          At a Glance
+          Technical Interests
         </Heading>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 hairline-grid">
-        {credentials.map((cred) => (
-          <article class="p-6 bg-surface-raised grid gap-2 content-start min-w-0">
-            <span class="text-accent text-micro font-mono uppercase">
-              {cred.label}
+      <div class="hairline-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {technicalInterests.map((interest) => (
+          <article class="grid gap-2.5 content-start p-6 bg-surface-raised min-w-0">
+            <span class="text-accent text-kicker font-mono">
+              {interest.number}
             </span>
+            <Heading level={3} as={4} mb="none">
+              {interest.name}
+            </Heading>
             <p class="m-0 text-text-muted text-button leading-prose">
-              {cred.detail}
+              {interest.description}
             </p>
           </article>
         ))}
       </div>
 
-      <!-- Tooling Range -->
-      <div class="mt-8 grid gap-3">
-        <Heading level={3} as={4} mb="none" class="font-mono">
-          Tooling Range
-        </Heading>
-        <ul class="flex flex-wrap gap-2 p-0 m-0 list-none">
-          {toolingSkills.map((skill) => (
-            <li>
-              <Tag>{skill}</Tag>
-            </li>
-          ))}
-        </ul>
+      <p class="m-0 mt-6 text-text-faint text-small font-mono">
+        These interests evolve as I encounter new problems worth understanding. For the specific tools, libraries, and technologies behind individual projects, see the relevant <a href="/workbench" class="text-accent hover:underline">Workbench entries</a>.
+      </p>
+    </Container>
+  </Section>
+
+  <!-- Bridge to Workbench & Contact -->
+  <Section divider={false}>
+    <Container>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 sm:p-8 bg-surface-raised border border-line rounded-card">
+        <div class="grid gap-1.5 max-w-prose">
+          <Heading level={3} as={4} mb="none">
+            Explore the work or start a conversation
+          </Heading>
+          <p class="m-0 text-text-muted text-small leading-body">
+            Browse project records and investigations in the Workbench, or get in touch directly.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 shrink-0">
+          <Button href="/workbench">Explore Workbench →</Button>
+          <Button href="/contact" variant="ghost" mono>Get In Touch</Button>
+        </div>
       </div>
     </Container>
   </Section>

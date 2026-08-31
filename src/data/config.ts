@@ -5,19 +5,27 @@
 
 export const SITE = {
   name: "Shedrack Godstime",
+  handle: "kristency",
   url: "https://shedrackgodstime.pages.dev",
-  tagline:
-    "A security practitioner learning through research and hands-on building.",
+  title: "Shedrack Godstime — Cybersecurity, Systems & Networked Software",
+  tagline: "Cybersecurity, systems, and networked software.",
   headerTagline: "Cybersecurity / Systems / Networks",
   footerTagline: "Cybersecurity, systems, and networked software.",
+  jobTitle: "Security Practitioner & Systems Builder",
   description:
-    "Cybersecurity-focused technical builder working across systems, networking, and security research.",
+    "Shedrack Godstime is a cybersecurity practitioner and systems builder focused on understanding how systems work, how they fail, and how to secure them. Work spans security research, systems programming in Rust, Linux, and networking.",
+  shortDescription:
+    "Shedrack Godstime is a cybersecurity practitioner and systems builder exploring security, systems, networking, and the technology beneath them.",
+  currentMode: "Active technical practice",
+  location: "Abuja, Nigeria",
+  locationTag: "ABUJA, NIGERIA · GLOBAL",
+  timezone: "Nigeria (WAT)",
   email: "shedrackgodstime@outlook.com",
   ogImage: "/og-image.png",
-  profileImage: "/profile-photo.jpg",
+  profileImage: "/profile-picture.webp",
   themeColor: "#2563eb",
   keywords:
-    "Shedrack Godstime, cybersecurity, systems programmer, Rust, P2P networking, security research",
+    "Shedrack Godstime, kristency, cybersecurity, security research, systems programming, Rust, networking, Linux, network security, software security",
 };
 
 export const SEO = {

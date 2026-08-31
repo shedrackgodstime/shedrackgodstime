@@ -17,20 +17,21 @@ import Heading from "../components/ui/Heading.astro";
 import Lede from "../components/ui/Lede.astro";
 import StatusDot from "../components/ui/StatusDot.astro";
 import SocialIcon from "../components/ui/SocialIcon.astro";
-import { SOCIALS } from "../data/config";
+import { SITE, SOCIALS } from "../data/config";
 ---
 
 <Layout
   title="Contact"
   description="Direct channels for research collaboration, security disclosures, and technical questions. No contact form, no newsletter, no tracking."
+  keywords="Shedrack Godstime, kristency, contact, email, security disclosures, research collaboration, GitHub, X, LinkedIn, Abuja, Nigeria"
 >
   <PageHeader>
     <Container>
       <Kicker>Contact</Kicker>
       <Heading level={1} mb="md">Get in touch</Heading>
       <Lede>
-        Research collaboration, security disclosures, and technical questions.
-        No contact form — pick whichever channel below is easiest.
+        Direct channels for technical questions, research collaboration, security
+        disclosures, and professional enquiries. Pick whichever channel you prefer.
       </Lede>
     </Container>
   </PageHeader>
@@ -96,9 +97,9 @@ import { SOCIALS } from "../data/config";
           <Kicker mb="xs">Best for</Kicker>
           <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 m-0 p-0 list-none text-text-muted text-regular max-w-prose-wide">
             <li>Research collaboration</li>
-            <li>Security disclosures (coordinated)</li>
-            <li>Technical questions on the workbench</li>
-            <li>Professional inquiries</li>
+            <li>Coordinated security disclosures</li>
+            <li>Technical questions about the Workbench</li>
+            <li>Professional enquiries</li>
           </ul>
         </div>
 
@@ -106,7 +107,7 @@ import { SOCIALS } from "../data/config";
              all columns on lg+ so it sits as a full-width footer note. -->
         <div class="lg:col-span-3 flex items-center gap-2 border border-line bg-scrim-50 text-text-faint text-small font-mono p-4">
           <StatusDot />
-          <span>Nigeria / WAT · usually responsive on weekdays</span>
+          <span>{SITE.locationTag}</span>
         </div>
 
       </div>

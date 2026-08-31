@@ -32,19 +32,32 @@ const projectCount = sorted.filter((e) => e.data.type === "project").length;
 const explorationCount = sorted.filter(
   (e) => e.data.type === "exploration",
 ).length;
+
+const workbenchTitles = sorted.map((e) => e.data.title);
+const allTags = [...new Set(sorted.flatMap((e) => e.data.tags))];
+const catalogKeywords = [
+  SITE.keywords,
+  ...workbenchTitles,
+  ...allTags,
+  "workbench",
+  "technical explorations",
+].join(", ");
 ---
 
 <Layout
   title="Workbench"
   description={`Technical record behind ${SITE.name}'s portfolio: project narratives, research notes, and protocol investigations.`}
+  keywords={catalogKeywords}
 >
   <PageHeader>
     <Container>
       <Kicker>Technical Workbench</Kicker>
-      <Heading level={1} mb="md">Projects &amp; Explorations</Heading>
+      <Heading level={1} mb="md">
+        Projects, tools, and security research.
+      </Heading>
       <Lede>
-        The technical record behind the portfolio: project narratives,
-        investigations, protocol research, and case-study material.
+        Projects, experiments, and investigations documenting what I'm building
+        and trying to understand.
       </Lede>
     </Container>
   </PageHeader>
@@ -59,9 +72,6 @@ const explorationCount = sorted.filter(
           <Tag variant="filter">Projects ({projectCount})</Tag>
           <Tag variant="filter">Explorations ({explorationCount})</Tag>
         </div>
-        <span class="text-text-faint text-kicker font-mono">
-          Source: workbench repository
-        </span>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

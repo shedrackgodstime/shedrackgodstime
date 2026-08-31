@@ -69,22 +69,26 @@ export const technicalAreas: TechnicalArea[] = [
   {
     number: "01",
     name: "Security",
-    description: "Web application security, network security, offensive labs, hardening, and threat-aware engineering.",
+    description:
+      "Cybersecurity research, security testing, network security, and understanding how systems fail.",
   },
   {
     number: "02",
     name: "Systems",
-    description: "Rust, Linux, CLI tools, low-level software, operating system behavior, and practical reliability.",
+    description:
+      "Rust, Linux, systems programming, CLI tools, and exploring software closer to the machine.",
   },
   {
     number: "03",
     name: "Networks",
-    description: "Protocols, NAT traversal, packet analysis, distributed systems, remote access, and infrastructure.",
+    description:
+      "Protocols, network analysis, distributed systems, remote access, and the infrastructure connecting them.",
   },
   {
     number: "04",
-    name: "Hardware Edge",
-    description: "LoRa, ESP32, drones, satellites, radio systems, embedded concepts, and security implications.",
+    name: "Hardware",
+    description:
+      "Embedded systems, electronics, radio communication, and the security problems that emerge at the edge.",
   },
 ];
 
@@ -103,6 +107,39 @@ export const credentials: Credential[] = [
   },
 ];
 
+export interface TechnicalInterest {
+  number: string;
+  name: string;
+  description: string;
+}
+
+export const technicalInterests: TechnicalInterest[] = [
+  {
+    number: "01",
+    name: "Cybersecurity",
+    description:
+      "Security research, offensive security, vulnerability analysis, digital forensics, and network security.",
+  },
+  {
+    number: "02",
+    name: "Systems",
+    description:
+      "Rust, Linux, operating systems, systems programming, and low-level software.",
+  },
+  {
+    number: "03",
+    name: "Networks",
+    description:
+      "TCP/IP, protocols, network analysis, routing, DNS, and network infrastructure.",
+  },
+  {
+    number: "04",
+    name: "Hardware",
+    description:
+      "Embedded systems, microcontrollers, radio communication, electronics, and hardware security.",
+  },
+];
+
 export const experienceTimeline: ExperienceItem[] = [
   {
     role: "IT Trainee — Networking & Systems",
@@ -110,7 +147,7 @@ export const experienceTimeline: ExperienceItem[] = [
     location: "Nigeria",
     period: "Professional Training",
     description:
-      "Hands-on technical experience in enterprise networking, system administration, network troubleshooting, and security monitoring across corporate infrastructure.",
+      "Worked on enterprise networking and IT infrastructure: network diagnostics, IP address management, router and switch configuration, and Windows/Linux system troubleshooting. Observed network operations and documented technical issues.",
     highlights: [
       "Assisted with local network diagnostics, router/switch configuration, and IP address management.",
       "Supported workstation setup, Linux/Windows system troubleshooting, and user security permissions.",
@@ -118,12 +155,12 @@ export const experienceTimeline: ExperienceItem[] = [
     ],
   },
   {
-    role: "Independent Security & Systems Researcher",
-    organization: "Open Source & Security Labs",
+    role: "Independent Technical Practice",
+    organization: "Security · Systems · Networking · Open Source",
     location: "Remote / Nigeria",
     period: "Ongoing",
     description:
-      "Developing systems programming tools in Rust, conducting protocol explorations, and documenting technical findings in the public Workbench.",
+      "Independently building software and conducting security and systems investigations outside formal employment. Work includes Rust systems tooling, network and protocol exploration, security labs, and hardware research.",
     highlights: [
       "Architected irosh (peer-to-peer encrypted remote management in Rust).",
       "Conducted offensive security lab exercises, vulnerability assessments, and web application audits.",
@@ -140,7 +177,7 @@ export const educationTimeline: EducationItem[] = [
     location: "Auchi, Edo State, Nigeria",
     period: "Higher Education",
     details:
-      "Specialized study in network security, cryptography, defensive posture, digital forensics, and ethical hacking.",
+      "Specialized study in network security, cryptography, defensive posture, digital forensics, ethical hacking, and cyber resilience.",
   },
   {
     degree: "National Diploma (ND)",
@@ -149,7 +186,7 @@ export const educationTimeline: EducationItem[] = [
     location: "Auchi, Edo State, Nigeria",
     period: "Foundational Education",
     details:
-      "Foundational computer science curriculum: data structures, algorithms, operating systems, networking fundamentals, and software development.",
+      "Foundational computer science curriculum: programming, algorithms, data structures, operating systems, databases, and networking fundamentals.",
   },
 ];
 

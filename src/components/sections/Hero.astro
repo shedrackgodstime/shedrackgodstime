@@ -34,17 +34,17 @@ import { SITE } from "../../data/config";
     <p
       class="max-w-lede-hero m-0 mb-7.5 text-text-muted text-body-hero leading-relaxed"
     >
-      I build tools, investigate how systems behave, and document the
-      technical work behind them.
+      A security practitioner and systems builder exploring low-level software,
+      networks, and infrastructure through labs, research, and hands-on tooling.
     </p>
 
     <div
       class="flex flex-col xs:flex-row flex-wrap gap-3"
       aria-label="Primary actions"
     >
-      <Button href="/workbench" class="w-full xs:w-auto">Explore workbench</Button>
+      <Button href="/workbench" class="w-full xs:w-auto">Explore Workbench</Button>
       <Button href="/about" variant="ghost" class="w-full xs:w-auto">
-        View background
+        About Me
       </Button>
     </div>
   </Container>
@@ -58,8 +58,8 @@ import { SITE } from "../../data/config";
       <span>Current mode</span>
     </div>
     <strong class="text-text font-sans text-regular leading-normal">
-      Building a unified technical portfolio
+      {SITE.currentMode}
     </strong>
-    <small class="text-micro text-text-faint">Nigeria / WAT</small>
+    <small class="text-micro text-text-faint">{SITE.locationTag}</small>
   </aside>
 </section>

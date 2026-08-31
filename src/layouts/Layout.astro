@@ -37,22 +37,32 @@ interface Props {
   robots?: string;
   /** Social preview image; falls back to SITE.ogImage. */
   ogImage?: string;
+  /** Page-specific keywords; falls back to SITE.keywords. */
+  keywords?: string;
 }
 
-const { title, description = SITE.description, robots, ogImage = SITE.ogImage } =
-  Astro.props;
+const {
+  title,
+  description = SITE.description,
+  robots,
+  ogImage = SITE.ogImage,
+  keywords = SITE.keywords,
+} = Astro.props;
 
-const pageTitle = title ? `${title} — ${SITE.name}` : `${SITE.name} | ${SITE.tagline}`;
+const pageTitle = title ? `${title} — ${SITE.name}` : SITE.title;
 const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 const ogImageURL = new URL(ogImage, SITE.url);
+const twitterHandle = SOCIALS.find((s) => s.label === "X")?.username ?? "@kristency_";
 
 const jsonLdPerson = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
   name: SITE.name,
+  alternateName: SITE.handle,
   url: SITE.url,
   email: SITE.email,
-  jobTitle: "Security Researcher / Systems Programmer",
+  jobTitle: SITE.jobTitle,
+  description: SITE.shortDescription,
   sameAs: SOCIALS.filter((s) => s.href.startsWith("http")).map((s) => s.href),
 });
 
@@ -90,6 +100,8 @@ ${cssVarsBlock(paletteDark)}
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={SITE.name} />
+    <meta name="keywords" content={keywords} />
     {robots && <meta name="robots" content={robots} />}
     <meta name="theme-color" content={SITE.themeColor} />
 
@@ -106,6 +118,8 @@ ${cssVarsBlock(paletteDark)}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
@@ -115,8 +129,8 @@ ${cssVarsBlock(paletteDark)}
     <meta name="msvalidate.01" content={SEO.bingSiteVerificationId} />
 
     <!-- JSON-LD structured data -->
-    <script type="application/ld+json" set:html={jsonLdPerson} />
-    <script type="application/ld+json" set:html={jsonLdWebsite} />
+    <script type="application/ld+json" is:inline set:html={jsonLdPerson} />
+    <script type="application/ld+json" is:inline set:html={jsonLdWebsite} />
 
     <!--
       No-flash theme bootstrap. Runs inline before paint and before any
