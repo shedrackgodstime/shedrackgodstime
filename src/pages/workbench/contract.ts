@@ -133,7 +133,7 @@ source: "https://github.com/user/repo"
 
 | Status | Meaning | Live Portfolio Behavior | Auto-Trigger on Push? |
 | :--- | :--- | :--- | :--- |
-| \`draft\` | Work-in-progress, raw notes, or private draft | **Hidden.** Never built or shown on the live site. | **No.** Ignored by GitHub Actions. |
+| \`draft\` | Work-in-progress, unlisted notes, or draft writeup | **Hidden.** Excluded from live site (unpublishes page if previously live). | **Yes.** Triggers build to synchronize and remove page. |
 | \`active\` | Ongoing project, lab, or active investigation | **Published.** Visible in catalog, RSS, and sitemap. | **Yes.** Automatically triggers build. |
 | \`completed\` | Stable release, finished crate, or completed paper | **Published.** Visible in catalog, RSS, and sitemap. | **Yes.** Automatically triggers build. |
 | \`archived\` | Historical reference or past experiment | **Published.** Visible with an archived status badge. | **Yes.** Automatically triggers build. |
