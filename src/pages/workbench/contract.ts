@@ -33,8 +33,9 @@ When given this contract inside any project or research codebase:
      Wait for their direction before generating the updated entry.
    - **If the project/topic is not listed:** Analyze the current repository structure, code, configuration files, and protocols to draft a comprehensive new record.
 
-2. **Inspect Existing Records as Reference:**
-   If \`~/Projects/workbench/\` is accessible on the local filesystem, inspect existing \`projects/*/README.md\` or \`explorations/*/README.md\` entries as reference for tone, technical depth, and diagram structure.
+2. **Inspect Existing Records & Syntax Reference:**
+   - **Local Records:** If \`~/Projects/workbench/\` is accessible on the local filesystem, inspect existing \`projects/*/README.md\` or \`explorations/*/README.md\` entries as reference for tone, technical depth, and structure.
+   - **Live Syntax & Diagram Reference:** Refer to \`${SITE.url}/workbench/test\` for comprehensive live examples of every supported Mermaid diagram type (sequence, flowcharts, C4, architecture, git graphs, timelines), dual-theme code blocks, and formatting rules.
 
 3. **Determine the Entry Type:**
    - \`project\`: If the primary outcome is a built software artifact, tool, library, or prototype.
@@ -117,7 +118,7 @@ source: "https://github.com/user/repo"
 
 - **Headings:** Use structured sections (\`## Technical Overview\`, \`## Architecture\`, \`## Key Findings\`, \`## Trade-offs\`).
 - **Code Blocks:** Always include language specifiers (\`\`\`rust, \`\`\`bash, \`\`\`toml).
-- **Mermaid Diagrams:** Fully supported at build time with theme support. Use standard \`\`\`mermaid syntax.
+- **Mermaid Diagrams:** Fully supported at build time with theme support and fullscreen expansion. See \`${SITE.url}/workbench/test\` for comprehensive examples across all supported diagram types.
 - **Images:** Relative paths (e.g., \`![Architecture Diagram](./architecture.png)\`) are automatically resolved to raw GitHub CDN URLs at build time.
 - **Tone:** Grounded, practical engineering narrative. Explain design decisions, protocols, failure points, and lessons learned.
 
