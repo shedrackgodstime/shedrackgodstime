@@ -67,6 +67,21 @@ ${catalogList}
 
 ---
 
+## The Two-Sided Publishing Contract
+
+The architecture separates the content source from the presentation engine:
+
+1. **Source Repository (\`shedrackgodstime/workbench\`):**
+   - Holds the technical records, architectural decisions, and lab logs.
+   - Pushes to \`projects/**/README.md\` or \`explorations/**/README.md\` automatically inspect the file status and notify the portfolio.
+2. **Presentation Engine (\`shedrackgodstime/shedrackgodstime\`):**
+   - At build time, fetches entries from the Workbench repository.
+   - Filters out all entries with \`status: draft\` so private work is never published.
+   - Automatically rewrites relative image paths (e.g. \`./arch.png\`) to raw GitHub CDN URLs.
+   - Compiles Mermaid diagrams to zero-runtime static SVGs.
+
+---
+
 ## File Hierarchy
 
 \`\`\`txt
@@ -111,6 +126,17 @@ source: "https://github.com/user/repo"
 | \`updated\`  | no       | string   | \`YYYY-MM\` format. Last update. Overrides \`started\` for sitemap \`lastmod\` and RSS dates  |
 | \`context\`  | no       | string   | Longer description. Shown as "Record Context" callout box                                     |
 | \`source\`   | no       | string   | Full repository URL. Shown as "Source ↗" link chip                                            |
+
+---
+
+### Status Lifecycle & Behavior
+
+| Status | Meaning | Live Portfolio Behavior | Auto-Trigger on Push? |
+| :--- | :--- | :--- | :--- |
+| \`draft\` | Work-in-progress, raw notes, or private draft | **Hidden.** Never built or shown on the live site. | **No.** Ignored by GitHub Actions. |
+| \`active\` | Ongoing project, lab, or active investigation | **Published.** Visible in catalog, RSS, and sitemap. | **Yes.** Automatically triggers build. |
+| \`completed\` | Stable release, finished crate, or completed paper | **Published.** Visible in catalog, RSS, and sitemap. | **Yes.** Automatically triggers build. |
+| \`archived\` | Historical reference or past experiment | **Published.** Visible with an archived status badge. | **Yes.** Automatically triggers build. |
 
 ---
 
