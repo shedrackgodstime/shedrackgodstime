@@ -23,19 +23,17 @@ function createGitHubLoader(): Loader {
       const offline = process.env.OFFLINE === "1";
       const isDev = import.meta.env.DEV;
 
-      // Local fixtures are dev/offline-only and must never reach a production
-      // build (CI runs a plain online build). In dev we load BOTH fixtures and
-      // the GitHub feed so e.g. test + remote entries coexist locally; offline builds
-      // stay fixture-only and online builds stay GitHub-only.
-      if (offline) {
-        context.logger.info("OFFLINE mode — using local fixtures");
-        const localLoader = glob({
-          pattern: "**/*.md",
-          base: "./contents",
-        });
-        await localLoader.load(context);
-        if (!isDev) return;
-        context.logger.info("DEV — loading GitHub feed alongside local fixtures");
+      // Always load local fixtures (e.g. test.md) so /workbench/test is rendered
+      // as a hidden test fixture accessible by direct URL.
+      const localLoader = glob({
+        pattern: "**/*.md",
+        base: "./contents",
+      });
+      await localLoader.load(context);
+
+      if (offline && !isDev) {
+        context.logger.info("OFFLINE mode — local fixtures only");
+        return;
       }
 
       context.logger.info("Loading from GitHub (workbench repo)");
