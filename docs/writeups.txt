@@ -1,0 +1,467 @@
+Core idea:
+Portfolio Writing Direction
+
+The writing should be simple, technical, honest, and restrained.
+
+The portfolio is not a résumé, a marketing page, or a collection of claims. It is a professional presentation of an ongoing technical practice.
+
+The central idea is:
+
+«I build things, investigate how they work, and document what I learn.»
+
+Everything should support that idea.
+
+- Home introduces who I am, what I work on, and where the work leads.
+- Workbench presents the actual projects, experiments, and investigations.
+- About provides the background, experience, education, and context behind the work.
+- Contact provides a simple path to start a conversation.
+
+The writing should show rather than sell. Technical ability should be demonstrated through the work, not exaggerated through words like expert, highly skilled, or passionate.
+
+Cybersecurity is the primary focus, but the writing should leave room for systems, networking, software, Linux, hardware, electronics, and whatever I explore next.
+
+The tone should be:
+
+«Clear. Technical. Calm. Direct. Curious. Professional.»
+
+Every section should say what needs to be said, then stop.
+
+
+core identity: 
+Shedrack Godstime
+
+Cybersecurity, systems, and networked software.
+
+I build things, investigate how they work, and document what I learn.
+
+My work is centered on cybersecurity, but my curiosity extends into the systems beneath it — operating systems, networks, protocols, software, infrastructure, electronics, and the hardware they run on.
+
+I learn by building and testing rather than simply consuming information. Some work becomes a finished project. Some becomes an experiment, an investigation, or a technical note. Together, they form a record of what I am learning and where that work leads next.
+
+Workbench
+
+The workbench is where I keep that record.
+
+It contains projects I've built and explorations into systems, technologies, and problems I want to understand better. The emphasis is not on presenting a finished list of skills, but on showing the actual work behind them.
+
+Build. Investigate. Understand. Document.
+
+About page: 
+About
+
+Profile & Background
+
+I'm Shedrack Godstime, a cybersecurity practitioner and systems/software developer from Nigeria.
+
+My work is centered on understanding how systems work and where they break. I build software, explore networks and protocols, investigate security problems, and document what I learn along the way.
+
+Cybersecurity is my primary field, but my interests extend into the systems beneath it — Linux, systems programming, networking, infrastructure, electronics, and hardware.
+
+Technical Practice
+
+I learn primarily through building and investigation. Some work becomes a project; other work becomes an experiment, research, or technical note.
+
+The Workbench is where I document that process — the things I've built, the systems I've explored, and the technical questions I'm working through.
+
+---
+
+Experience
+
+IT Trainee — Networking & Systems
+
+Setraco Nigeria Limited
+
+Gained practical experience working around enterprise networking and IT infrastructure, including network troubleshooting, system administration, workstation support, and security practices.
+
+- Assisted with network diagnostics and IP address management.
+- Worked with router and switch configuration.
+- Supported Windows and Linux system troubleshooting.
+- Observed network operations and documented technical issues.
+
+Independent Technical Practice
+
+Security · Systems · Networking · Open Source
+
+I independently build software and conduct security and systems experiments outside formal employment.
+
+My work includes Rust-based systems tooling, network and protocol exploration, security labs, and hardware-related research. Selected work and technical findings are documented in the Workbench.
+
+---
+
+Education
+
+Higher National Diploma — Cybersecurity
+
+Federal Polytechnic Auchi
+
+Focused on cybersecurity, networking, ethical hacking, digital forensics, cyber resilience, cryptography, and security of information systems.
+
+National Diploma — Computer Science
+
+Federal Polytechnic Auchi
+
+Studied foundational computer science including programming, algorithms, data structures, operating systems, databases, and networking.
+
+---
+
+Technical Interests
+
+My current interests include:
+
+Cybersecurity
+Security research, offensive security, vulnerability analysis, digital forensics, and network security.
+
+Systems
+Rust, Linux, operating systems, systems programming, and low-level software.
+
+Networks
+TCP/IP, protocols, network analysis, routing, DNS, and network infrastructure.
+
+Hardware
+Embedded systems, microcontrollers, radio communication, electronics, and hardware security.
+
+These interests change as I encounter new problems worth understanding.
+
+---
+
+Credentials & Practice
+
+Experience
+IT training in networking and systems at Setraco Nigeria Limited.
+
+Education
+HND Cybersecurity and ND Computer Science from Federal Polytechnic Auchi.
+
+Practice
+Independent security research, systems programming, open-source development, networking experiments, and technical investigations.
+
+For the tools and technologies behind individual projects, see the relevant Workbench entries.
+
+
+landing page:
+Shedrack Godstime
+
+Cybersecurity, systems, and networked software.
+
+I build things, investigate how they work, and document what I learn.
+
+Explore Workbench
+About Me
+
+Nigeria · WAT
+
+---
+
+What I Work On
+
+01 — Security
+
+Cybersecurity research, security testing, network security, and understanding how systems fail.
+
+02 — Systems
+
+Rust, Linux, systems programming, CLI tools, and exploring software closer to the machine.
+
+03 — Networks
+
+Protocols, network analysis, distributed systems, remote access, and the infrastructure connecting them.
+
+04 — Hardware
+
+Embedded systems, electronics, radio communication, and the security problems that emerge at the edge.
+
+---
+
+Featured Workbench
+
+selection of projects, tools, and security research.
+
+Projects, experiments, and investigations documenting what I'm building and trying to understand.
+
+irosh
+
+Active
+
+A Rust-based exploration of secure peer-to-peer remote access and data transfer.
+
+"Rust" "P2P" "SSH" "Networking"
+
+View Workbench →
+
+---
+Behind the Work
+
+Explore the background behind the work, or get in touch to start a conversation.
+
+About Me
+Get In Touch →
+
+
+
+Workbench page:
+Technical Workbench
+
+Projects & Explorations
+
+A collection of projects, experiments, and investigations documenting the things I build, explore, and work to understand.
+
+Contact page: Contact
+
+Get in Touch
+
+For technical questions, research, collaboration, security disclosures, or professional enquiries.
+
+Channels
+
+GitHub
+@shedrackgodstime →
+
+X
+@kristency_ →
+
+LinkedIn
+in/shedrackgodstime →
+
+Bluesky
+@placeholder →
+
+Mastodon
+@placeholder →
+
+Email
+shedrackgodstime@outlook.com
+
+Best For
+
+Research collaboration
+Security disclosures
+Technical questions about the Workbench
+Professional enquiries
+
+Nigeria · WAT
+
+
+
+
+Metadata / SEO: 
+
+Title
+
+Shedrack Godstime — Cybersecurity, Systems & Networked Software
+
+Description
+
+Shedrack Godstime is a cybersecurity practitioner and systems/software developer focused on understanding how systems work, how they fail, and how they can be secured. His work spans cybersecurity, systems programming, networking, Linux, software, and technical research.
+
+Short Description
+
+Shedrack Godstime is a cybersecurity practitioner and systems/software developer exploring security, systems, networking, and the technology beneath them.
+
+Tagline
+
+Cybersecurity, systems, and networked software.
+
+Keywords
+
+Shedrack Godstime, Kristency, cybersecurity, security research, systems programming, Rust, networking, Linux, network security, software security
+
+Why the Metadata Uses Third Person
+
+The visible portfolio uses first person because it is Shedrack speaking directly to the visitor:
+
+
+I build things, investigate how they work, and document what I learn.
+
+
+
+Metadata serves a different purpose. It describes who and what the site is for search engines, link previews, indexing, and other external contexts.
+
+Therefore:
+
+
+Website copy → first person
+
+Metadata / SEO → third person
+
+
+
+This keeps the site personal while making its external description clear, neutral, and professional..........
+
+
+Another version :
+# Portfolio Copy — Revised
+
+Fixes applied: cut the duplicate "Credentials & Practice" section, reduced the thesis-line repetition to one strong placement, cleaned up the Featured Workbench tags, rewrote the Setraco bullet out of résumé-speak. Social placeholders left exactly as you had them — you're handling those yourself.
+
+---
+
+## Home
+
+Shedrack Godstime
+
+Cybersecurity, systems, and networked software.
+
+I build things, investigate how they work, and document what I learn.
+
+[Explore Workbench] [About Me]
+
+Nigeria · WAT
+
+---
+
+### What I Work On
+
+**01 — Security**
+Cybersecurity research, security testing, network security, and understanding how systems fail.
+
+**02 — Systems**
+Rust, Linux, systems programming, CLI tools, and exploring software closer to the machine.
+
+**03 — Networks**
+Protocols, network analysis, distributed systems, remote access, and the infrastructure connecting them.
+
+**04 — Hardware**
+Embedded systems, electronics, radio communication, and the security problems that emerge at the edge.
+
+---
+
+### Featured Workbench
+
+Selected work from the bench.
+
+Projects, experiments, and investigations documenting what I'm building and trying to understand.
+
+**irosh** — Active
+
+A Rust-based exploration of secure peer-to-peer remote access and data transfer.
+
+`Rust` `P2P` `SSH` `Networking`
+
+[View Workbench →]
+
+---
+
+### Behind the Work
+
+Explore the background behind the work, or get in touch to start a conversation.
+
+[About Me] [Get In Touch →]
+
+---
+
+## Workbench
+
+Technical Workbench
+
+**Projects & Explorations**
+
+A collection of projects, experiments, and investigations documenting the things I build, explore, and work to understand.
+
+---
+
+## About
+
+### Profile & Background
+
+I'm Shedrack Godstime, a cybersecurity practitioner and systems/software developer from Nigeria.
+
+My work is centered on understanding how systems work and where they break. I build software, explore networks and protocols, investigate security problems, and document what I find along the way.
+
+Cybersecurity is my primary field, but my interests extend into the systems beneath it — Linux, systems programming, networking, infrastructure, electronics, and hardware.
+
+### Technical Practice
+
+I learn primarily through building and investigation. Some work becomes a project; other work becomes an experiment, research, or a technical note.
+
+The Workbench is where I document that process — the things I've built, the systems I've explored, and the technical questions I'm working through.
+
+---
+
+### Experience
+
+**IT Trainee — Networking & Systems**
+Setraco Nigeria Limited
+
+Worked on enterprise networking and IT infrastructure: network diagnostics, IP address management, router and switch configuration, and Windows/Linux troubleshooting. Observed network operations and documented technical issues.
+
+**Independent Technical Practice**
+Security · Systems · Networking · Open Source
+
+I independently build software and conduct security and systems experiments outside formal employment. My work includes Rust-based systems tooling, network and protocol exploration, security labs, and hardware-related research. Selected work and technical findings are documented in the Workbench.
+
+---
+
+### Education
+
+**Higher National Diploma — Cybersecurity**
+Federal Polytechnic Auchi
+
+Focused on cybersecurity, networking, ethical hacking, digital forensics, cyber resilience, cryptography, and security of information systems.
+
+**National Diploma — Computer Science**
+Federal Polytechnic Auchi
+
+Studied foundational computer science including programming, algorithms, data structures, operating systems, databases, and networking.
+
+---
+
+### Technical Interests
+
+**Cybersecurity** — Security research, offensive security, vulnerability analysis, digital forensics, and network security.
+
+**Systems** — Rust, Linux, operating systems, systems programming, and low-level software.
+
+**Networks** — TCP/IP, protocols, network analysis, routing, DNS, and network infrastructure.
+
+**Hardware** — Embedded systems, microcontrollers, radio communication, electronics, and hardware security.
+
+These interests change as I encounter new problems worth understanding.
+
+*(The old "Credentials & Practice" section is removed — it just restated Experience and Education you'd already read two scrolls up. For tools/tech behind individual projects, that line now belongs at the bottom of the Education block:)*
+
+For the tools and technologies behind individual projects, see the relevant Workbench entries.
+
+---
+
+## Contact
+
+### Get in Touch
+
+For technical questions, research, collaboration, security disclosures, or professional enquiries.
+
+**Channels**
+GitHub — @shedrackgodstime →
+X — @kristency_ →
+LinkedIn — in/shedrackgodstime →
+Bluesky — @placeholder →
+Mastodon — @placeholder →
+Email — shedrackgodstime@outlook.com
+
+**Best For**
+Research collaboration
+Security disclosures
+Technical questions about the Workbench
+Professional enquiries
+
+Nigeria · WAT
+
+---
+
+## Metadata / SEO
+
+**Title**
+Shedrack Godstime — Cybersecurity, Systems & Networked Software
+
+**Description**
+Shedrack Godstime is a cybersecurity practitioner and systems/software developer focused on understanding how systems work, how they fail, and how they can be secured. His work spans cybersecurity, systems programming, networking, Linux, software, and technical research.
+
+**Short Description**
+Shedrack Godstime is a cybersecurity practitioner and systems/software developer exploring security, systems, networking, and the technology beneath them.
+
+**Tagline**
+Cybersecurity, systems, and networked software.
+
+**Keywords**
+Shedrack Godstime, Kristency, cybersecurity, security research, systems programming, Rust, networking, Linux, network security, software security
+
+
