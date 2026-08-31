@@ -147,24 +147,24 @@ export const experienceTimeline: ExperienceItem[] = [
     location: "Nigeria",
     period: "Professional Training",
     description:
-      "Worked on enterprise networking and IT infrastructure: network diagnostics, IP address management, router and switch configuration, and Windows/Linux system troubleshooting. Observed network operations and documented technical issues.",
+      "Hands-on enterprise networking and infrastructure support at Setraco, maintaining day-to-day corporate network operations and hardware reliability.",
     highlights: [
-      "Assisted with local network diagnostics, router/switch configuration, and IP address management.",
-      "Supported workstation setup, Linux/Windows system troubleshooting, and user security permissions.",
-      "Observed network traffic patterns and contributed to internal technical documentation.",
+      "Configured and diagnosed routers, switches, and IP subnet allocations across corporate offices.",
+      "Maintained Windows and Linux workstations, system permissions, and hardware troubleshooting.",
+      "Monitored local network traffic to identify connectivity bottlenecks and documented technical resolutions.",
     ],
   },
   {
     role: "Independent Technical Practice",
-    organization: "Security · Systems · Networking · Open Source",
+    organization: "Security · Systems · Networking",
     location: "Remote / Nigeria",
     period: "Ongoing",
     description:
-      "Independently building software and conducting security and systems investigations outside formal employment. Work includes Rust systems tooling, network and protocol exploration, security labs, and hardware research.",
+      "Self-directed security research, systems programming, and lab environments exploring how protocols, operating systems, and edge devices behave.",
     highlights: [
-      "Architected irosh (peer-to-peer encrypted remote management in Rust).",
-      "Conducted offensive security lab exercises, vulnerability assessments, and web application audits.",
-      "Researched hardware edge protocols (LoRa, ESP32, radio frequency communications).",
+      "Developing irosh, a peer-to-peer encrypted remote access tool written in Rust.",
+      "Running offensive security labs, vulnerability assessments, and web application audits.",
+      "Investigating edge communication protocols including LoRa, ESP32 microcontrollers, and RF links.",
     ],
   },
 ];
@@ -177,7 +177,7 @@ export const educationTimeline: EducationItem[] = [
     location: "Auchi, Edo State, Nigeria",
     period: "Higher Education",
     details:
-      "Specialized study in network security, cryptography, defensive posture, digital forensics, ethical hacking, and cyber resilience.",
+      "Advanced coursework focused on applied cryptography, network defense, digital forensics, threat analysis, and secure systems architecture.",
   },
   {
     degree: "National Diploma (ND)",
@@ -186,7 +186,7 @@ export const educationTimeline: EducationItem[] = [
     location: "Auchi, Edo State, Nigeria",
     period: "Foundational Education",
     details:
-      "Foundational computer science curriculum: programming, algorithms, data structures, operating systems, databases, and networking fundamentals.",
+      "Core computer science curriculum: data structures, algorithms, operating system fundamentals, database design, and software development.",
   },
 ];
 

@@ -353,17 +353,15 @@ Projects, experiments, and investigations documenting what I'm building and tryi
 
 ### Profile & Background
 
-I'm Shedrack Godstime, a cybersecurity practitioner and systems/software developer from Nigeria.
+I'm Shedrack Godstime, based in Abuja, Nigeria. Most of my work sits at the intersection of security research and low-level systems—understanding how software, networks, and operating systems operate under the hood, and finding where they fail.
 
-My work is centered on understanding how systems work and where they break. I build software, explore networks and protocols, investigate security problems, and document what I find along the way.
-
-Cybersecurity is my primary field, but my interests extend into the systems beneath it — Linux, systems programming, networking, infrastructure, electronics, and hardware.
+While cybersecurity is my core focus, I spend a lot of time digging into the layers beneath it: Linux internals, networking protocols, systems programming in Rust, and embedded hardware.
 
 ### Technical Practice
 
-I learn primarily through building and investigation. Not everything I work on becomes a full project — some efforts stay as quick experiments, deep-dives into specific problems, or short technical notes.
+I learn best by building and testing things directly. Not every exploration turns into a full release; many stay as focused security labs, experimental tools, or technical notes.
 
-The Workbench is where I document that process — the things I've built, the systems I've explored, and the technical questions I'm working through.
+The Workbench is where I keep that record.
 
 ---
 
@@ -372,12 +370,20 @@ The Workbench is where I document that process — the things I've built, the sy
 **IT Trainee — Networking & Systems**
 Setraco Nigeria Limited — Professional Training
 
-Worked on enterprise networking and IT infrastructure: network diagnostics, IP address management, router and switch configuration, and Windows/Linux system troubleshooting. Observed network operations and documented technical issues.
+Hands-on enterprise networking and infrastructure support at Setraco, maintaining day-to-day corporate network operations and hardware reliability.
+
+- Configured and diagnosed routers, switches, and IP subnet allocations across corporate offices.
+- Maintained Windows and Linux workstations, system permissions, and hardware troubleshooting.
+- Monitored local network traffic to identify connectivity bottlenecks and documented technical resolutions.
 
 **Independent Technical Practice**
-Security · Systems · Networking · Open Source — Ongoing
+Security · Systems · Networking — Ongoing
 
-Independently building software and conducting security and systems investigations outside formal employment. Work includes Rust systems tooling, network and protocol exploration, security labs, and hardware research. Selected work and technical findings are documented in the Workbench.
+Self-directed security research, systems programming, and lab environments exploring how protocols, operating systems, and edge devices behave.
+
+- Developing irosh, a peer-to-peer encrypted remote access tool written in Rust.
+- Running offensive security labs, vulnerability assessments, and web application audits.
+- Investigigating edge communication protocols including LoRa, ESP32 microcontrollers, and RF links.
 
 ---
 
@@ -386,12 +392,12 @@ Independently building software and conducting security and systems investigatio
 **Higher National Diploma (HND) — Cybersecurity**
 Federal Polytechnic Auchi — Higher Education
 
-Specialized study in network security, cryptography, defensive posture, digital forensics, ethical hacking, and cyber resilience.
+Advanced coursework focused on applied cryptography, network defense, digital forensics, threat analysis, and secure systems architecture.
 
 **National Diploma (ND) — Computer Science**
 Federal Polytechnic Auchi — Foundational Education
 
-Foundational computer science curriculum: programming, algorithms, data structures, operating systems, databases, and networking fundamentals.
+Core computer science curriculum: data structures, algorithms, operating system fundamentals, database design, and software development.
 
 ---
 
@@ -405,7 +411,7 @@ Foundational computer science curriculum: programming, algorithms, data structur
 
 **04 — Hardware** — Embedded systems, microcontrollers, radio communication, electronics, and hardware security.
 
-These interests evolve as I encounter new problems worth understanding. For the specific tools, libraries, and technologies behind individual projects, see the relevant Workbench entries.
+My technical focus shifts as I take on new problems. To see the specific tools, crates, and protocols used across individual projects, explore the Workbench.
 
 ---
 
