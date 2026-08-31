@@ -1,26 +1,7 @@
-# Shedrack Godstime - *kristency*
+# Shedrack Godstime
 
-Cybersecurity practitioner focused on how systems, software, and networks work beneath the surface.
+Curiosity-driven builder. Focused on cybersecurity, low-level systems in Rust, networks, and infrastructure.
 
-I learn by building, testing, breaking, and researching. My main focus is cybersecurity, but I'm also interested in the layers beneath it — operating systems, networking, low-level software, hardware, and how computers work.
+I learn by building things, testing how they break, and researching new problems along the way.
 
-## Focus Areas
-
-- Cybersecurity & Security Research
-- Systems Security & Offensive Security
-- Linux Internals
-- Networking
-- Reverse Engineering
-- Systems Programming
-- Embedded Systems & Electronics
-- Computer Architecture
-- Rust
-
-## Philosophy
-
-Understand how things work beneath the surface.
-
-## Links
-
-- **Portfolio:** [shedrackgodstime.pages.dev](https://shedrackgodstime.pages.dev)
-- **X:** [@kristency_](https://x.com/kristency_)
+To learn more about my work → **[Portfolio](https://shedrackgodstime.pages.dev)**
